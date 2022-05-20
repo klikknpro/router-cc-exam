@@ -1,24 +1,43 @@
-import { React, useState, useEffect } from "react";
-import Map from "react-map-gl";
+import { React, useState, useEffect, useRef } from "react";
+import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
 
-// this is a Controlled map by the "react-map-gl" module
+// this version is based on the Original MapBox tutorial
 const Home = () => {
-  const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
+  const mapContainer = useRef(null);
+  const map = useRef(null);
+  const [lng, setLng] = useState(19.040236);
+  const [lat, setLat] = useState(47.497913);
+  const [zoom, setZoom] = useState(10);
 
-  const [viewState, setViewState] = useState({
-    latitude: 47.497913,
-    longitude: 19.040236,
-    zoom: 10,
+  mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
+
+  useEffect(() => {
+    // on load
+    if (map.current) return; // initialize map only once
+    map.current = new mapboxgl.Map({
+      container: mapContainer.current,
+      style: "mapbox://styles/mapbox/streets-v11",
+      center: [lng, lat],
+      zoom: zoom,
+    });
+  });
+
+  useEffect(() => {
+    // on map movement
+    if (!map.current) return; // wait for map to initialize
+    map.current.on("move", () => {
+      setLng(map.current.getCenter().lng.toFixed(6));
+      setLat(map.current.getCenter().lat.toFixed(6));
+      setZoom(map.current.getZoom().toFixed(2));
+    });
   });
 
   return (
     <div>
-      <Map
-        {...viewState}
-        onMove={(evt) => setViewState(evt.viewState)}
-        style={{ width: 800, height: 600 }}
-        mapStyle="mapbox://styles/mapbox/streets-v9"
-        mapboxAccessToken={MAPBOX_TOKEN}></Map>
+      <div className="sidebar">
+        Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
+      </div>
+      <div ref={mapContainer} className="map-container" />
     </div>
   );
 };
