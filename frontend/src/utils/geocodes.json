@@ -1,0 +1,1206 @@
+{
+  "routes": [
+    {
+      "geometry": {
+        "coordinates": [
+          [-73.978488, 40.736864],
+          [-73.980909, 40.73788],
+          [-73.982134, 40.736203],
+          [-73.983589, 40.734207],
+          [-73.983149, 40.734025],
+          [-73.983482, 40.733836],
+          [-73.983855, 40.733321],
+          [-73.983958, 40.732914],
+          [-73.984396, 40.733096],
+          [-73.985909, 40.731019],
+          [-73.982735, 40.729681],
+          [-73.983013, 40.729306],
+          [-73.983267, 40.729066],
+          [-73.983999, 40.729373],
+          [-73.983536, 40.730019],
+          [-73.97663, 40.727104],
+          [-73.975148, 40.7292],
+          [-73.974122, 40.728766]
+        ],
+        "type": "LineString"
+      },
+      "legs": [
+        {
+          "summary": "East 23rd Street, 2nd Avenue",
+          "weight": 153.5,
+          "duration": 123.6,
+          "steps": [
+            {
+              "intersections": [
+                {
+                  "out": 0,
+                  "entry": [true],
+                  "bearings": [296],
+                  "location": [-73.978488, 40.736864]
+                },
+                {
+                  "out": 3,
+                  "in": 1,
+                  "entry": [true, false, true, true],
+                  "bearings": [30, 120, 210, 300],
+                  "location": [-73.978544, 40.736885]
+                }
+              ],
+              "driving_side": "right",
+              "geometry": {
+                "coordinates": [
+                  [-73.978488, 40.736864],
+                  [-73.978544, 40.736885],
+                  [-73.978643, 40.736927],
+                  [-73.978689, 40.736946],
+                  [-73.978997, 40.737073],
+                  [-73.980544, 40.737727],
+                  [-73.980778, 40.737825],
+                  [-73.980815, 40.737841],
+                  [-73.980909, 40.73788]
+                ],
+                "type": "LineString"
+              },
+              "mode": "cycling",
+              "maneuver": {
+                "bearing_after": 296,
+                "bearing_before": 0,
+                "location": [-73.978488, 40.736864],
+                "type": "depart",
+                "instruction": "Head northwest on East 23rd Street"
+              },
+              "weight": 98.30000000000001,
+              "duration": 68.4,
+              "name": "East 23rd Street",
+              "distance": 233.2
+            },
+            {
+              "intersections": [
+                {
+                  "out": 2,
+                  "in": 1,
+                  "entry": [true, false, true, true],
+                  "bearings": [30, 120, 210, 300],
+                  "location": [-73.980909, 40.73788]
+                },
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [false, true, true, true],
+                  "bearings": [30, 120, 210, 300],
+                  "location": [-73.981401, 40.73721]
+                },
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [false, true, true, true],
+                  "bearings": [30, 120, 210, 300],
+                  "location": [-73.981845, 40.736601]
+                }
+              ],
+              "driving_side": "right",
+              "geometry": {
+                "coordinates": [
+                  [-73.980909, 40.73788],
+                  [-73.980973, 40.737791],
+                  [-73.981116, 40.737596],
+                  [-73.98117, 40.737523],
+                  [-73.981346, 40.737284],
+                  [-73.981401, 40.73721],
+                  [-73.981433, 40.737166],
+                  [-73.981845, 40.736601],
+                  [-73.982088, 40.736267],
+                  [-73.982134, 40.736203]
+                ],
+                "type": "LineString"
+              },
+              "mode": "cycling",
+              "maneuver": {
+                "bearing_after": 208,
+                "bearing_before": 298,
+                "location": [-73.980909, 40.73788],
+                "modifier": "left",
+                "type": "turn",
+                "instruction": "Turn left onto 2nd Avenue"
+              },
+              "weight": 55.2,
+              "duration": 55.2,
+              "name": "2nd Avenue",
+              "distance": 213.2
+            },
+            {
+              "intersections": [
+                {
+                  "in": 0,
+                  "entry": [true],
+                  "bearings": [29],
+                  "location": [-73.982134, 40.736203]
+                }
+              ],
+              "driving_side": "right",
+              "geometry": {
+                "coordinates": [
+                  [-73.982134, 40.736203],
+                  [-73.982134, 40.736203]
+                ],
+                "type": "LineString"
+              },
+              "mode": "cycling",
+              "maneuver": {
+                "bearing_after": 0,
+                "bearing_before": 209,
+                "location": [-73.982134, 40.736203],
+                "modifier": "left",
+                "type": "arrive",
+                "instruction": "You have arrived at your 1st destination, on the left"
+              },
+              "weight": 0,
+              "duration": 0,
+              "name": "2nd Avenue",
+              "distance": 0
+            }
+          ],
+          "distance": 446.4
+        },
+        {
+          "summary": "2nd Avenue, East 17th Street",
+          "weight": 266.1,
+          "duration": 236.1,
+          "steps": [
+            {
+              "intersections": [
+                {
+                  "out": 0,
+                  "entry": [true],
+                  "bearings": [209],
+                  "location": [-73.982134, 40.736203]
+                },
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [false, true, true, true],
+                  "bearings": [30, 120, 210, 300],
+                  "location": [-73.982267, 40.73602]
+                },
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [false, true, true, true],
+                  "bearings": [30, 120, 210, 300],
+                  "location": [-73.982695, 40.735431]
+                },
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [false, true, true, true],
+                  "bearings": [30, 120, 210, 300],
+                  "location": [-73.983122, 40.734846]
+                },
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [false, true, true, true],
+                  "bearings": [30, 120, 210, 300],
+                  "location": [-73.983548, 40.734263]
+                }
+              ],
+              "driving_side": "right",
+              "geometry": {
+                "coordinates": [
+                  [-73.982134, 40.736203],
+                  [-73.982267, 40.73602],
+                  [-73.982518, 40.735675],
+                  [-73.982695, 40.735431],
+                  [-73.982952, 40.735079],
+                  [-73.983075, 40.73491],
+                  [-73.983122, 40.734846],
+                  [-73.983162, 40.734792],
+                  [-73.983387, 40.734483],
+                  [-73.983504, 40.734323],
+                  [-73.983548, 40.734263],
+                  [-73.983589, 40.734207]
+                ],
+                "type": "LineString"
+              },
+              "mode": "cycling",
+              "maneuver": {
+                "bearing_after": 209,
+                "bearing_before": 0,
+                "location": [-73.982134, 40.736203],
+                "modifier": "left",
+                "type": "depart",
+                "instruction": "Head southwest on 2nd Avenue"
+              },
+              "weight": 107.6,
+              "duration": 77.6,
+              "name": "2nd Avenue",
+              "distance": 253.6
+            },
+            {
+              "intersections": [
+                {
+                  "out": 1,
+                  "in": 0,
+                  "entry": [false, true, true, true],
+                  "bearings": [30, 120, 210, 300],
+                  "location": [-73.983589, 40.734207]
+                },
+                {
+                  "out": 1,
+                  "in": 3,
+                  "entry": [true, true, true, false],
+                  "bearings": [30, 120, 210, 300],
+                  "location": [-73.983475, 40.734165]
+                }
+              ],
+              "driving_side": "right",
+              "geometry": {
+                "coordinates": [
+                  [-73.983589, 40.734207],
+                  [-73.983507, 40.734173],
+                  [-73.983475, 40.734165],
+                  [-73.983165, 40.734031],
+                  [-73.983149, 40.734025]
+                ],
+                "type": "LineString"
+              },
+              "mode": "pushing bike",
+              "maneuver": {
+                "bearing_after": 115,
+                "bearing_before": 208,
+                "location": [-73.983589, 40.734207],
+                "modifier": "left",
+                "type": "turn",
+                "instruction": "Turn left onto East 17th Street"
+              },
+              "weight": 42.2,
+              "duration": 42.2,
+              "name": "East 17th Street",
+              "distance": 42.3
+            },
+            {
+              "intersections": [
+                {
+                  "out": 1,
+                  "in": 2,
+                  "entry": [true, true, false],
+                  "bearings": [120, 210, 300],
+                  "location": [-73.983149, 40.734025]
+                },
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [false, true, true, true],
+                  "bearings": [30, 135, 210, 285],
+                  "location": [-73.983187, 40.733967]
+                }
+              ],
+              "driving_side": "right",
+              "geometry": {
+                "coordinates": [
+                  [-73.983149, 40.734025],
+                  [-73.983187, 40.733967],
+                  [-73.983241, 40.733888]
+                ],
+                "type": "LineString"
+              },
+              "mode": "pushing bike",
+              "maneuver": {
+                "bearing_after": 205,
+                "bearing_before": 118,
+                "location": [-73.983149, 40.734025],
+                "modifier": "right",
+                "type": "turn",
+                "instruction": "Turn right"
+              },
+              "weight": 18.1,
+              "duration": 18.1,
+              "name": "",
+              "distance": 17.1
+            },
+            {
+              "intersections": [
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [false, true, true],
+                  "bearings": [30, 150, 285],
+                  "location": [-73.983241, 40.733888]
+                }
+              ],
+              "driving_side": "right",
+              "geometry": {
+                "coordinates": [
+                  [-73.983241, 40.733888],
+                  [-73.983256, 40.733894],
+                  [-73.983312, 40.733905],
+                  [-73.983357, 40.733903],
+                  [-73.983379, 40.733898]
+                ],
+                "type": "LineString"
+              },
+              "mode": "pushing bike",
+              "maneuver": {
+                "bearing_after": 279,
+                "bearing_before": 206,
+                "location": [-73.983241, 40.733888],
+                "modifier": "right",
+                "type": "end of road",
+                "instruction": "Turn right"
+              },
+              "weight": 12.3,
+              "duration": 12.3,
+              "name": "",
+              "distance": 12
+            },
+            {
+              "intersections": [
+                {
+                  "out": 1,
+                  "in": 0,
+                  "entry": [false, true, true],
+                  "bearings": [90, 240, 345],
+                  "location": [-73.983379, 40.733898]
+                },
+                {
+                  "out": 1,
+                  "in": 0,
+                  "entry": [false, true, true],
+                  "bearings": [30, 165, 300],
+                  "location": [-73.983606, 40.733675]
+                }
+              ],
+              "driving_side": "right",
+              "geometry": {
+                "coordinates": [
+                  [-73.983379, 40.733898],
+                  [-73.9834, 40.733894],
+                  [-73.98344, 40.733875],
+                  [-73.983482, 40.733836],
+                  [-73.983606, 40.733675],
+                  [-73.983577, 40.733578]
+                ],
+                "type": "LineString"
+              },
+              "mode": "pushing bike",
+              "maneuver": {
+                "bearing_after": 232,
+                "bearing_before": 271,
+                "location": [-73.983379, 40.733898],
+                "modifier": "slight left",
+                "type": "turn",
+                "instruction": "Make a slight left"
+              },
+              "weight": 42.3,
+              "duration": 42.3,
+              "name": "",
+              "distance": 43.2
+            },
+            {
+              "intersections": [
+                {
+                  "out": 1,
+                  "in": 2,
+                  "entry": [true, true, false],
+                  "bearings": [90, 225, 345],
+                  "location": [-73.983577, 40.733578]
+                }
+              ],
+              "driving_side": "right",
+              "geometry": {
+                "coordinates": [
+                  [-73.983577, 40.733578],
+                  [-73.983616, 40.73356],
+                  [-73.983651, 40.733524],
+                  [-73.983661, 40.733497],
+                  [-73.983656, 40.733463]
+                ],
+                "type": "LineString"
+              },
+              "mode": "pushing bike",
+              "maneuver": {
+                "bearing_after": 220,
+                "bearing_before": 165,
+                "location": [-73.983577, 40.733578],
+                "modifier": "right",
+                "type": "end of road",
+                "instruction": "Turn right"
+              },
+              "weight": 16.1,
+              "duration": 16.1,
+              "name": "",
+              "distance": 15.7
+            },
+            {
+              "intersections": [
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [false, true, true],
+                  "bearings": [15, 135, 255],
+                  "location": [-73.983656, 40.733463]
+                }
+              ],
+              "driving_side": "right",
+              "geometry": {
+                "coordinates": [
+                  [-73.983656, 40.733463],
+                  [-73.983802, 40.733433]
+                ],
+                "type": "LineString"
+              },
+              "mode": "pushing bike",
+              "maneuver": {
+                "bearing_after": 254,
+                "bearing_before": 192,
+                "location": [-73.983656, 40.733463],
+                "modifier": "right",
+                "type": "turn",
+                "instruction": "Turn right"
+              },
+              "weight": 15.1,
+              "duration": 15.1,
+              "name": "",
+              "distance": 12.7
+            },
+            {
+              "intersections": [
+                {
+                  "out": 1,
+                  "in": 0,
+                  "entry": [false, true, true],
+                  "bearings": [75, 195, 315],
+                  "location": [-73.983802, 40.733433]
+                }
+              ],
+              "driving_side": "right",
+              "geometry": {
+                "coordinates": [
+                  [-73.983802, 40.733433],
+                  [-73.983797, 40.733399],
+                  [-73.983855, 40.733321]
+                ],
+                "type": "LineString"
+              },
+              "mode": "pushing bike",
+              "maneuver": {
+                "bearing_after": 195,
+                "bearing_before": 254,
+                "location": [-73.983802, 40.733433],
+                "modifier": "left",
+                "type": "turn",
+                "instruction": "Turn left"
+              },
+              "weight": 12.4,
+              "duration": 12.4,
+              "name": "",
+              "distance": 13.8
+            },
+            {
+              "intersections": [
+                {
+                  "in": 0,
+                  "entry": [true],
+                  "bearings": [29],
+                  "location": [-73.983855, 40.733321]
+                }
+              ],
+              "driving_side": "right",
+              "geometry": {
+                "coordinates": [
+                  [-73.983855, 40.733321],
+                  [-73.983855, 40.733321]
+                ],
+                "type": "LineString"
+              },
+              "mode": "pushing bike",
+              "maneuver": {
+                "bearing_after": 0,
+                "bearing_before": 209,
+                "location": [-73.983855, 40.733321],
+                "modifier": "left",
+                "type": "arrive",
+                "instruction": "You have arrived at your 2nd destination, on the left"
+              },
+              "weight": 0,
+              "duration": 0,
+              "name": "",
+              "distance": 0
+            }
+          ],
+          "distance": 410.5
+        },
+        {
+          "summary": "2nd Avenue, East 12th Street",
+          "weight": 332.1,
+          "duration": 302.1,
+          "steps": [
+            {
+              "intersections": [
+                {
+                  "out": 0,
+                  "entry": [true],
+                  "bearings": [209],
+                  "location": [-73.983855, 40.733321]
+                }
+              ],
+              "driving_side": "right",
+              "geometry": {
+                "coordinates": [
+                  [-73.983855, 40.733321],
+                  [-73.983896, 40.733266],
+                  [-73.983942, 40.733205],
+                  [-73.983955, 40.733164],
+                  [-73.983953, 40.733125],
+                  [-73.98394, 40.733092],
+                  [-73.983901, 40.733051],
+                  [-73.983866, 40.733036]
+                ],
+                "type": "LineString"
+              },
+              "mode": "pushing bike",
+              "maneuver": {
+                "bearing_after": 209,
+                "bearing_before": 0,
+                "location": [-73.983855, 40.733321],
+                "modifier": "left",
+                "type": "depart",
+                "instruction": "Head southwest"
+              },
+              "weight": 35.7,
+              "duration": 35.7,
+              "name": "",
+              "distance": 36.7
+            },
+            {
+              "intersections": [
+                {
+                  "out": 1,
+                  "in": 2,
+                  "entry": [true, true, false],
+                  "bearings": [90, 210, 315],
+                  "location": [-73.983866, 40.733036]
+                },
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [false, true, true, true],
+                  "bearings": [30, 105, 210, 315],
+                  "location": [-73.983925, 40.732956]
+                }
+              ],
+              "driving_side": "right",
+              "geometry": {
+                "coordinates": [
+                  [-73.983866, 40.733036],
+                  [-73.983925, 40.732956],
+                  [-73.983958, 40.732914]
+                ],
+                "type": "LineString"
+              },
+              "mode": "pushing bike",
+              "maneuver": {
+                "bearing_after": 208,
+                "bearing_before": 136,
+                "location": [-73.983866, 40.733036],
+                "modifier": "right",
+                "type": "turn",
+                "instruction": "Turn right"
+              },
+              "weight": 18.2,
+              "duration": 18.2,
+              "name": "",
+              "distance": 15.6
+            },
+            {
+              "intersections": [
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [false, true, true],
+                  "bearings": [30, 120, 300],
+                  "location": [-73.983958, 40.732914]
+                },
+                {
+                  "out": 3,
+                  "in": 1,
+                  "entry": [true, false, true, true],
+                  "bearings": [30, 120, 210, 300],
+                  "location": [-73.984279, 40.733048]
+                }
+              ],
+              "driving_side": "right",
+              "geometry": {
+                "coordinates": [
+                  [-73.983958, 40.732914],
+                  [-73.983977, 40.732922],
+                  [-73.984279, 40.733048],
+                  [-73.984317, 40.733063],
+                  [-73.984396, 40.733096]
+                ],
+                "type": "LineString"
+              },
+              "mode": "pushing bike",
+              "maneuver": {
+                "bearing_after": 298,
+                "bearing_before": 209,
+                "location": [-73.983958, 40.732914],
+                "modifier": "right",
+                "type": "end of road",
+                "instruction": "Turn right onto East 15th Street"
+              },
+              "weight": 46.2,
+              "duration": 46.2,
+              "name": "East 15th Street",
+              "distance": 42.1
+            },
+            {
+              "intersections": [
+                {
+                  "out": 2,
+                  "in": 1,
+                  "entry": [true, false, true, true],
+                  "bearings": [30, 120, 210, 300],
+                  "location": [-73.984396, 40.733096]
+                },
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [false, true, true, true],
+                  "bearings": [30, 120, 210, 300],
+                  "location": [-73.984441, 40.733033]
+                },
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [false, true, true, true],
+                  "bearings": [30, 120, 210, 300],
+                  "location": [-73.984941, 40.732347]
+                },
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [false, true, true, true],
+                  "bearings": [30, 120, 210, 300],
+                  "location": [-73.985444, 40.731658]
+                }
+              ],
+              "driving_side": "right",
+              "geometry": {
+                "coordinates": [
+                  [-73.984396, 40.733096],
+                  [-73.984441, 40.733033],
+                  [-73.98448, 40.73298],
+                  [-73.984602, 40.732807],
+                  [-73.984876, 40.732436],
+                  [-73.984941, 40.732347],
+                  [-73.985001, 40.732265],
+                  [-73.985279, 40.731884],
+                  [-73.985323, 40.731824],
+                  [-73.985403, 40.731714],
+                  [-73.985444, 40.731658],
+                  [-73.985483, 40.731605],
+                  [-73.98573, 40.731265],
+                  [-73.985872, 40.731071],
+                  [-73.985909, 40.731019]
+                ],
+                "type": "LineString"
+              },
+              "mode": "cycling",
+              "maneuver": {
+                "bearing_after": 208,
+                "bearing_before": 298,
+                "location": [-73.984396, 40.733096],
+                "modifier": "left",
+                "type": "turn",
+                "instruction": "Turn left onto 2nd Avenue"
+              },
+              "weight": 79.4,
+              "duration": 79.4,
+              "name": "2nd Avenue",
+              "distance": 263.9
+            },
+            {
+              "intersections": [
+                {
+                  "out": 1,
+                  "in": 0,
+                  "entry": [false, true, true, true],
+                  "bearings": [30, 120, 210, 300],
+                  "location": [-73.985909, 40.731019]
+                },
+                {
+                  "out": 1,
+                  "in": 3,
+                  "entry": [true, true, true, false],
+                  "bearings": [30, 120, 210, 300],
+                  "location": [-73.983536, 40.730019]
+                }
+              ],
+              "driving_side": "right",
+              "geometry": {
+                "coordinates": [
+                  [-73.985909, 40.731019],
+                  [-73.985826, 40.730984],
+                  [-73.985786, 40.730967],
+                  [-73.983681, 40.73008],
+                  [-73.983644, 40.730065],
+                  [-73.983536, 40.730019],
+                  [-73.983419, 40.72997],
+                  [-73.982735, 40.729681]
+                ],
+                "type": "LineString"
+              },
+              "mode": "cycling",
+              "maneuver": {
+                "bearing_after": 118,
+                "bearing_before": 208,
+                "location": [-73.985909, 40.731019],
+                "modifier": "left",
+                "type": "turn",
+                "instruction": "Turn left onto East 12th Street"
+              },
+              "weight": 109.6,
+              "duration": 79.6,
+              "name": "East 12th Street",
+              "distance": 306.1
+            },
+            {
+              "intersections": [
+                {
+                  "out": 1,
+                  "in": 2,
+                  "entry": [true, true, false],
+                  "bearings": [120, 210, 300],
+                  "location": [-73.982735, 40.729681]
+                },
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [false, true, true, true],
+                  "bearings": [30, 120, 210, 300],
+                  "location": [-73.982773, 40.72963]
+                }
+              ],
+              "driving_side": "right",
+              "geometry": {
+                "coordinates": [
+                  [-73.982735, 40.729681],
+                  [-73.982773, 40.72963],
+                  [-73.98279, 40.729607],
+                  [-73.983013, 40.729306]
+                ],
+                "type": "LineString"
+              },
+              "mode": "pushing bike",
+              "maneuver": {
+                "bearing_after": 208,
+                "bearing_before": 118,
+                "location": [-73.982735, 40.729681],
+                "modifier": "right",
+                "type": "turn",
+                "instruction": "Turn right"
+              },
+              "weight": 43,
+              "duration": 43,
+              "name": "",
+              "distance": 47.8
+            },
+            {
+              "intersections": [
+                {
+                  "in": 0,
+                  "entry": [true],
+                  "bearings": [29],
+                  "location": [-73.983013, 40.729306]
+                }
+              ],
+              "driving_side": "right",
+              "geometry": {
+                "coordinates": [
+                  [-73.983013, 40.729306],
+                  [-73.983013, 40.729306]
+                ],
+                "type": "LineString"
+              },
+              "mode": "pushing bike",
+              "maneuver": {
+                "bearing_after": 0,
+                "bearing_before": 209,
+                "location": [-73.983013, 40.729306],
+                "modifier": "right",
+                "type": "arrive",
+                "instruction": "You have arrived at your 3rd destination, on the right"
+              },
+              "weight": 0,
+              "duration": 0,
+              "name": "",
+              "distance": 0
+            }
+          ],
+          "distance": 712.3
+        },
+        {
+          "summary": "East 12th Street, East 15th Street",
+          "weight": 455.4,
+          "duration": 425.4,
+          "steps": [
+            {
+              "intersections": [
+                {
+                  "out": 0,
+                  "entry": [true],
+                  "bearings": [209],
+                  "location": [-73.983013, 40.729306]
+                }
+              ],
+              "driving_side": "right",
+              "geometry": {
+                "coordinates": [
+                  [-73.983013, 40.729306],
+                  [-73.983133, 40.729144],
+                  [-73.983189, 40.729168],
+                  [-73.983212, 40.729138],
+                  [-73.983224, 40.729123]
+                ],
+                "type": "LineString"
+              },
+              "mode": "pushing bike",
+              "maneuver": {
+                "bearing_after": 209,
+                "bearing_before": 0,
+                "location": [-73.983013, 40.729306],
+                "modifier": "right",
+                "type": "depart",
+                "instruction": "Head southwest"
+              },
+              "weight": 30.3,
+              "duration": 30.3,
+              "name": "",
+              "distance": 31.9
+            },
+            {
+              "intersections": [
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [false, true, true, true],
+                  "bearings": [60, 120, 210, 300],
+                  "location": [-73.983224, 40.729123]
+                }
+              ],
+              "driving_side": "right",
+              "geometry": {
+                "coordinates": [
+                  [-73.983224, 40.729123],
+                  [-73.983267, 40.729066]
+                ],
+                "type": "LineString"
+              },
+              "mode": "pushing bike",
+              "maneuver": {
+                "bearing_after": 209,
+                "bearing_before": 246,
+                "location": [-73.983224, 40.729123],
+                "modifier": "slight left",
+                "type": "turn",
+                "instruction": "Make a slight left"
+              },
+              "weight": 10.8,
+              "duration": 10.8,
+              "name": "",
+              "distance": 7.3
+            },
+            {
+              "intersections": [
+                {
+                  "out": 2,
+                  "in": 0,
+                  "entry": [false, true, true],
+                  "bearings": [30, 120, 300],
+                  "location": [-73.983267, 40.729066]
+                }
+              ],
+              "driving_side": "right",
+              "geometry": {
+                "coordinates": [
+                  [-73.983267, 40.729066],
+                  [-73.983879, 40.729323],
+                  [-73.983999, 40.729373]
+                ],
+                "type": "LineString"
+              },
+              "mode": "cycling",
+              "maneuver": {
+                "bearing_after": 298,
+                "bearing_before": 209,
+                "location": [-73.983267, 40.729066],
+                "modifier": "right",
+                "type": "turn",
+                "instruction": "Turn right onto East 11th Street"
+              },
+              "weight": 23.2,
+              "duration": 23.2,
+              "name": "East 11th Street",
+              "distance": 70.5
+            },
+            {
+              "intersections": [
+                {
+                  "out": 0,
+                  "in": 1,
+                  "entry": [true, false, true, true],
+                  "bearings": [30, 120, 210, 300],
+                  "location": [-73.983999, 40.729373]
+                }
+              ],
+              "driving_side": "right",
+              "geometry": {
+                "coordinates": [
+                  [-73.983999, 40.729373],
+                  [-73.983956, 40.729433],
+                  [-73.98379, 40.729664],
+                  [-73.983577, 40.729962],
+                  [-73.983536, 40.730019]
+                ],
+                "type": "LineString"
+              },
+              "mode": "cycling",
+              "maneuver": {
+                "bearing_after": 28,
+                "bearing_before": 298,
+                "location": [-73.983999, 40.729373],
+                "modifier": "right",
+                "type": "turn",
+                "instruction": "Turn right onto 1st Avenue"
+              },
+              "weight": 25.8,
+              "duration": 25.8,
+              "name": "1st Avenue",
+              "distance": 81.8
+            },
+            {
+              "intersections": [
+                {
+                  "out": 1,
+                  "in": 2,
+                  "entry": [true, true, false, true],
+                  "bearings": [30, 120, 210, 300],
+                  "location": [-73.983536, 40.730019]
+                },
+                {
+                  "out": 1,
+                  "in": 3,
+                  "entry": [true, true, true, false],
+                  "bearings": [30, 120, 210, 300],
+                  "location": [-73.981325, 40.729086]
+                },
+                {
+                  "out": 1,
+                  "in": 3,
+                  "entry": [true, true, true, false],
+                  "bearings": [30, 120, 210, 300],
+                  "location": [-73.978998, 40.728106]
+                }
+              ],
+              "driving_side": "right",
+              "geometry": {
+                "coordinates": [
+                  [-73.983536, 40.730019],
+                  [-73.983419, 40.72997],
+                  [-73.982735, 40.729681],
+                  [-73.981422, 40.729127],
+                  [-73.981325, 40.729086],
+                  [-73.981228, 40.729045],
+                  [-73.979072, 40.728137],
+                  [-73.978998, 40.728106],
+                  [-73.978932, 40.728077],
+                  [-73.97849, 40.727886],
+                  [-73.976746, 40.727153],
+                  [-73.97663, 40.727104]
+                ],
+                "type": "LineString"
+              },
+              "mode": "cycling",
+              "maneuver": {
+                "bearing_after": 118,
+                "bearing_before": 28,
+                "location": [-73.983536, 40.730019],
+                "modifier": "right",
+                "type": "turn",
+                "instruction": "Turn right onto East 12th Street"
+              },
+              "weight": 174.3,
+              "duration": 174.3,
+              "name": "East 12th Street",
+              "distance": 666.3
+            },
+            {
+              "intersections": [
+                {
+                  "out": 0,
+                  "in": 3,
+                  "entry": [true, true, true, false],
+                  "bearings": [30, 135, 210, 300],
+                  "location": [-73.97663, 40.727104]
+                },
+                {
+                  "out": 0,
+                  "in": 2,
+                  "entry": [true, true, false, true],
+                  "bearings": [30, 120, 210, 300],
+                  "location": [-73.97618, 40.727755]
+                },
+                {
+                  "out": 0,
+                  "in": 1,
+                  "entry": [true, false, true],
+                  "bearings": [30, 210, 300],
+                  "location": [-73.975686, 40.728452]
+                }
+              ],
+              "driving_side": "right",
+              "geometry": {
+                "coordinates": [
+                  [-73.97663, 40.727104],
+                  [-73.976591, 40.72716],
+                  [-73.976219, 40.727698],
+                  [-73.97618, 40.727755],
+                  [-73.976139, 40.727812],
+                  [-73.975983, 40.72803],
+                  [-73.975751, 40.728357],
+                  [-73.975686, 40.728452],
+                  [-73.975632, 40.728536],
+                  [-73.97543, 40.72881],
+                  [-73.975236, 40.72908],
+                  [-73.97519, 40.729141],
+                  [-73.975148, 40.7292]
+                ],
+                "type": "LineString"
+              },
+              "mode": "cycling",
+              "maneuver": {
+                "bearing_after": 26,
+                "bearing_before": 118,
+                "location": [-73.97663, 40.727104],
+                "modifier": "left",
+                "type": "turn",
+                "instruction": "Turn left onto Avenue C"
+              },
+              "weight": 101.80000000000001,
+              "duration": 71.80000000000001,
+              "name": "Avenue C",
+              "distance": 264.5
+            },
+            {
+              "intersections": [
+                {
+                  "out": 1,
+                  "in": 2,
+                  "entry": [true, true, false, true],
+                  "bearings": [30, 120, 210, 300],
+                  "location": [-73.975148, 40.7292]
+                },
+                {
+                  "out": 1,
+                  "in": 3,
+                  "entry": [true, true, true, false],
+                  "bearings": [30, 120, 210, 300],
+                  "location": [-73.975041, 40.729153]
+                }
+              ],
+              "driving_side": "right",
+              "geometry": {
+                "coordinates": [
+                  [-73.975148, 40.7292],
+                  [-73.975041, 40.729153],
+                  [-73.975008, 40.729139],
+                  [-73.974122, 40.728766]
+                ],
+                "type": "LineString"
+              },
+              "mode": "pushing bike",
+              "maneuver": {
+                "bearing_after": 119,
+                "bearing_before": 28,
+                "location": [-73.975148, 40.7292],
+                "modifier": "right",
+                "type": "turn",
+                "instruction": "Turn right onto East 15th Street"
+              },
+              "weight": 89.2,
+              "duration": 89.2,
+              "name": "East 15th Street",
+              "distance": 99
+            },
+            {
+              "intersections": [
+                {
+                  "in": 0,
+                  "entry": [true],
+                  "bearings": [299],
+                  "location": [-73.974122, 40.728766]
+                }
+              ],
+              "driving_side": "right",
+              "geometry": {
+                "coordinates": [
+                  [-73.974122, 40.728766],
+                  [-73.974122, 40.728766]
+                ],
+                "type": "LineString"
+              },
+              "mode": "pushing bike",
+              "maneuver": {
+                "bearing_after": 0,
+                "bearing_before": 119,
+                "location": [-73.974122, 40.728766],
+                "modifier": "left",
+                "type": "arrive",
+                "instruction": "You have arrived at your destination, on the left"
+              },
+              "weight": 0,
+              "duration": 0,
+              "name": "East 15th Street",
+              "distance": 0
+            }
+          ],
+          "distance": 1221.3
+        }
+      ],
+      "weight_name": "cyclability",
+      "weight": 1207.1,
+      "duration": 1087.1999999999998,
+      "distance": 2790.5
+    }
+  ],
+  "waypoints": [
+    {
+      "distance": 1.1206280989433073,
+      "name": "East 23rd Street",
+      "location": [-73.978488, 40.736864]
+    },
+    {
+      "distance": 22.916802456944122,
+      "name": "2nd Avenue",
+      "location": [-73.982134, 40.736203]
+    },
+    {
+      "distance": 13.300264535972262,
+      "name": "",
+      "location": [-73.983855, 40.733321]
+    },
+    {
+      "distance": 8.62240843449176,
+      "name": "",
+      "location": [-73.983013, 40.729306]
+    },
+    {
+      "distance": 26.98018108738475,
+      "name": "East 15th Street",
+      "location": [-73.974122, 40.728766]
+    }
+  ],
+  "code": "Ok",
+  "uuid": "AmNDVh2_jZtSfyPVbz2uoiucXmZMOEqP2f10GXp_lnuZepYe1Big8Q=="
+}
