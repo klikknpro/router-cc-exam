@@ -1,12 +1,20 @@
-import React from "react";
+import { React, useEffect, useState } from "react";
+import { Routes, Route, Link } from "react-router-dom";
+import Home from "./routes/Home";
+import HomeBox from "./routes/HomeBox";
 
 function App() {
-  const { REACT_APP_MAPBOX_ROUTER } = process.env;
+  // useEffect(() => {
+  //   console.log("This app is in", process.env.NODE_ENV, "mode");
+  // }, []);
 
   return (
     <div className="App">
       <h1>Hello Router</h1>
-      <div id="mapbox"></div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/box" element={<HomeBox />} />
+      </Routes>
     </div>
   );
 }

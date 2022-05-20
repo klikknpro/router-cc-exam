@@ -15,3 +15,13 @@ const profileSchema = new mongoose.Schema(
 const Profile = mongoose.model("profile", profileSchema);
 
 module.exports = Profile;
+
+/*
+{
+  from: String,
+  to: String,
+  distance: Number,
+  date: String,
+  comments: Array
+}
+*/
