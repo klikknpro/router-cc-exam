@@ -1,6 +1,7 @@
 import { React, useEffect, useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import Home from "./routes/Home";
+import HomeMapGl from "./routes/HomeMapGl";
 
 function App() {
   // useEffect(() => {
@@ -11,6 +12,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/map-gl" element={<HomeMapGl />} />
       </Routes>
     </div>
   );
