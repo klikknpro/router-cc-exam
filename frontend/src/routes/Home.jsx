@@ -16,9 +16,6 @@ const Home = () => {
   /* access to the browser's Geolocation API via the GeolocateControl */
   /* https://docs.mapbox.com/mapbox-gl-js/api/markers/#geolocatecontrol#trigger */
   const locateFeature = () => {
-    // extra navigation controls
-    map.current.addControl(new mapboxgl.NavigationControl());
-
     map.current.addControl(
       new mapboxgl.GeolocateControl({
         positionOptions: {
@@ -35,13 +32,19 @@ const Home = () => {
     );
   };
 
+  const navigationFeature = () => {
+    map.current.addControl(new mapboxgl.NavigationControl());
+  };
+
   const route = () => {
     // adding the feature to my map
     locateFeature(); // might need to add a .trigger() ??
+    // extra navigation controls
+    navigationFeature();
 
     // action to do when we click the map (event listener)
     map.current.on("load", () => {
-      // add a starting point as soon as the map is "loaded", visually complete render
+      // add a starting point (in a form of a Layer) as soon as the map is "loaded", visually complete render
       // but its Budapest only, not the precise location
       map.current.addLayer({
         id: "point",
@@ -70,24 +73,54 @@ const Home = () => {
     });
 
     map.current.on("click", (event) => {
-      let coords = [];
+      let endCoords = [];
       for (const key in event.lngLat) {
-        coords.push(event.lngLat[key]);
+        endCoords.push(event.lngLat[key]);
       }
-      // const end = {
-      //   type: "FeatureCollection",
-      //   features: [
-      //     {
-      //       type: "Feature",
-      //       properties: {},
-      //       geometry: {
-      //         type: "Point",
-      //         coordinates: coords,
-      //       },
-      //     },
-      //   ],
-      // };
-      // getRoute(coords);
+
+      // IF !!!!! "end" layer already exists, then this will be geojson data for its source
+      const end = {
+        type: "FeatureCollection",
+        features: [
+          {
+            type: "Feature",
+            properties: {},
+            geometry: {
+              type: "Point",
+              coordinates: endCoords,
+            },
+          },
+        ],
+      };
+
+      if (map.current.getLayer("end")) {
+        map.current.getSource("end").setData(end);
+      } else {
+        map.current.addLayer({
+          id: "end",
+          type: "circle",
+          source: {
+            type: "geojson",
+            data: {
+              type: "FeatureCollection",
+              features: [
+                {
+                  type: "Feature",
+                  properties: {},
+                  geometry: {
+                    type: "Point",
+                    coordinates: endCoords,
+                  },
+                },
+              ],
+            },
+          },
+          paint: {
+            "circle-radius": 10,
+            "circle-color": "#f30",
+          },
+        });
+      }
     });
   };
 
@@ -101,7 +134,6 @@ const Home = () => {
       zoom: zoom,
     });
     // on map movement
-    if (!map.current) return; // wait for map to initialize
     map.current.on("move", () => {
       setLng(map.current.getCenter().lng.toFixed(4));
       setLat(map.current.getCenter().lat.toFixed(4));
