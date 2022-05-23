@@ -1,5 +1,7 @@
 import { React, useState, useEffect, useRef } from "react";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
+import { getFormControlUtilityClasses } from "@mui/material";
+import http from "axios";
 
 /* this version is based on the Original MapBox tutorial */
 const Home = () => {
@@ -42,10 +44,9 @@ const Home = () => {
     // extra navigation controls
     navigationFeature();
 
-    // action to do when we click the map (event listener)
+    // adds a starting point (in a form of a Layer) on load
     map.current.on("load", () => {
-      // add a starting point (in a form of a Layer) as soon as the map is "loaded", visually complete render
-      // but its Budapest only, not the precise location
+      // but now its Budapest only (initial coordinates), not the precise location
       map.current.addLayer({
         id: "point",
         type: "circle",
@@ -72,6 +73,7 @@ const Home = () => {
       });
     });
 
+    // event listener which adds/updates an "end" layer on click
     map.current.on("click", (event) => {
       let endCoords = [];
       for (const key in event.lngLat) {
@@ -121,7 +123,15 @@ const Home = () => {
           },
         });
       }
+      getRoute(endCoords);
     });
+  };
+
+  const getRoute = async (endCoords) => {
+    const result = await http.get(
+      `https://api.mapbox.com/directions/v5/mapbox/cycling/${start[0]},${start[1]};${endCoords[0]},${endCoords[1]}&alternatives=true&overview=full&annotations=distance,duration&steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`
+    );
+    console.log(result); // unauthorized !!!
   };
 
   useEffect(() => {
