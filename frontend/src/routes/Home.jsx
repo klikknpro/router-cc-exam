@@ -13,29 +13,81 @@ const Home = () => {
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
   /* this nice little navigation button that locates my device */
-  const locate = () => {
+  /* access to the browser's Geolocation API via the GeolocateControl */
+  /* https://docs.mapbox.com/mapbox-gl-js/api/markers/#geolocatecontrol#trigger */
+  const locateFeature = () => {
+    // extra navigation controls
+    map.current.addControl(new mapboxgl.NavigationControl());
+
     map.current.addControl(
       new mapboxgl.GeolocateControl({
         positionOptions: {
           enableHighAccuracy: true,
         },
-        // When active the map will receive updates to the device's location as it changes.
         trackUserLocation: true,
         style: {
           right: 10,
           top: 10,
         },
         position: "bottom-left",
-        // Draw an arrow next to the location dot to indicate which direction the device is heading.
         showUserHeading: true,
       })
     );
   };
 
   const route = () => {
-    locate();
+    // adding the feature to my map
+    locateFeature(); // might need to add a .trigger() ??
+
+    // action to do when we click the map (event listener)
     map.current.on("load", () => {
-      //
+      // add a starting point as soon as the map is "loaded", visually complete render
+      // but its Budapest only, not the precise location
+      map.current.addLayer({
+        id: "point",
+        type: "circle",
+        source: {
+          type: "geojson",
+          data: {
+            type: "FeatureCollection",
+            features: [
+              {
+                type: "Feature",
+                properties: {},
+                geometry: {
+                  type: "Point",
+                  coordinates: start,
+                },
+              },
+            ],
+          },
+        },
+        paint: {
+          "circle-radius": 10,
+          "circle-color": "#3887be",
+        },
+      });
+    });
+
+    map.current.on("click", (event) => {
+      let coords = [];
+      for (const key in event.lngLat) {
+        coords.push(event.lngLat[key]);
+      }
+      // const end = {
+      //   type: "FeatureCollection",
+      //   features: [
+      //     {
+      //       type: "Feature",
+      //       properties: {},
+      //       geometry: {
+      //         type: "Point",
+      //         coordinates: coords,
+      //       },
+      //     },
+      //   ],
+      // };
+      // getRoute(coords);
     });
   };
 
@@ -55,7 +107,7 @@ const Home = () => {
       setLat(map.current.getCenter().lat.toFixed(4));
       setZoom(map.current.getZoom().toFixed(2));
     });
-    // route();
+    route();
     // eslint-disable-next-line
   }, [map.current]);
 
