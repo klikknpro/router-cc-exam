@@ -13,6 +13,7 @@ const Home = () => {
   const [zoom, setZoom] = useState(10);
 
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
+  const mapboxToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
   /* this nice little navigation button that locates my device */
   /* access to the browser's Geolocation API via the GeolocateControl */
@@ -129,9 +130,40 @@ const Home = () => {
 
   const getRoute = async (endCoords) => {
     const result = await http.get(
-      `https://api.mapbox.com/directions/v5/mapbox/cycling/${start[0]},${start[1]};${endCoords[0]},${endCoords[1]}&alternatives=true&overview=full&annotations=distance,duration&steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`
+      `https://api.mapbox.com/directions/v5/mapbox/cycling/${start[0]},${start[1]};${endCoords[0]},${endCoords[1]}?steps=true&geometries=geojson&overview=full&annotations=distance,duration&waypoints=0;1&access_token=${mapboxgl.accessToken}`
     );
-    console.log(result); // unauthorized !!!
+    const data = result.data.routes[0];
+    const route = data.geometry.coordinates;
+    const geojson = {
+      type: "Feature",
+      properties: {},
+      geometry: {
+        type: "LineString",
+        coordinates: route,
+      },
+    };
+
+    if (map.current.getSource("route")) {
+      map.current.getSource("route").setData(geojson);
+    } else {
+      map.current.addLayer({
+        id: "route",
+        type: "line",
+        source: {
+          type: "geojson",
+          data: geojson,
+        },
+        layout: {
+          "line-join": "round",
+          "line-cap": "round",
+        },
+        paint: {
+          "line-color": "#3887be",
+          "line-width": 5,
+          "line-opacity": 0.75,
+        },
+      });
+    }
   };
 
   useEffect(() => {
