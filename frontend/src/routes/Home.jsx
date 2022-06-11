@@ -1,6 +1,5 @@
 import { React, useState, useEffect, useRef } from "react";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
-import { getFormControlUtilityClasses } from "@mui/material";
 import http from "axios";
 
 /* this version is based on the Original MapBox tutorial */
@@ -13,7 +12,6 @@ const Home = () => {
   const [zoom, setZoom] = useState(10);
 
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
-  const mapboxToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
   /* this nice little navigation button that locates my device */
   /* access to the browser's Geolocation API via the GeolocateControl */
