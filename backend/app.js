@@ -1,30 +1,31 @@
-require("dotenv").config();
 const express = require("express");
+require("express-async-errors");
 const app = express();
 const cors = require("cors");
-const mongoose = require("mongoose");
-const port = process.env.PORT;
+const morgan = require("morgan");
+const errorHandler = require("./middleware/errorHandler");
+
+const corsOptions = {
+  origin: process.env.APP_URL, // a FE localhost kell ide
+  optionsSuccessStatus: 200,
+};
+
+morgan.token("host", function (req, res) {
+  return req.hostname;
+});
 
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
+app.use(morgan(":method :url :status - HOST: :host  - :response-time ms"));
 
-mongoose
-  .connect(process.env.CONNECTION_STRING)
-  .then(() => console.log("MongoDB connected"))
-  .catch((error) => console.log(error));
+/* === ROUTES === */
+/* === *** === */
 
-/* === *** === *** === */
-
-// mongoose.connection
-//   .dropDatabase()
-//   .then(() => console.log("database deleted"))
-//   .catch((err) => console.log(err));
-
-// const { initBaseData } = require("./controllers/init-base-data");
-// initBaseData()
-//   .then((info) => console.log(info))
-//   .catch((err) => console.log(err));
-
-app.listen(port, () => {
-  console.log(`Router© is listening on port ${port}. Please run: "brew services start mongodb-community"`);
+app.get("/", (req, res) => {
+  console.log("Health check completed");
+  res.sendStatus(200);
 });
+
+app.use(errorHandler);
+
+module.exports = app;
