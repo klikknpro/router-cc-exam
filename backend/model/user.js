@@ -6,7 +6,7 @@ const routeSchema = new mongoose.Schema({
   from: { type: String, required: true }, // response.routes[0].geometry.coordinates[0]
   to: { type: String, required: true }, // response.routes[0].geometry.coordinates[lastOne]
   coordinates: { type: Array, required: true }, // response.routes[0].geometry.coordinates
-  checkpoints: { type: Array, required: true },
+  checkpoints: { type: Array, required: true }, // see logic
   distance: { type: Number, required: true }, // response.routes[0].distance
   isPublic: { type: Boolean, default: false },
   tFactor: { type: Number, required: true }, // Toughness - Factor
