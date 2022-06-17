@@ -1,4 +1,4 @@
-const short = {
+const directions = {
   routes: [
     {
       geometry: {
@@ -554,3 +554,5 @@ const short = {
   code: "Ok",
   uuid: "6bogPK6-IEY8xeU6EyOsfEH9PHMU2M-kWnGjYDFuGLAHZlctC9ORDg==",
 };
+
+module.exports = directions;
