@@ -16,7 +16,7 @@ router.post("/", auth({ block: true }), async (req, res) => {
   )
     return res.sendStatus(400);
 
-  const user = await User.findById(res.locals.userId);
+  const user = await User.findById(res.locals.user.userId);
   if (!user) return res.status(404).send("User not found.");
 
   user.myRoutes.push({
@@ -30,6 +30,7 @@ router.post("/", auth({ block: true }), async (req, res) => {
     isPublic: false,
   });
 
+  // return the whole user object
   user
     .save()
     .then((data) => {
@@ -49,16 +50,17 @@ router.get("/:routeId", auth({ block: true })); // display selected route
 router.patch("/:routeId", auth({ block: true }), async (req, res) => {
   if (!req.params.routeId) return res.sendStatus(400);
 
-  const isPublic = req.query.isPublic;
-  if (!isPublic && !req.body.description) return res.sendStatus(400);
+  if (!req.query.isPublic && !req.body.description) return res.status(400).send("Cannot change the nothing");
 
-  const user = await User.findById(res.locals.userId);
+  const isPublic = req.query.isPublic === "true";
+
+  const user = await User.findById(res.locals.user.userId);
   if (!user) return res.status(404).send("User not found.");
 
   const route = user.myRoutes.id(req.params.routeId);
   if (!route) return res.status(404).send("Route not found.");
 
-  if (req.body.description) route.description = req.body.description;
+  if (req.body.description && req.body.description === "") route.description = req.body.description;
   if (isPublic === true || isPublic === false) route.isPublic = isPublic;
 
   user
@@ -72,15 +74,5 @@ router.patch("/:routeId", auth({ block: true }), async (req, res) => {
 }); // update and response with updated document
 
 router.delete("/:routeId", auth({ block: true })); // isDeleted: true ;)
-
-// router.get("/:id/todos", auth({ block: true }), allTodos);
-
-// router.get("/:id/todos/:todoId", auth({ block: true }), todoById);
-
-// router.post("/:id/todos"); // create a todo and send todo :id back
-
-// router.patch("/:id/todos/:id", controller); // update and send updated todo :id back
-
-// router.delete("/:id/todos/:id", controller); // isDeleted: true ;)
 
 module.exports = router;
