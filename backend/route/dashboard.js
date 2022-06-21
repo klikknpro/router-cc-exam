@@ -2,8 +2,7 @@ const router = require("express").Router();
 const User = require("../model/user");
 const auth = require("../middleware/auth");
 
-/* these are REST endpoints */
-
+/* === >>> REST endpoints <<< === */
 router.post("/", auth({ block: true }), async (req, res) => {
   if (
     !req.body.description ||
@@ -30,7 +29,6 @@ router.post("/", auth({ block: true }), async (req, res) => {
     isPublic: false,
   });
 
-  // return the whole user object
   user
     .save()
     .then((data) => {
@@ -38,21 +36,33 @@ router.post("/", auth({ block: true }), async (req, res) => {
     })
     .catch((err) => {
       return res.status(500).send(err);
-    });
-}); // save route to db
+    }); // return the whole user object
+});
 
-router.get("/", auth({ block: true })); // display the user's dashboard
+/* === >>> <<< === */
+/* === >>> display the user's dashboard (all or selected route only) <<< === */
+router.get("/", auth({ block: true }), async (req, res) => {
+  const user = await User.findById(res.locals.user.userId);
+  if (!user) return res.status(404).send("User not found.");
 
-router.get("/:routeId", auth({ block: true })); // display selected route
+  if (req.query.routeId) {
+    const route = user.myRoutes.id(req.query.routeId);
+    if (!route) return res.status(404).send("Route not found.");
+    return res.status(200).send(route);
+  }
 
-/* change "description" from body */
-/* set public from /:routeId?isPublic=true */
+  return res.status(200).send(user.myRoutes);
+});
+
+/* === >>> <<< === */
+/* === >>> change "description" from body <<< === */
+/* === >>> set public from /:routeId?isPublic=true <<< === */
 router.patch("/:routeId", auth({ block: true }), async (req, res) => {
   if (!req.params.routeId) return res.sendStatus(400);
 
   if (!req.query.isPublic && !req.body.description) return res.status(400).send("Cannot change the nothing");
 
-  const isPublic = req.query.isPublic === "true";
+  const isPublic = req.query.isPublic === "true"; // convert to boolean
 
   const user = await User.findById(res.locals.user.userId);
   if (!user) return res.status(404).send("User not found.");
@@ -66,13 +76,27 @@ router.patch("/:routeId", auth({ block: true }), async (req, res) => {
   user
     .save()
     .then((user) => {
-      return res.status(200).json(user.myRoutes.id(req.params.routeId)); // return route only ?? i hope so
+      return res.status(200).json(user.myRoutes.id(req.params.routeId));
     })
     .catch((err) => {
       return res.status(500).send(err);
     });
 }); // update and response with updated document
 
-router.delete("/:routeId", auth({ block: true })); // isDeleted: true ;)
+/* === >>> <<< === */
+/* === >>> delete selected route only <<< === */
+router.delete("/:routeId", auth({ block: true }), async (req, res) => {
+  if (!req.params.routeId) return res.sendStatus(400);
+
+  const user = await User.findById(res.locals.user.userId);
+  if (!user) return res.status(404).send("User not found.");
+
+  const route = user.myRoutes.id(req.params.routeId);
+  if (!route) return res.status(404).send("Route not found.");
+
+  // const index = user.myRoutes.indexOf(route);
+  // console.log(index);
+  // res.sendStatus(404);
+});
 
 module.exports = router;
