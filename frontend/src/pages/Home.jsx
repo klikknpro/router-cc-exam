@@ -1,10 +1,11 @@
-import { React, useState, useEffect, useRef } from "react";
+import React from "react";
+import { useState, useEffect, useRef } from "react";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
 import http from "axios";
 
 /* this version is based on the Original MapBox tutorial */
 const Home = () => {
-  const mapContainer = useRef(null);
+  const mapContainer = useRef(null); // my DOM element
   const map = useRef(null); // rendered element
   const [lng, setLng] = useState(19.0402);
   const [lat, setLat] = useState(47.4979);
@@ -13,35 +14,11 @@ const Home = () => {
 
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
-  /* this nice little navigation button that locates my device */
-  /* access to the browser's Geolocation API via the GeolocateControl */
-  /* https://docs.mapbox.com/mapbox-gl-js/api/markers/#geolocatecontrol#trigger */
-  const locateFeature = () => {
-    map.current.addControl(
-      new mapboxgl.GeolocateControl({
-        positionOptions: {
-          enableHighAccuracy: true,
-        },
-        trackUserLocation: true,
-        style: {
-          right: 10,
-          top: 10,
-        },
-        position: "bottom-left",
-        showUserHeading: true,
-      })
-    );
-  };
-
-  const navigationFeature = () => {
-    map.current.addControl(new mapboxgl.NavigationControl());
-  };
-
   const route = () => {
     // adding the feature to my map
-    locateFeature(); // might need to add a .trigger() ??
+    // geolocateFeature(); // might need to add a .trigger() ??
     // extra navigation controls
-    navigationFeature();
+    // navigationFeature();
 
     // adds a starting point (in a form of a Layer) on load
     map.current.on("load", () => {
@@ -164,6 +141,23 @@ const Home = () => {
     }
   };
 
+  /* === >>> locate button <<< === */
+  const geolocateFeature = new mapboxgl.GeolocateControl({
+    positionOptions: {
+      enableHighAccuracy: true,
+    },
+    trackUserLocation: false,
+    style: {
+      right: 10,
+      top: 10,
+    },
+    position: "bottom-left",
+    showUserHeading: true,
+  });
+
+  /* === >>> navigation buttons <<< === */
+  const navigationFeature = new mapboxgl.NavigationControl();
+
   useEffect(() => {
     // on load
     if (map.current) return; // initialize map only once
@@ -173,6 +167,14 @@ const Home = () => {
       center: [lng, lat],
       zoom: zoom,
     });
+    map.current.addControl(geolocateFeature);
+    map.current.addControl(navigationFeature);
+
+    // trigger geolocate
+    map.current.on("load", () => {
+      geolocateFeature.trigger();
+    });
+
     // on map movement
     map.current.on("move", () => {
       setLng(map.current.getCenter().lng.toFixed(4));
@@ -194,3 +196,9 @@ const Home = () => {
 };
 
 export default Home;
+
+/*
+map.on('load', () => {
+geolocate.trigger();
+});
+*/
