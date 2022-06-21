@@ -9,17 +9,10 @@ const Home = () => {
   const map = useRef(null); // rendered element
   const [lng, setLng] = useState(19.0402);
   const [lat, setLat] = useState(47.4979);
-  const start = [lng, lat]; // initial directions
   const [zoom, setZoom] = useState(10);
-
-  mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
+  const start = [lng, lat]; // initial directions
 
   const route = () => {
-    // adding the feature to my map
-    // geolocateFeature(); // might need to add a .trigger() ??
-    // extra navigation controls
-    // navigationFeature();
-
     // adds a starting point (in a form of a Layer) on load
     map.current.on("load", () => {
       // but now its Budapest only (initial coordinates), not the precise location
@@ -158,6 +151,8 @@ const Home = () => {
   /* === >>> navigation buttons <<< === */
   const navigationFeature = new mapboxgl.NavigationControl();
 
+  mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
+
   useEffect(() => {
     // on load
     if (map.current) return; // initialize map only once
@@ -175,13 +170,19 @@ const Home = () => {
       geolocateFeature.trigger();
     });
 
-    // on map movement
+    geolocateFeature.on("geolocate", (data) => {
+      setLng(data.coords.longitude.toFixed(4));
+      setLat(data.coords.latitude.toFixed(4));
+    });
+
+    // update coordinates on map movement
     map.current.on("move", () => {
       setLng(map.current.getCenter().lng.toFixed(4));
       setLat(map.current.getCenter().lat.toFixed(4));
       setZoom(map.current.getZoom().toFixed(2));
     });
-    route();
+
+    // route();
     // eslint-disable-next-line
   }, [map.current]);
 
@@ -198,7 +199,7 @@ const Home = () => {
 export default Home;
 
 /*
-map.on('load', () => {
-geolocate.trigger();
+geolocateFeature.on('geolocate', () => {
+console.log('A geolocate event has occurred.');
 });
 */
