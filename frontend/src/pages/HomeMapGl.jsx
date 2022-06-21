@@ -3,6 +3,7 @@ import Map, { Source, Layer } from "react-map-gl";
 import { Button } from "@mui/material";
 import tornado from "../icons/iconmonstr-weather-88-32.png";
 
+/* NOT GOING WITH THIS VERSION */
 // this is a Controlled map by the "react-map-gl" module
 const HomeMapGl = () => {
   const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;

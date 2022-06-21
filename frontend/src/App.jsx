@@ -1,7 +1,8 @@
-import { React, useEffect, useState } from "react";
+import React from "react";
+import { useEffect, useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
-import Home from "./routes/Home";
-import HomeMapGl from "./routes/HomeMapGl";
+import Home from "./pages/Home";
+import HomeMapGl from "./pages/HomeMapGl";
 
 function App() {
   // useEffect(() => {

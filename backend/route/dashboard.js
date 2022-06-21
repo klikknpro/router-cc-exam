@@ -51,7 +51,7 @@ router.get("/", auth({ block: true }), async (req, res) => {
     return res.status(200).send(route);
   }
 
-  return res.status(200).send(user.myRoutes);
+  return res.status(200).json({ username: user.username, myRoutes: user.myRoutes });
 });
 
 /* === >>> <<< === */

@@ -1,6 +1,8 @@
 const shortRoute = require("./short");
 const longRoute = require("./long");
 
+///
+
 let checkpointsList = [];
 const legs = shortRoute.routes[0].legs;
 
@@ -15,6 +17,7 @@ for (const leg of legs) {
   }
 }
 
-const coordinates = shortRoute.routes[0].geometry.coordinates;
-
-console.log(coordinates);
+console.log(checkpointsList);
+/*
+<lon>,<lat>;<lon>,<lat>
+*/
