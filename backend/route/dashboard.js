@@ -81,7 +81,7 @@ router.patch("/:routeId", auth({ block: true }), async (req, res) => {
     .catch((err) => {
       return res.status(500).send(err);
     });
-}); // update and response with updated document
+});
 
 /* === >>> <<< === */
 /* === >>> delete selected route only <<< === */
@@ -91,12 +91,21 @@ router.delete("/:routeId", auth({ block: true }), async (req, res) => {
   const user = await User.findById(res.locals.user.userId);
   if (!user) return res.status(404).send("User not found.");
 
-  const route = user.myRoutes.id(req.params.routeId);
-  if (!route) return res.status(404).send("Route not found.");
-
-  // const index = user.myRoutes.indexOf(route);
-  // console.log(index);
-  // res.sendStatus(404);
+  User.findByIdAndUpdate(
+    res.locals.user.userId,
+    {
+      $pull: {
+        myRoutes: { _id: req.params.routeId },
+      },
+    },
+    { new: true }
+  )
+    .then((result) => res.status(200).json(result.myRoutes))
+    .catch((err) => res.status(404).send("Route not found")); // return all remaining routes
 });
 
 module.exports = router;
+
+/*
+
+*/
