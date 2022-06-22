@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect, useRef } from "react";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
 import http from "axios";
+import { Button } from "@mui/material";
 
 /* this version is based on the Original MapBox tutorial */
 const Home = () => {
@@ -156,36 +157,15 @@ const Home = () => {
 
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
+  /* === >>> initialize map (only once) <<< === */
   useEffect(() => {
-    // on load
-    if (map.current) return; // initialize map only once
+    // on site load
+    if (map.current) return;
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v11",
       center: [19.0402, 47.4979],
       zoom: 10,
-    });
-
-    map.current.addControl(geolocateFeature);
-    map.current.addControl(navigationFeature);
-
-    // trigger geolocate
-    map.current.on("load", () => {
-      geolocateFeature.trigger();
-      // setSomeLoadingMask(true);
-    });
-    // eslint-disable-next-line
-  }, []);
-
-  useEffect(() => {
-    // after load
-    if (!map.current) return; // wait for map to initialize
-
-    geolocateFeature.on("geolocate", (data) => {
-      setLng(data.coords.longitude.toFixed(4));
-      setLat(data.coords.latitude.toFixed(4));
-      // setSomeLoadingMask(false);
-      console.log("geolocate event", lng, lat);
     });
 
     // update coordinates info on map movement
@@ -195,20 +175,33 @@ const Home = () => {
       setZoomInfo(map.current.getZoom().toFixed(2));
     });
 
-    // eslint-disable-next-line
-  });
+    map.current.addControl(geolocateFeature);
+    map.current.addControl(navigationFeature);
 
-  useEffect(() => {
-    map.current.on("click", (event) => {
-      let endCoords = [];
-      for (const key in event.lngLat) {
-        endCoords.push(event.lngLat[key]);
-      }
-      console.log("from", lng, lat);
-      console.log("to", endCoords);
+    geolocateFeature.on("geolocate", (data) => {
+      setLng(data.coords.longitude.toFixed(4));
+      setLat(data.coords.latitude.toFixed(4));
+      // setSomeLoadingMask(false);
+      // console.log(data.coords.longitude.toFixed(4), data.coords.latitude.toFixed(4));
+    });
+
+    map.current.on("load", () => {
+      geolocateFeature.trigger();
     });
     // eslint-disable-next-line
-  }, []);
+  }, [map.current]);
+
+  // useEffect(() => {
+  //   // if (!map.current) return; // wait for map to initialize
+
+  //   map.current.on("click", (event) => {
+  //     let endCoords = [];
+  //     for (const key in event.lngLat) {
+  //       endCoords.push(event.lngLat[key]);
+  //     }
+  //   });
+  //   // eslint-disable-next-line
+  // });
 
   return (
     <div>
@@ -216,6 +209,7 @@ const Home = () => {
         Longitude: {lngInfo} | Latitude: {latInfo} | Zoom: {zoomInfo}
       </div>
       <div ref={mapContainer} className="map-container" />
+      <Button onClick={() => console.log(lng, lat)}>Start</Button>
     </div>
   );
 };
