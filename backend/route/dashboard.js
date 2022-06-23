@@ -48,7 +48,7 @@ router.get("/", auth({ block: true }), async (req, res) => {
   if (req.query.routeId) {
     const route = user.myRoutes.id(req.query.routeId);
     if (!route) return res.status(404).send("Route not found.");
-    return res.status(200).send(route);
+    return res.status(200).json(route);
   }
 
   return res.status(200).json({ username: user.username, myRoutes: user.myRoutes });

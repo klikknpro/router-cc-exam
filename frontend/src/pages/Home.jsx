@@ -8,142 +8,34 @@ import { Button } from "@mui/material";
 const Home = () => {
   const mapContainer = useRef(null); // my DOM element
   const map = useRef(null); // rendered element
-  const [lng, setLng] = useState(null);
-  const [lat, setLat] = useState(null);
+  const [lngStart, setLngStart] = useState(null);
+  const [latStart, setLatStart] = useState(null);
+
+  /* for sidebar */
   const [lngInfo, setLngInfo] = useState(19.0402);
   const [latInfo, setLatInfo] = useState(47.4979);
   const [zoomInfo, setZoomInfo] = useState(10);
-  // const start = [lng, lat]; // initial directions
 
-  const route = () => {
-    // adds a starting point (in a form of a Layer) on load
-    // map.current.on("load", () => {
-    //   map.current.addLayer({
-    //     id: "point",
-    //     type: "circle",
-    //     source: {
-    //       type: "geojson",
-    //       data: {
-    //         type: "FeatureCollection",
-    //         features: [
-    //           {
-    //             type: "Feature",
-    //             properties: {},
-    //             geometry: {
-    //               type: "Point",
-    //               coordinates: start,
-    //             },
-    //           },
-    //         ],
-    //       },
-    //     },
-    //     paint: {
-    //       "circle-radius": 10,
-    //       "circle-color": "#3887be",
-    //     },
-    //   });
-    // });
+  const geolocateStart = () => {
+    console.log("running start");
 
-    // event listener which adds/updates an "end" layer on click
-    map.current.on("click", (event) => {
-      let endCoords = [];
-      for (const key in event.lngLat) {
-        endCoords.push(event.lngLat[key]);
-      }
-      console.log("from", lng, lat);
-      console.log("to", endCoords);
+    geolocateFeature.on("geolocate", (data) => {
+      setLngStart(data.coords.longitude.toFixed(4));
+      setLatStart(data.coords.latitude.toFixed(4));
+      // console.log(data.coords.longitude.toFixed(4), data.coords.latitude.toFixed(4));
+    });
 
-      // IF !!!!! "end" layer already exists, then this will be geojson data for its source
-      // const end = {
-      //   type: "FeatureCollection",
-      //   features: [
-      //     {
-      //       type: "Feature",
-      //       properties: {},
-      //       geometry: {
-      //         type: "Point",
-      //         coordinates: endCoords,
-      //       },
-      //     },
-      //   ],
-      // };
-
-      // if (map.current.getLayer("end")) {
-      //   map.current.getSource("end").setData(end);
-      // } else {
-      //   map.current.addLayer({
-      //     id: "end",
-      //     type: "circle",
-      //     source: {
-      //       type: "geojson",
-      //       data: {
-      //         type: "FeatureCollection",
-      //         features: [
-      //           {
-      //             type: "Feature",
-      //             properties: {},
-      //             geometry: {
-      //               type: "Point",
-      //               coordinates: endCoords,
-      //             },
-      //           },
-      //         ],
-      //       },
-      //     },
-      //     paint: {
-      //       "circle-radius": 10,
-      //       "circle-color": "#f30",
-      //     },
-      //   });
-      // }
-      // getRoute(endCoords);
+    map.current.on("load", () => {
+      geolocateFeature.trigger();
     });
   };
-
-  // const getRoute = async (endCoords) => {
-  //   const result = await http.get(
-  //     `https://api.mapbox.com/directions/v5/mapbox/cycling/${start[0]},${start[1]};${endCoords[0]},${endCoords[1]}?steps=true&geometries=geojson&overview=full&annotations=distance,duration&waypoints=0;1&access_token=${mapboxgl.accessToken}`
-  //   );
-  //   const data = result.data.routes[0];
-  //   const route = data.geometry.coordinates;
-  //   const geojson = {
-  //     type: "Feature",
-  //     properties: {},
-  //     geometry: {
-  //       type: "LineString",
-  //       coordinates: route,
-  //     },
-  //   };
-
-  //   if (map.current.getSource("route")) {
-  //     map.current.getSource("route").setData(geojson);
-  //   } else {
-  //     map.current.addLayer({
-  //       id: "route",
-  //       type: "line",
-  //       source: {
-  //         type: "geojson",
-  //         data: geojson,
-  //       },
-  //       layout: {
-  //         "line-join": "round",
-  //         "line-cap": "round",
-  //       },
-  //       paint: {
-  //         "line-color": "#3887be",
-  //         "line-width": 5,
-  //         "line-opacity": 0.75,
-  //       },
-  //     });
-  //   }
-  // };
 
   /* === >>> locate button <<< === */
   const geolocateFeature = new mapboxgl.GeolocateControl({
     positionOptions: {
       enableHighAccuracy: true,
     },
-    trackUserLocation: true,
+    trackUserLocation: false,
     style: {
       right: 10,
       top: 10,
@@ -168,40 +60,43 @@ const Home = () => {
       zoom: 10,
     });
 
-    // update coordinates info on map movement
+    map.current.addControl(geolocateFeature);
+    map.current.addControl(navigationFeature);
+
+    // for sidebar
     map.current.on("move", () => {
       setLngInfo(map.current.getCenter().lng.toFixed(4));
       setLatInfo(map.current.getCenter().lat.toFixed(4));
       setZoomInfo(map.current.getZoom().toFixed(2));
     });
 
-    map.current.addControl(geolocateFeature);
-    map.current.addControl(navigationFeature);
-
-    geolocateFeature.on("geolocate", (data) => {
-      setLng(data.coords.longitude.toFixed(4));
-      setLat(data.coords.latitude.toFixed(4));
-      // setSomeLoadingMask(false);
-      // console.log(data.coords.longitude.toFixed(4), data.coords.latitude.toFixed(4));
-    });
-
-    map.current.on("load", () => {
-      geolocateFeature.trigger();
-    });
     // eslint-disable-next-line
   }, [map.current]);
 
-  // useEffect(() => {
-  //   // if (!map.current) return; // wait for map to initialize
+  useEffect(() => {
+    console.log("start useeffect");
+    geolocateStart();
+    // eslint-disable-next-line
+  }, []);
 
-  //   map.current.on("click", (event) => {
-  //     let endCoords = [];
-  //     for (const key in event.lngLat) {
-  //       endCoords.push(event.lngLat[key]);
-  //     }
-  //   });
-  //   // eslint-disable-next-line
-  // });
+  // useEffect(() => {
+  //   // setlngStart from a click (user input)
+  //   if (!lngStart && !latStart) setLngStart(current) setLatStart(current)
+  // }, [lngCurrent, latCurrent]); // geolocateFeature ezt allitja
+
+  useEffect(() => {
+    if (lngStart && latStart) {
+      // console.log(hanyszor futsz le? ha valtozik a location (elmozdul a device VAGY manualisat allitok be start poziciot), akkor is ujraregisztralod ezt a click eventet??)
+      map.current.on("click", (event) => {
+        let endCoords = [];
+        for (const key in event.lngLat) {
+          endCoords.push(event.lngLat[key]);
+        }
+        console.log("from", lngStart, latStart);
+        console.log("to", endCoords);
+      });
+    }
+  }, [lngStart, latStart]); // ??? re-register click event?
 
   return (
     <div>
@@ -209,7 +104,7 @@ const Home = () => {
         Longitude: {lngInfo} | Latitude: {latInfo} | Zoom: {zoomInfo}
       </div>
       <div ref={mapContainer} className="map-container" />
-      <Button onClick={() => console.log(lng, lat)}>Start</Button>
+      <Button onClick={() => console.log(lngStart, latStart)}>Start</Button>
     </div>
   );
 };
