@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
+import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
 import App from "./App";
 import { AuthProvider } from "./providers/auth";
 import ErrorBoundary from "./components/ErrorBoundary";
