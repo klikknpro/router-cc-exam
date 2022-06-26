@@ -25,7 +25,7 @@ const Home = () => {
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
   const geolocateStart = () => {
-    console.log("geolocate start");
+    console.log("register geolocate event at [] only!");
     geolocateFeature.on("geolocate", (data) => {
       console.log("set geolocate data");
       setLngStart(null);
@@ -49,7 +49,7 @@ const Home = () => {
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v11",
-      center: [19.0402, 47.4979],
+      center: [20.2025, 48.2264],
       zoom: 10,
     });
 
@@ -64,11 +64,24 @@ const Home = () => {
       setZoomInfo(map.current.getZoom().toFixed(2));
     });
 
+    /* // init LineString tool
+    map.current.on("load", () => {
+      drawFeature.changeMode("draw_line_string");
+      const featureCollection = drawFeature.getAll();
+      const currentFeature = featureCollection.features[0];
+      currentFeature.geometry.coordinates[0] = [20.2025, 48.2264];
+      drawFeature.set(currentFeature);
+      // set start coordinate property here
+    }); */
+
+    map.current.on("draw.create", (e) => {
+      console.log(e);
+      console.log(e.features[0].geometry.coordinates); // [lng, lat] for directions API
+    });
     // eslint-disable-next-line
   }, [map.current]);
 
   useEffect(() => {
-    console.log("geolocate useEffect");
     geolocateStart();
     // eslint-disable-next-line
   }, []);
@@ -82,12 +95,12 @@ const Home = () => {
     // eslint-disable-next-line
   }, [lngCurrent, latCurrent]);
 
-  useEffect(() => {
+  /* useEffect(() => {
     console.log("click event useEffect");
     if (lngStart && latStart) {
       // console.log(hanyszor futsz le? ha valtozik a location (elmozdul a device VAGY manualisat allitok be start poziciot), akkor is ujraregisztralod ezt a click eventet??)
+      console.log("register click event");
       map.current.on("click", (event) => {
-        console.log("register click event");
         let endCoords = [];
         for (const key in event.lngLat) {
           endCoords.push(event.lngLat[key]);
@@ -96,7 +109,7 @@ const Home = () => {
         console.log("to", endCoords);
       });
     }
-  }, [lngStart, latStart]); // ??? re-register click event?
+  }, [lngStart, latStart]); // ??? re-register click event? */
 
   return (
     <div>
@@ -107,8 +120,8 @@ const Home = () => {
       <Button onClick={() => console.log(lngStart, latStart)}>Route</Button>
       <Button
         onClick={() => {
-          setLngStart(19.0482);
-          setLatStart(47.4779);
+          setLngStart(20.2025);
+          setLatStart(48.2264);
         }}>
         Set my Start Coordinates
       </Button>
