@@ -17,7 +17,13 @@ for (const leg of legs) {
   }
 }
 
-console.log(checkpointsList);
+console.log("original", checkpointsList);
+
+checkpointsList = checkpointsList.filter((_, i) => {
+  return (i + 1) % 5;
+}); // keeps every Nth element
+
+console.log("shortened", checkpointsList);
 /*
 <lon>,<lat>;<lon>,<lat>
 */

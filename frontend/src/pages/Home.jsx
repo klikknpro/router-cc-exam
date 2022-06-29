@@ -5,6 +5,7 @@ import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-load
 import geolocateFeature from "../map-features/geolocate";
 import navigationFeature from "../map-features/navigation";
 import drawFeature from "../map-features/draw";
+import directions from "../map-features/directions";
 import { Button } from "@mui/material";
 
 /* this version is based on the Original MapBox tutorial */
@@ -22,46 +23,6 @@ const Home = () => {
   const [zoomInfo, setZoomInfo] = useState(10);
 
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
-
-  const directions = async (drawCoordinates) => {
-    const coordinates = drawCoordinates.join(";");
-
-    const response = await http.get(
-      `https://api.mapbox.com/directions/v5/mapbox/cycling/${coordinates}?steps=true&geometries=geojson&annotations=distance,duration&access_token=${mapboxgl.accessToken}`
-    );
-    // console.log(response);
-    const routeCoords = response.data.routes[0].geometry.coordinates;
-    const routeGeojson = {
-      type: "Feature",
-      properties: {},
-      geometry: {
-        type: "LineString",
-        coordinates: routeCoords,
-      },
-    };
-
-    if (map.current.getSource("routeLayer")) {
-      map.current.getSource("routeLayer").setData(routeGeojson);
-    } else {
-      map.current.addLayer({
-        id: "routeLayer",
-        type: "line",
-        source: {
-          type: "geojson",
-          data: routeGeojson,
-        },
-        layout: {
-          "line-join": "round",
-          "line-cap": "round",
-        },
-        paint: {
-          "line-color": "#3887be",
-          "line-width": 5,
-          "line-opacity": 0.75,
-        },
-      });
-    }
-  };
 
   const geolocateStart = () => {
     console.log("register geolocate event at [] only!");
@@ -108,9 +69,9 @@ const Home = () => {
     });
 
     map.current.on("draw.create", (e) => {
-      // console.log(e.features[0].geometry.coordinates); // [lng, lat] for directions API
+      // console.log(e.features[0].geometry.coordinates);
       const drawCoordinates = e.features[0].geometry.coordinates;
-      directions(drawCoordinates);
+      directions(drawCoordinates, map);
     });
 
     map.current.on("draw.delete", (e) => {
