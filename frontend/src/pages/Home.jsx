@@ -2,7 +2,6 @@ import React from "react";
 import { useState, useEffect, useRef } from "react";
 import http from "axios";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
-import MapboxDraw from "@mapbox/mapbox-gl-draw";
 import geolocateFeature from "../map-features/geolocate";
 import navigationFeature from "../map-features/navigation";
 import drawFeature from "../map-features/draw";
@@ -24,6 +23,46 @@ const Home = () => {
 
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
+  const directions = async (drawCoordinates) => {
+    const coordinates = drawCoordinates.join(";");
+
+    const response = await http.get(
+      `https://api.mapbox.com/directions/v5/mapbox/cycling/${coordinates}?steps=true&geometries=geojson&annotations=distance,duration&access_token=${mapboxgl.accessToken}`
+    );
+    // console.log(response);
+    const routeCoords = response.data.routes[0].geometry.coordinates;
+    const routeGeojson = {
+      type: "Feature",
+      properties: {},
+      geometry: {
+        type: "LineString",
+        coordinates: routeCoords,
+      },
+    };
+
+    if (map.current.getSource("routeLayer")) {
+      map.current.getSource("routeLayer").setData(routeGeojson);
+    } else {
+      map.current.addLayer({
+        id: "routeLayer",
+        type: "line",
+        source: {
+          type: "geojson",
+          data: routeGeojson,
+        },
+        layout: {
+          "line-join": "round",
+          "line-cap": "round",
+        },
+        paint: {
+          "line-color": "#3887be",
+          "line-width": 5,
+          "line-opacity": 0.75,
+        },
+      });
+    }
+  };
+
   const geolocateStart = () => {
     console.log("register geolocate event at [] only!");
     geolocateFeature.on("geolocate", (data) => {
@@ -34,6 +73,10 @@ const Home = () => {
       setLngCurrent(data.coords.longitude.toFixed(4));
       setLatCurrent(data.coords.latitude.toFixed(4));
       // console.log(data.coords.longitude.toFixed(4), data.coords.latitude.toFixed(4));
+      map.current.flyTo({
+        center: [data.coords.longitude, data.coords.latitude],
+        zoom: 13,
+      });
     });
 
     map.current.on("load", () => {
@@ -49,7 +92,7 @@ const Home = () => {
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v11",
-      center: [20.2025, 48.2264],
+      center: [19.0402, 47.4979],
       zoom: 10,
     });
 
@@ -64,19 +107,15 @@ const Home = () => {
       setZoomInfo(map.current.getZoom().toFixed(2));
     });
 
-    /* // init LineString tool
-    map.current.on("load", () => {
-      drawFeature.changeMode("draw_line_string");
-      const featureCollection = drawFeature.getAll();
-      const currentFeature = featureCollection.features[0];
-      currentFeature.geometry.coordinates[0] = [20.2025, 48.2264];
-      drawFeature.set(currentFeature);
-      // set start coordinate property here
-    }); */
-
     map.current.on("draw.create", (e) => {
-      console.log(e);
-      console.log(e.features[0].geometry.coordinates); // [lng, lat] for directions API
+      // console.log(e.features[0].geometry.coordinates); // [lng, lat] for directions API
+      const drawCoordinates = e.features[0].geometry.coordinates;
+      directions(drawCoordinates);
+    });
+
+    map.current.on("draw.delete", (e) => {
+      map.current.removeLayer("routeLayer");
+      map.current.removeSource("routeLayer");
     });
     // eslint-disable-next-line
   }, [map.current]);
@@ -95,7 +134,23 @@ const Home = () => {
     // eslint-disable-next-line
   }, [lngCurrent, latCurrent]);
 
-  /* useEffect(() => {
+  return (
+    <div>
+      <div className="sidebar">
+        Longitude: {lngInfo} | Latitude: {latInfo} | Zoom: {zoomInfo}
+      </div>
+      <div ref={mapContainer} className="map-container" />
+      <Button onClick={() => console.log(lngStart, latStart)}>Start Coordinates</Button>
+      <Button onClick={() => drawFeature.trash()}>Trash line</Button>
+    </div>
+  );
+};
+
+export default Home;
+
+/*
+
+useEffect(() => {
     console.log("click event useEffect");
     if (lngStart && latStart) {
       // console.log(hanyszor futsz le? ha valtozik a location (elmozdul a device VAGY manualisat allitok be start poziciot), akkor is ujraregisztralod ezt a click eventet??)
@@ -107,32 +162,29 @@ const Home = () => {
         }
         console.log("from", lngStart, latStart);
         console.log("to", endCoords);
+        // ez igy mukodott f@szan, csak mindig ujabb es ujabb click eventet regisztralt
       });
     }
-  }, [lngStart, latStart]); // ??? re-register click event? */
+  }, [lngStart, latStart]); // ??? re-register click event?
 
-  return (
-    <div>
-      <div className="sidebar">
-        Longitude: {lngInfo} | Latitude: {latInfo} | Zoom: {zoomInfo}
-      </div>
-      <div ref={mapContainer} className="map-container" />
-      <Button onClick={() => console.log(lngStart, latStart)}>Route</Button>
-      <Button
-        onClick={() => {
-          setLngStart(20.2025);
-          setLatStart(48.2264);
-        }}>
-        Set my Start Coordinates
-      </Button>
-    </div>
-  );
-};
+useEffect(() => {
+    if (lngStart && latStart) {
+      // init LineString tool
+      drawFeature.changeMode("draw_line_string");
 
-export default Home;
+      const featureCollection = drawFeature.getAll();
+      const currentFeatureId = featureCollection.features[0].id;
+      console.log(currentFeatureId, typeof currentFeatureId);
 
-/*
-geolocateFeature.on('geolocate', () => {
-console.log('A geolocate event has occurred.');
-});
-*/
+      drawFeature.changeMode("draw_line_string", {
+        featureId: currentFeatureId,
+        // couldn't find this featureId, but its there...
+        from: [lngStart, latStart],
+      });
+      console.log("linestring activated");
+    }
+
+    // eslint-disable-next-line
+  }, [lngStart, latStart]);
+
+  */
