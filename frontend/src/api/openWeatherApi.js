@@ -1,13 +1,15 @@
 const forecast = (route) => {
   let checkpointsList = [];
+  let sumDuration = 0;
   const legs = route.legs;
 
   for (const leg of legs) {
     for (const step of leg.steps) {
       const last = step.geometry.coordinates.length - 1;
+      sumDuration += step.duration;
       const checkpoint = {
-        coordinate: step.geometry.coordinates[last],
-        duration: step.duration,
+        coordinate: step.geometry.coordinates[last], // [lng, lat]
+        duration: Math.round(sumDuration),
       };
       checkpointsList.push(checkpoint);
     }
