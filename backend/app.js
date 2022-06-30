@@ -19,8 +19,8 @@ app.use(cors(corsOptions));
 app.use(morgan(":method :url :status - HOST: :host  - :response-time ms"));
 
 /* === ROUTES === */
-const dashboardRoutes = require("./route/dashboard");
-app.use("/api/dashboard", dashboardRoutes);
+const myRoutesRoutes = require("./route/myRoutes");
+app.use("/api/my-routes", myRoutesRoutes);
 const userRoutes = require("./route/user.js");
 app.use("/api/user", userRoutes);
 /* === *** === */

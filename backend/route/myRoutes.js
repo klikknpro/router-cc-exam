@@ -35,7 +35,7 @@ router.post("/", auth({ block: true }), async (req, res) => {
       return res.status(200).json(data);
     })
     .catch((err) => {
-      return res.status(500).send(err);
+      return res.status(500).json(err);
     }); // return the whole user object
 });
 
@@ -45,13 +45,19 @@ router.get("/", auth({ block: true }), async (req, res) => {
   const user = await User.findById(res.locals.user.userId);
   if (!user) return res.status(404).send("User not found.");
 
-  if (req.query.routeId) {
-    const route = user.myRoutes.id(req.query.routeId);
-    if (!route) return res.status(404).send("Route not found.");
-    return res.status(200).json(route);
-  }
-
   return res.status(200).json({ username: user.username, myRoutes: user.myRoutes });
+});
+
+/* === >>> <<< === */
+/* === >>> display the user's selected route only <<< === */
+router.get("/:routeId", auth({ block: true }), async (req, res) => {
+  const user = await User.findById(res.locals.user.userId);
+  if (!user) return res.status(404).send("User not found.");
+
+  const route = user.myRoutes.id(req.params.routeId);
+  if (!route) return res.status(404).send("Route not found.");
+
+  return res.status(200).json(route);
 });
 
 /* === >>> <<< === */
@@ -59,10 +65,10 @@ router.get("/", auth({ block: true }), async (req, res) => {
 /* === >>> set public from /:routeId?isPublic=true <<< === */
 router.patch("/:routeId", auth({ block: true }), async (req, res) => {
   if (!req.params.routeId) return res.sendStatus(400);
+  if (!req.body.isPublic && !req.body.description) return res.status(400).send("Cannot change the nothing");
 
-  if (!req.query.isPublic && !req.body.description) return res.status(400).send("Cannot change the nothing");
-
-  const isPublic = req.query.isPublic === "true"; // convert to boolean
+  const isPublic = req.body.isPublic;
+  // const isPublic = req.body.isPublic === "true"; // convert to boolean
 
   const user = await User.findById(res.locals.user.userId);
   if (!user) return res.status(404).send("User not found.");
@@ -70,7 +76,7 @@ router.patch("/:routeId", auth({ block: true }), async (req, res) => {
   const route = user.myRoutes.id(req.params.routeId);
   if (!route) return res.status(404).send("Route not found.");
 
-  if (req.body.description && req.body.description === "") route.description = req.body.description;
+  if (req.body.description && req.body.description !== "") route.description = req.body.description;
   if (isPublic === true || isPublic === false) route.isPublic = isPublic;
 
   user
