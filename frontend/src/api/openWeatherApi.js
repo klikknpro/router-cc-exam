@@ -1,5 +1,5 @@
 const forecast = (route) => {
-  let checkpointsList = [];
+  let allCheckpoints = [];
   let sumDuration = 0;
   const legs = route.legs;
 
@@ -9,19 +9,21 @@ const forecast = (route) => {
       sumDuration += step.duration;
       const checkpoint = {
         coordinate: step.geometry.coordinates[last], // [lng, lat]
-        duration: Math.round(sumDuration),
+        duration: Math.round(sumDuration), // in seconds
       };
-      checkpointsList.push(checkpoint);
+      allCheckpoints.push(checkpoint);
     }
   }
 
-  console.log("original", checkpointsList);
-
-  const newCheckpointsList = checkpointsList.filter((_, i) => {
-    return (i + 1) % 8;
-  }); // keeps every Nth element
-
-  console.log("shortened", newCheckpointsList);
+  const quarterWay = Math.round(allCheckpoints.length / 4);
+  const weatherCheckpoints = [
+    allCheckpoints[0],
+    allCheckpoints[quarterWay],
+    allCheckpoints[quarterWay * 2],
+    allCheckpoints[quarterWay * 3],
+    allCheckpoints[allCheckpoints.length - 1],
+  ];
+  console.log(weatherCheckpoints);
 };
 
 export default forecast;

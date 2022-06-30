@@ -1,4 +1,3 @@
-/*
 const shortRoute = require("./short");
 const longRoute = require("./long");
 
@@ -12,38 +11,27 @@ for (const leg of legs) {
   for (const step of leg.steps) {
     const last = step.geometry.coordinates.length - 1;
     sumDuration += step.duration;
+    const roundToMinutes = Math.round(sumDuration / 60) * 60;
     const checkpoint = {
       coordinate: step.geometry.coordinates[last], // [lng, lat]
-      duration: Math.round(sumDuration), // in seconds
+      duration: roundToMinutes, // in seconds rounded to minutes
     };
     checkpointsList.push(checkpoint);
   }
 }
-console.log("original length", checkpointsList.length);
+console.log("original", checkpointsList);
 
-const routeLength = checkpointsList.length;
-*/
+const quarterWay = Math.round(checkpointsList.length / 4);
 
-// const lorem =
-//   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti suscipit omnis quas dolor esse cum non, quae nihil mollitia soluta. Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti suscipit omnis quas dolor esse cum non, quae nihil mollitia soluta.";
-const lorem = "Lorem ip mollitiadghy met consectetur adipisicing elit.";
-const testList = lorem.split("");
-console.log("original length", testList.length);
-
-const quarterWay = Math.round(testList.length / 4);
-
-const newList = [
-  testList[0],
-  testList[quarterWay],
-  testList[quarterWay * 2],
-  testList[quarterWay * 3],
-  testList[testList.length - 1],
+const newCheckpointsList = [
+  checkpointsList[0],
+  checkpointsList[quarterWay],
+  checkpointsList[quarterWay * 2],
+  checkpointsList[quarterWay * 3],
+  checkpointsList[checkpointsList.length - 1],
 ];
 
-console.log("newList length", newList.length, "newList", newList);
-
-// const newCheckpointsList = testList.filter((element, i) => i % size === 0); // keeps every Nth element
-// console.log("shortened length", newCheckpointsList.length);
+console.log("shortened", newCheckpointsList);
 
 // console.log(Math.round(Date.now() / 1000));
 // setTimeout(() => {
