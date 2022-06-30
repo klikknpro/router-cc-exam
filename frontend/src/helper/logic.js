@@ -4,26 +4,26 @@ const longRoute = require("./long");
 ///
 
 let checkpointsList = [];
-const legs = shortRoute.routes[0].legs;
+let sumDuration = 0;
+const legs = longRoute.routes[0].legs;
 
 for (const leg of legs) {
   for (const step of leg.steps) {
     const last = step.geometry.coordinates.length - 1;
+    sumDuration += step.duration;
     const checkpoint = {
-      coordinate: step.geometry.coordinates[last],
-      duration: step.duration,
+      coordinate: step.geometry.coordinates[last], // [lng, lat]
+      duration: Math.round(sumDuration), // in seconds
     };
     checkpointsList.push(checkpoint);
   }
 }
+// console.log("original length", checkpointsList.length, checkpointsList);
 
-console.log("original", checkpointsList);
+const newCheckpointsList = checkpointsList.filter((element, i) => i % 7 === 0); // keeps every Nth element
+// console.log("shortened length", newCheckpointsList.length, newCheckpointsList);
 
-checkpointsList = checkpointsList.filter((_, i) => {
-  return (i + 1) % 5;
-}); // keeps every Nth element
-
-console.log("shortened", checkpointsList);
-/*
-<lon>,<lat>;<lon>,<lat>
-*/
+console.log(Math.round(Date.now() / 1000));
+setTimeout(() => {
+  console.log(Math.round(Date.now() / 1000));
+}, 1000);
