@@ -5,6 +5,9 @@ const longRoute = require("./long");
 
 let checkpointsList = [];
 let sumDuration = 0;
+const reqTimestamp = Math.round(Math.round(Date.now() / 1000) / 60) * 60;
+console.log(reqTimestamp);
+
 const legs = longRoute.routes[0].legs;
 
 for (const leg of legs) {
@@ -15,11 +18,12 @@ for (const leg of legs) {
     const checkpoint = {
       coordinate: step.geometry.coordinates[last], // [lng, lat]
       duration: roundToMinutes, // in seconds rounded to minutes
+      timestamp: reqTimestamp + roundToMinutes,
     };
     checkpointsList.push(checkpoint);
   }
 }
-console.log("original", checkpointsList);
+// console.log("original", checkpointsList);
 
 const quarterWay = Math.round(checkpointsList.length / 4);
 
