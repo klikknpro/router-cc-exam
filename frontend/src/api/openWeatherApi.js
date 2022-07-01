@@ -33,11 +33,12 @@ const forecast = async (route) => {
   let markers = [];
   for (const checkpoint of weatherCheckpoints) {
     const response = await http.get(
-      `https://api.openweathermap.org/data/3.0/onecall?lat=${weatherCheckpoints[0].coordinate[1]}&lon=${weatherCheckpoints[0].coordinate[0]}&units=metric&exclude=daily,alerts&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}`
+      `https://api.openweathermap.org/data/3.0/onecall?lat=${checkpoint.coordinate[1]}&lon=${checkpoint.coordinate[0]}&units=metric&exclude=daily,alerts&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}`
     );
 
     const lastMinutely = response.data.minutely[60].dt;
-    if (checkpoint.timestamp < lastMinutely) {
+
+    if (checkpoint.timestamp <= lastMinutely) {
       for (const minute of response.data.minutely) {
         if (minute.dt === checkpoint.timestamp) {
           markers.push({
@@ -53,9 +54,27 @@ const forecast = async (route) => {
         }
       }
     } else {
-      //
+      for (let hour = 0; hour < 8; hour++) {
+        // maximize the duration of a ride in 8 hours
+        if (
+          response.data.hourly[hour] < checkpoint.timestamp &&
+          response.data.hourly[hour + 1] > checkpoint.timestamp
+        ) {
+          markers.push({
+            coordinate: checkpoint.coordinate,
+            precipitation: null,
+            temp: response.data.hourly[hour].temp,
+            humidity: response.data.hourly[hour].humidity,
+            windSpeed: response.data.hourly[hour].wind_speed,
+            windDirection: response.data.hourly[hour].wind_deg,
+            description: response.data.hourly[hour].weather[0].description,
+            icon: `http://openweathermap.org/img/wn/${response.data.hourly[hour].weather[0].icon}@2x.png`,
+          });
+        }
+      }
     }
   }
+  console.log("after every request", markers);
 };
 
 export default forecast;
