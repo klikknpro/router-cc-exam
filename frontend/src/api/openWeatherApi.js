@@ -23,10 +23,10 @@ const forecast = async (route) => {
   const quarterWay = Math.round(allCheckpoints.length / 4);
   const weatherCheckpoints = [
     allCheckpoints[0],
-    // allCheckpoints[quarterWay],
-    // allCheckpoints[quarterWay * 2],
-    // allCheckpoints[quarterWay * 3],
-    // allCheckpoints[allCheckpoints.length - 1],
+    allCheckpoints[quarterWay],
+    allCheckpoints[quarterWay * 2],
+    allCheckpoints[quarterWay * 3],
+    allCheckpoints[allCheckpoints.length - 1],
   ];
   console.log(weatherCheckpoints);
 
@@ -36,9 +36,12 @@ const forecast = async (route) => {
       `https://api.openweathermap.org/data/3.0/onecall?lat=${checkpoint.coordinate[1]}&lon=${checkpoint.coordinate[0]}&units=metric&exclude=daily,alerts&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}`
     );
 
+    console.log("checkpoint timestamp", checkpoint.timestamp);
     const lastMinutely = response.data.minutely[60].dt;
+    console.log("lastMinutely", lastMinutely);
 
     if (checkpoint.timestamp <= lastMinutely) {
+      console.log("minutely");
       for (const minute of response.data.minutely) {
         if (minute.dt === checkpoint.timestamp) {
           markers.push({
@@ -54,6 +57,7 @@ const forecast = async (route) => {
         }
       }
     } else {
+      console.log("hourly");
       for (let hour = 0; hour < 8; hour++) {
         // maximize the duration of a ride in 8 hours
         if (
@@ -74,7 +78,7 @@ const forecast = async (route) => {
       }
     }
   }
-  console.log("after every request", markers);
+  console.log(markers);
 };
 
 export default forecast;

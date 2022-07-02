@@ -17,7 +17,7 @@ const AuthProvider = ({ children }) => {
     const searchParams = new URLSearchParams();
     searchParams.append("response_type", "code");
     searchParams.append("client_id", config.google_client_id);
-    searchParams.append("redirect_uri", window.location.origin + "/callback");
+    searchParams.append("redirect_uri", window.location.origin + "/callback/google");
     searchParams.append("scope", "openid");
     searchParams.append("prompt", "select_account");
 
@@ -49,7 +49,7 @@ const AuthProvider = ({ children }) => {
   const register = async (username) => {
     const response = await post("user/create", { username });
     if (response?.status === 200) {
-      setToken(response.data.token);
+      setToken(response.data.sessionToken);
       localStorage.setItem("token", response.data.sessionToken);
       setUser(jwt(response.data.sessionToken));
     }

@@ -27,3 +27,14 @@ code {
   margin: 12px;
   border-radius: 4px;
 }
+
+.navbar {
+  height: 30px;
+  padding: 10px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: grey;
+}

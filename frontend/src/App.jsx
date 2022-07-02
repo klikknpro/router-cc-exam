@@ -1,8 +1,12 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
+import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
-import HomeMapGl from "./pages/HomeMapGl";
+import Protected from "./components/Protected";
+import Profile from "./pages/Profile";
+import Register from "./pages/Register";
+import Callback from "./pages/Callback";
 
 function App() {
   // useEffect(() => {
@@ -11,9 +15,26 @@ function App() {
 
   return (
     <div className="App">
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/map-gl" element={<HomeMapGl />} />
+        <Route
+          path="/profile"
+          element={
+            <Protected>
+              <Profile />
+            </Protected>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <Protected>
+              <Register />
+            </Protected>
+          }
+        />
+        <Route path="/callback/google" element={<Callback />} />
       </Routes>
     </div>
   );
