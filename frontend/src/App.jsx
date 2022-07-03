@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
-import Navbar from "./components/Navbar";
+import NavbarComp from "./components/NavbarComp";
 import Home from "./pages/Home";
 import Protected from "./components/Protected";
 import Profile from "./pages/Profile";
@@ -15,7 +15,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar />
+      <NavbarComp />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route

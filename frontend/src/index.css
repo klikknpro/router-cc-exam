@@ -13,6 +13,7 @@ code {
 
 .map-container {
   height: 90vh;
+  margin-top: 50px;
 }
 
 .sidebar {
@@ -24,7 +25,7 @@ code {
   position: absolute;
   top: 0;
   left: 0;
-  margin: 12px;
+  margin: 150px;
   border-radius: 4px;
 }
 
