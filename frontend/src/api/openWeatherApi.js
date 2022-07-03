@@ -1,4 +1,5 @@
 import http from "axios";
+// import weatherMarkers from "../map-features/weatherMarkers";
 
 const forecast = async (route) => {
   let allCheckpoints = [];
@@ -28,7 +29,7 @@ const forecast = async (route) => {
     allCheckpoints[quarterWay * 3],
     allCheckpoints[allCheckpoints.length - 1],
   ];
-  console.log(weatherCheckpoints);
+  // console.log(weatherCheckpoints);
 
   let markers = [];
   for (const checkpoint of weatherCheckpoints) {
@@ -41,12 +42,13 @@ const forecast = async (route) => {
     // console.log("lastMinutely", lastMinutely);
 
     if (checkpoint.timestamp <= lastMinutely) {
-      console.log("minutely");
+      // console.log("minutely");
       for (const minute of response.data.minutely) {
         if (minute.dt === checkpoint.timestamp) {
           markers.push({
             coordinate: checkpoint.coordinate,
             precipitation: minute.precipitation,
+            weatherCode: response.data.hourly[0].weather[0].id,
             temp: response.data.hourly[0].temp,
             humidity: response.data.hourly[0].humidity,
             windSpeed: response.data.hourly[0].wind_speed,
@@ -57,20 +59,17 @@ const forecast = async (route) => {
         }
       }
     } else {
-      console.log("hourly");
+      // console.log("hourly");
       for (let hour = 0; hour < 8; hour++) {
         // maximize the duration of a ride in 8 hours
-        console.log("timestamp to check", checkpoint.timestamp);
-        console.log("hour", response.data.hourly[hour].dt);
-        console.log("hour + 1", response.data.hourly[hour + 1].dt);
         if (
           checkpoint.timestamp - response.data.hourly[hour].dt <= 3600 &&
           checkpoint.timestamp - response.data.hourly[hour].dt > 0
         ) {
-          console.log("push");
           markers.push({
             coordinate: checkpoint.coordinate,
             precipitation: null,
+            weatherCode: response.data.hourly[hour].weather[0].id,
             temp: response.data.hourly[hour].temp,
             humidity: response.data.hourly[hour].humidity,
             windSpeed: response.data.hourly[hour].wind_speed,
@@ -82,7 +81,9 @@ const forecast = async (route) => {
       }
     }
   }
-  console.log(markers);
+  // console.log(markers);
+  // weatherMarkers(markers);
+  return markers;
 };
 
 export default forecast;

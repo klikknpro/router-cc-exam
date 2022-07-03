@@ -6,6 +6,7 @@ import geolocateFeature from "../map-features/geolocate";
 import navigationFeature from "../map-features/navigation";
 import drawFeature from "../map-features/draw";
 import directions from "../map-features/directions";
+import forecast from "../api/openWeatherApi";
 import { Button } from "@mui/material";
 
 /* this version is based on the Original MapBox tutorial */
@@ -68,10 +69,12 @@ const Home = () => {
       setZoomInfo(map.current.getZoom().toFixed(2));
     });
 
-    map.current.on("draw.create", (e) => {
+    map.current.on("draw.create", async (e) => {
       // console.log(e.features[0].geometry.coordinates);
       const drawCoordinates = e.features[0].geometry.coordinates;
-      directions(drawCoordinates, map);
+      const route = await directions(drawCoordinates, map);
+      const markersData = await forecast(route);
+      console.log(markersData);
     });
 
     map.current.on("draw.delete", (e) => {
