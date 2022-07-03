@@ -7,6 +7,7 @@ import navigationFeature from "../map-features/navigation";
 import drawFeature from "../map-features/draw";
 import directions from "../map-features/directions";
 import forecast from "../api/openWeatherApi";
+import weatherMarkers from "../map-features/weatherMarkers";
 import { Button } from "@mui/material";
 
 /* this version is based on the Original MapBox tutorial */
@@ -74,7 +75,8 @@ const Home = () => {
       const drawCoordinates = e.features[0].geometry.coordinates;
       const route = await directions(drawCoordinates, map);
       const markersData = await forecast(route);
-      console.log(markersData);
+      console.log("markersData", markersData);
+      weatherMarkers(markersData, map);
     });
 
     map.current.on("draw.delete", (e) => {
