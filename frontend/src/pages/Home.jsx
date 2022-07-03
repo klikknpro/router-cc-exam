@@ -101,8 +101,7 @@ const Home = () => {
         Longitude: {lngInfo} | Latitude: {latInfo} | Zoom: {zoomInfo}
       </div>
       <div ref={mapContainer} className="map-container" />
-      <Button onClick={() => console.log(lngStart, latStart)}>Start Coordinates</Button>
-      <Button onClick={() => drawFeature.trash()}>Trash line</Button>
+      <Button>Save route</Button>
     </div>
   );
 };

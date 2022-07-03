@@ -13,7 +13,7 @@ code {
 
 .map-container {
   height: 90vh;
-  margin-top: 50px;
+  margin-top: 30px;
 }
 
 .sidebar {
@@ -21,11 +21,12 @@ code {
   color: #fff;
   padding: 6px 12px;
   font-family: monospace;
+  font-size: 12px;
   z-index: 1;
   position: absolute;
   top: 0;
   left: 0;
-  margin: 150px;
+  margin: 80px auto;
   border-radius: 4px;
 }
 

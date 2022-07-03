@@ -36,9 +36,9 @@ const forecast = async (route) => {
       `https://api.openweathermap.org/data/3.0/onecall?lat=${checkpoint.coordinate[1]}&lon=${checkpoint.coordinate[0]}&units=metric&exclude=daily,alerts&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}`
     );
 
-    console.log("checkpoint timestamp", checkpoint.timestamp);
+    // console.log("checkpoint timestamp", checkpoint.timestamp);
     const lastMinutely = response.data.minutely[60].dt;
-    console.log("lastMinutely", lastMinutely);
+    // console.log("lastMinutely", lastMinutely);
 
     if (checkpoint.timestamp <= lastMinutely) {
       console.log("minutely");
@@ -60,10 +60,14 @@ const forecast = async (route) => {
       console.log("hourly");
       for (let hour = 0; hour < 8; hour++) {
         // maximize the duration of a ride in 8 hours
+        console.log("timestamp to check", checkpoint.timestamp);
+        console.log("hour", response.data.hourly[hour].dt);
+        console.log("hour + 1", response.data.hourly[hour + 1].dt);
         if (
-          response.data.hourly[hour] < checkpoint.timestamp &&
-          response.data.hourly[hour + 1] > checkpoint.timestamp
+          checkpoint.timestamp - response.data.hourly[hour].dt <= 3600 &&
+          checkpoint.timestamp - response.data.hourly[hour].dt > 0
         ) {
+          console.log("push");
           markers.push({
             coordinate: checkpoint.coordinate,
             precipitation: null,
@@ -82,3 +86,9 @@ const forecast = async (route) => {
 };
 
 export default forecast;
+
+/*
+to check 1656842760
+hour 1656842400
+hour + 1 1656846000
+*/
