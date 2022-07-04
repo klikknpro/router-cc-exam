@@ -38,7 +38,7 @@ router.post("/", auth({ block: true }), async (req, res) => {
 });
 
 /* === >>> <<< === */
-/* === >>> display the user's dashboard (all or selected route only) <<< === */
+/* === >>> display the user's dashboard, all <<< === */
 router.get("/", auth({ block: true }), async (req, res) => {
   const user = await User.findById(res.locals.user.userId);
   if (!user) return res.status(404).send("User not found.");
@@ -62,7 +62,8 @@ router.get("/:routeId", auth({ block: true }), async (req, res) => {
 /* === >>> change "description" from body <<< === */
 router.patch("/:routeId", auth({ block: true }), async (req, res) => {
   if (!req.params.routeId) return res.sendStatus(400);
-  if (!req.body.isPublic && !req.body.description) return res.status(400).send("Cannot change the nothing");
+  // console.log(req.body);
+  // if (!req.body.isPublic && !req.body.description) return res.status(400).send("Cannot change the nothing");
 
   const isPublic = req.body.isPublic;
   // const isPublic = req.body.isPublic === "true"; // convert to boolean

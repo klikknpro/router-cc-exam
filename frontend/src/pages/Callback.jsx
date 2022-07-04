@@ -13,7 +13,7 @@ const Callback = () => {
       const code = params.get("code");
       if (code) {
         await login(code, "google");
-        navigate("/profile");
+        navigate("/my-routes");
       }
     };
     loginWithCode();

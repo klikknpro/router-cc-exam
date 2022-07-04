@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
+import { useAuth } from "../providers/auth";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
 import geolocateFeature from "../mapbox-features/geolocate";
 import navigationFeature from "../mapbox-features/navigation";
@@ -12,6 +13,7 @@ import { Button } from "@mui/material";
 
 /* this version is based on the Original MapBox tutorial */
 const Home = () => {
+  const { token } = useAuth();
   const mapContainer = useRef(null); // my DOM element
   const map = useRef(null); // rendered element
   const [lngStart, setLngStart] = useState(null); // for direction api
@@ -134,7 +136,13 @@ const Home = () => {
         Longitude: {lngInfo} | Latitude: {latInfo} | Zoom: {zoomInfo}
       </div>
       <div ref={mapContainer} className="map-container" />
-      <Button onClick={() => saveRoute(routeToSave)}>Save route</Button>
+      {localStorage.getItem("token") && (
+        <Button
+          onClick={() => saveRoute(routeToSave, setRouteToSave, token)}
+          disabled={routeToSave === null ? true : false}>
+          Save route
+        </Button>
+      )}
     </div>
   );
 };

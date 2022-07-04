@@ -4,7 +4,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import NavbarComp from "./components/NavbarComp";
 import Home from "./pages/Home";
 import Protected from "./components/Protected";
-import Profile from "./pages/Profile";
+import MyRoutes from "./pages/MyRoutes";
 import Register from "./pages/Register";
 import Callback from "./pages/Callback";
 
@@ -19,10 +19,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
-          path="/profile"
+          path="/my-routes"
           element={
             <Protected>
-              <Profile />
+              <MyRoutes />
             </Protected>
           }
         />
