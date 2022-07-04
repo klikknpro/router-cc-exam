@@ -82,6 +82,16 @@ const Home = () => {
     map.current.on("draw.delete", (e) => {
       map.current.removeLayer("routeLayer");
       map.current.removeSource("routeLayer");
+      map.current.removeLayer("layer0");
+      map.current.removeSource("source0");
+      map.current.removeLayer("layer1");
+      map.current.removeSource("source1");
+      map.current.removeLayer("layer2");
+      map.current.removeSource("source2");
+      map.current.removeLayer("layer3");
+      map.current.removeSource("source3");
+      map.current.removeLayer("layer4");
+      map.current.removeSource("source4");
     });
     // eslint-disable-next-line
   }, [map.current]);

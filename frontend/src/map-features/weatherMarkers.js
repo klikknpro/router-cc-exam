@@ -20,6 +20,10 @@ const weatherMarkers = (markers, map) => {
               },
               properties: {
                 title: marker.description,
+                temp: `${marker.temp} \u00B0 C`,
+                precipitation: `Expected rain: ${marker.precipitation} mm`,
+                humidity: `Humidity: ${marker.humidity}%`,
+                windSpeed: `Wind: ${marker.windSpeed} metre/sec`,
               },
             },
           ],
@@ -32,34 +36,53 @@ const weatherMarkers = (markers, map) => {
         layout: {
           "icon-image": iconId,
           // get the title name from the source's "title" property
-          "text-field": ["get", "title"],
+          "text-field": [
+            "format",
+            ["get", "title"],
+            { "font-scale": 1.2 },
+            "\n",
+            {},
+            ["get", "temp"],
+            { "font-scale": 0.8 },
+            "\n",
+            {},
+            ["get", "precipitation"],
+            { "font-scale": 0.8 },
+            "\n",
+            {},
+            ["get", "windSpeed"],
+            { "font-scale": 0.8 },
+            "\n",
+            {},
+            ["get", "humidity"],
+            { "font-scale": 0.8 },
+          ],
           "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
           "text-offset": [0, 1.25],
           "text-anchor": "top",
         },
       });
     });
-    console.log("layer", id, "is added");
+    // return
   }
 };
 
 export default weatherMarkers;
 
 /*
-const features = markers.map((marker) => ({
-    type: "Feature",
-    geometry: {
-      type: "Point",
-      coordinates: marker.coordinate,
-    },
-    properties: {
-      title: "Weather",
-      description: marker.description,
-    },
-  }));
-
-  const geojson = {
-    type: "FeatureCollection",
-    features: features,
-  };
+[
+'format',
+['get', 'name_en'],
+{ 'font-scale': 1.2 },
+'\n',
+{},
+['get', 'name'],
+{
+'font-scale': 0.8,
+'text-font': [
+'literal',
+['DIN Offc Pro Italic', 'Arial Unicode MS Regular']
+]
+}
+]
 */
