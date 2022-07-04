@@ -28,7 +28,7 @@ const MyRoutes = () => {
   return (
     <div>
       <h4>Username: {username && username}</h4>
-      {allRoutes && allRoutes.map((route, i) => <OneRoute route={route} key={i} />)}
+      {allRoutes && allRoutes.map((route, i) => <OneRoute setAllRoutes={setAllRoutes} route={route} key={i} />)}
     </div>
   );
 };
