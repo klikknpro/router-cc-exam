@@ -18,6 +18,7 @@ const Home = () => {
   const [latStart, setLatStart] = useState(null); // for direction api
   const [lngCurrent, setLngCurrent] = useState(null); // from geolocate
   const [latCurrent, setLatCurrent] = useState(null); // from geolocate
+  const [routeToSave, setRouteToSave] = useState(null);
 
   /* for sidebar */
   const [lngInfo, setLngInfo] = useState(19.0402);
@@ -25,6 +26,19 @@ const Home = () => {
   const [zoomInfo, setZoomInfo] = useState(10);
 
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
+
+  const appendRouteData = (route, markersData) => {
+    const weatherCodes = markersData.map((marker) => marker.weatherCode);
+
+    setRouteToSave({
+      description: route.legs[0].summary,
+      from: route.geometry.coordinates[0],
+      to: route.geometry.coordinates[route.geometry.coordinates.length - 1],
+      coordinates: route.geometry.coordinates,
+      distance: parseInt((route.distance / 1000).toFixed(1)),
+      tFactor: weatherCodes,
+    });
+  };
 
   const geolocateStart = () => {
     console.log("register geolocate event at [] only!");
@@ -74,24 +88,29 @@ const Home = () => {
       // console.log(e.features[0].geometry.coordinates);
       const drawCoordinates = e.features[0].geometry.coordinates;
       const route = await directions(drawCoordinates, map);
+      console.log("route data from Directions", route);
+
       const markersData = await forecast(route);
-      console.log("markersData", markersData);
+      console.log("markersData from OpenWeather", markersData);
+
+      appendRouteData(route, markersData);
+
       weatherMarkers(markersData, map);
     });
 
     map.current.on("draw.delete", (e) => {
       map.current.removeLayer("routeLayer");
       map.current.removeSource("routeLayer");
-      map.current.removeLayer("layer0");
-      map.current.removeSource("source0");
-      map.current.removeLayer("layer1");
-      map.current.removeSource("source1");
-      map.current.removeLayer("layer2");
-      map.current.removeSource("source2");
-      map.current.removeLayer("layer3");
-      map.current.removeSource("source3");
-      map.current.removeLayer("layer4");
-      map.current.removeSource("source4");
+      if (map.current.getLayer("layer0")) map.current.removeLayer("layer0");
+      if (map.current.getSource("source0")) map.current.removeSource("source0");
+      if (map.current.getLayer("layer1")) map.current.removeLayer("layer1");
+      if (map.current.getSource("source1")) map.current.removeSource("source1");
+      if (map.current.getLayer("layer2")) map.current.removeLayer("layer2");
+      if (map.current.getSource("source2")) map.current.removeSource("source2");
+      if (map.current.getLayer("layer3")) map.current.removeLayer("layer3");
+      if (map.current.getSource("source3")) map.current.removeSource("source3");
+      if (map.current.getLayer("layer4")) map.current.removeLayer("layer4");
+      if (map.current.getSource("source4")) map.current.removeSource("source4");
     });
     // eslint-disable-next-line
   }, [map.current]);
@@ -116,7 +135,7 @@ const Home = () => {
         Longitude: {lngInfo} | Latitude: {latInfo} | Zoom: {zoomInfo}
       </div>
       <div ref={mapContainer} className="map-container" />
-      <Button>Save route</Button>
+      <Button onClick={() => console.log(routeToSave)}>Save route</Button>
     </div>
   );
 };

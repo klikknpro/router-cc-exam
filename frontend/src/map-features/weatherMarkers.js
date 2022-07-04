@@ -4,9 +4,15 @@ const weatherMarkers = (markers, map) => {
     const iconId = "icon" + id;
     const sourceId = "source" + id;
 
+    // if (map.hasImage('cat')) map.updateImage('cat', image);
+
     map.current.loadImage(marker.icon, (err, image) => {
       if (err) throw err;
-      map.current.addImage(iconId, image);
+      if (map.current.hasImage(iconId)) {
+        map.current.updateImage(iconId, image);
+      } else {
+        map.current.addImage(iconId, image);
+      }
       map.current.addSource(sourceId, {
         type: "geojson",
         data: {
@@ -35,7 +41,7 @@ const weatherMarkers = (markers, map) => {
         source: sourceId,
         layout: {
           "icon-image": iconId,
-          // get the title name from the source's "title" property
+          "icon-allow-overlap": true,
           "text-field": [
             "format",
             ["get", "title"],

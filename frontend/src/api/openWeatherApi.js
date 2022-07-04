@@ -49,7 +49,7 @@ const forecast = async (route) => {
             coordinate: checkpoint.coordinate,
             precipitation: minute.precipitation,
             weatherCode: response.data.hourly[0].weather[0].id,
-            temp: response.data.hourly[0].temp,
+            temp: Math.round(response.data.hourly[0].temp),
             humidity: response.data.hourly[0].humidity,
             windSpeed: response.data.hourly[0].wind_speed,
             windDirection: response.data.hourly[0].wind_deg,
@@ -68,9 +68,9 @@ const forecast = async (route) => {
         ) {
           markers.push({
             coordinate: checkpoint.coordinate,
-            precipitation: null,
+            precipitation: 0,
             weatherCode: response.data.hourly[hour].weather[0].id,
-            temp: response.data.hourly[hour].temp,
+            temp: Math.round(response.data.hourly[hour].temp),
             humidity: response.data.hourly[hour].humidity,
             windSpeed: response.data.hourly[hour].wind_speed,
             windDirection: response.data.hourly[hour].wind_deg,
