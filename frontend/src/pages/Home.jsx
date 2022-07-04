@@ -1,13 +1,13 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
-import http from "axios";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
-import geolocateFeature from "../map-features/geolocate";
-import navigationFeature from "../map-features/navigation";
-import drawFeature from "../map-features/draw";
-import directions from "../map-features/directions";
+import geolocateFeature from "../mapbox-features/geolocate";
+import navigationFeature from "../mapbox-features/navigation";
+import drawFeature from "../mapbox-features/draw";
+import directions from "../mapbox-features/directions";
 import forecast from "../api/openWeatherApi";
-import weatherMarkers from "../map-features/weatherMarkers";
+import weatherMarkers from "../mapbox-features/weatherMarkers";
+import saveRoute from "../api/saveRoute";
 import { Button } from "@mui/material";
 
 /* this version is based on the Original MapBox tutorial */
@@ -84,8 +84,8 @@ const Home = () => {
       setZoomInfo(map.current.getZoom().toFixed(2));
     });
 
+    /* main sh1t happens here */
     map.current.on("draw.create", async (e) => {
-      // console.log(e.features[0].geometry.coordinates);
       const drawCoordinates = e.features[0].geometry.coordinates;
       const route = await directions(drawCoordinates, map);
       console.log("route data from Directions", route);
@@ -121,7 +121,6 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    // or will set lngStart from a click (user input)
     if (!lngStart && !latStart) {
       setLngStart(lngCurrent);
       setLatStart(latCurrent);
@@ -135,7 +134,7 @@ const Home = () => {
         Longitude: {lngInfo} | Latitude: {latInfo} | Zoom: {zoomInfo}
       </div>
       <div ref={mapContainer} className="map-container" />
-      <Button onClick={() => console.log(routeToSave)}>Save route</Button>
+      <Button onClick={() => saveRoute(routeToSave)}>Save route</Button>
     </div>
   );
 };

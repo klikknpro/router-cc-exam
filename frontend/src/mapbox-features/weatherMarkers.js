@@ -4,8 +4,6 @@ const weatherMarkers = (markers, map) => {
     const iconId = "icon" + id;
     const sourceId = "source" + id;
 
-    // if (map.hasImage('cat')) map.updateImage('cat', image);
-
     map.current.loadImage(marker.icon, (err, image) => {
       if (err) throw err;
       if (map.current.hasImage(iconId)) {
@@ -69,7 +67,6 @@ const weatherMarkers = (markers, map) => {
         },
       });
     });
-    // return
   }
 };
 

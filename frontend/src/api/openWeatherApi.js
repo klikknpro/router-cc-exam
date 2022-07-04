@@ -1,5 +1,4 @@
 import http from "axios";
-// import weatherMarkers from "../map-features/weatherMarkers";
 
 const forecast = async (route) => {
   let allCheckpoints = [];
@@ -37,9 +36,7 @@ const forecast = async (route) => {
       `https://api.openweathermap.org/data/3.0/onecall?lat=${checkpoint.coordinate[1]}&lon=${checkpoint.coordinate[0]}&units=metric&exclude=daily,alerts&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}`
     );
 
-    // console.log("checkpoint timestamp", checkpoint.timestamp);
     const lastMinutely = response.data.minutely[60].dt;
-    // console.log("lastMinutely", lastMinutely);
 
     if (checkpoint.timestamp <= lastMinutely) {
       // console.log("minutely");
@@ -82,14 +79,7 @@ const forecast = async (route) => {
     }
   }
   // console.log(markers);
-  // weatherMarkers(markers);
   return markers;
 };
 
 export default forecast;
-
-/*
-to check 1656842760
-hour 1656842400
-hour + 1 1656846000
-*/

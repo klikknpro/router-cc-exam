@@ -9,7 +9,6 @@ router.post("/", auth({ block: true }), async (req, res) => {
     !req.body.from ||
     !req.body.to ||
     !req.body.coordinates ||
-    !req.body.checkpoints ||
     !req.body.distance ||
     !req.body.tFactor
   )
@@ -23,7 +22,6 @@ router.post("/", auth({ block: true }), async (req, res) => {
     from: req.body.from,
     to: req.body.to,
     coordinates: req.body.coordinates,
-    checkpoints: req.body.checkpoints,
     distance: req.body.distance,
     tFactor: req.body.tFactor,
     isPublic: false,
@@ -62,7 +60,6 @@ router.get("/:routeId", auth({ block: true }), async (req, res) => {
 
 /* === >>> <<< === */
 /* === >>> change "description" from body <<< === */
-/* === >>> set public from /:routeId?isPublic=true <<< === */
 router.patch("/:routeId", auth({ block: true }), async (req, res) => {
   if (!req.params.routeId) return res.sendStatus(400);
   if (!req.body.isPublic && !req.body.description) return res.status(400).send("Cannot change the nothing");

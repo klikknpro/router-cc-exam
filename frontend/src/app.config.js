@@ -1,11 +1,11 @@
 const _config = {
   dev: {
-    rooter_project_api: "http://localhost:8080/api",
+    router_project_api: "http://localhost:8080/api",
     google_client_id: "352039495912-igun7ionlvauugjs3vfoa8lg1noq9d8a.apps.googleusercontent.com",
     google_base_url: "https://accounts.google.com/o/oauth2/v2/auth",
   }, // "eldobhatos", teszt google app ize
   prod: {
-    rooter_project_api: process.env.REACT_APP_TODO_API || "http://localhost:8080/api",
+    router_project_api: process.env.REACT_APP_TODO_API || "http://localhost:8080/api",
     google_client_id:
       process.env.REACT_APP_GOOGLE_CLIENT_ID ||
       "352039495912-igun7ionlvauugjs3vfoa8lg1noq9d8a.apps.googleusercontent.com",

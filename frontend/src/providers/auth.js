@@ -2,14 +2,14 @@ import React from "react";
 import { useState, useContext, createContext, useEffect } from "react";
 import http from "axios";
 import jwt from "jwt-decode";
-import { rooterProjectApi } from "../api/rooterProjectApi";
+import { routerProjectApi } from "../api/routerProjectApi";
 import config from "../app.config";
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
-  const { post } = rooterProjectApi();
+  const { post } = routerProjectApi();
 
   const auth = () => {
     const googleBaseUrl = config.google_base_url;
@@ -27,7 +27,7 @@ const AuthProvider = ({ children }) => {
 
   const login = async (code, provider) => {
     try {
-      const response = await http.post(config.rooter_project_api + "/user/login", {
+      const response = await http.post(config.router_project_api + "/user/login", {
         code,
         provider,
       });

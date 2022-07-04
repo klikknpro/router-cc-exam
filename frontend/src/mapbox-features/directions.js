@@ -1,6 +1,5 @@
 import http from "axios";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
-// import forecast from "../api/openWeatherApi";
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
@@ -42,8 +41,8 @@ const directions = async (drawCoordinates, map) => {
       },
     });
   }
+
   const weatherRoute = response.data.routes[0];
-  // forecast(weatherRoute, map);
   return weatherRoute;
 };
 

@@ -1,9 +1,9 @@
 import axios from "axios";
 import config from "../app.config";
 
-export const rooterProjectApi = () => {
+export const routerProjectApi = () => {
   const instance = axios.create({
-    baseURL: config.rooter_project_api,
+    baseURL: config.router_project_api,
     timeout: 3000,
   });
 
