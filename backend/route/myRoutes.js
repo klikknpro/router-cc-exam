@@ -38,7 +38,7 @@ router.post("/", auth({ block: true }), async (req, res) => {
 });
 
 /* === >>> <<< === */
-/* === >>> display the user's dashboard, all <<< === */
+/* === >>> display the user's all routes <<< === */
 router.get("/", auth({ block: true }), async (req, res) => {
   const user = await User.findById(res.locals.user.userId);
   if (!user) return res.status(404).send("User not found.");
@@ -62,8 +62,8 @@ router.get("/:routeId", auth({ block: true }), async (req, res) => {
 /* === >>> change "description" from body <<< === */
 router.patch("/:routeId", auth({ block: true }), async (req, res) => {
   if (!req.params.routeId) return res.sendStatus(400);
-  // console.log(req.body);
-  // if (!req.body.isPublic && !req.body.description) return res.status(400).send("Cannot change the nothing");
+  if (req.body.isPublic !== true && req.body.isPublic !== false && !req.body.description)
+    return res.status(400).send("Cannot change the nothing");
 
   const isPublic = req.body.isPublic;
   // const isPublic = req.body.isPublic === "true"; // convert to boolean
@@ -75,7 +75,8 @@ router.patch("/:routeId", auth({ block: true }), async (req, res) => {
   if (!route) return res.status(404).send("Route not found.");
 
   if (req.body.description && req.body.description !== "") route.description = req.body.description;
-  if (isPublic === true || isPublic === false) route.isPublic = isPublic;
+  // if (isPublic === true || isPublic === false);
+  route.isPublic = isPublic;
 
   user
     .save()
