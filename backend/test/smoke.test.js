@@ -21,7 +21,7 @@ test("mongo-in-memory server is running", async () => {
   const uri = mongod.getUri();
   const connection = await mongoose.connect(uri);
 
-  // fake mongo data
+  // (given) fake mongo data
   const Cat = mongoose.model("Cat", { name: String });
   const kitty = new Cat({ name: "Zildjian" });
 

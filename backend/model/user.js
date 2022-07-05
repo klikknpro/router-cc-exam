@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 
 const routeSchema = new mongoose.Schema({
-  description: { type: String, required: true }, // input || response.routes[0].legs[0].summary
-  from: { type: Array, required: true }, // response.routes[0].geometry.coordinates[0]
-  to: { type: Array, required: true }, // response.routes[0].geometry.coordinates[lastOne]
-  coordinates: { type: Array, required: true }, // limit this to 25 only! (later)
-  distance: { type: Number, required: true }, // response.routes[0].distance
-  tFactor: { type: Array, required: true }, // Toughness - Factor
+  description: { type: String, required: true },
+  from: { type: Array, required: true },
+  to: { type: Array, required: true },
+  coordinates: { type: Array, required: true },
+  distance: { type: Number, required: true },
+  tFactor: { type: Array, required: true },
   isPublic: { type: Boolean, default: false },
 });
 

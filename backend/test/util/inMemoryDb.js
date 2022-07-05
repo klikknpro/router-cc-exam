@@ -13,7 +13,7 @@ const stopDb = async (connection, server) => {
   await server.stop();
 };
 
-// database collections
+// delete database collections
 const deleteAll = async (...collections) => {
   const promises = collections.map((collection) => collection.deleteMany());
   await Promise.all(promises);

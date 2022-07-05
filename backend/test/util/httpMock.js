@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const mock = new axiosMockAdapter(_instance);
 
 const setupGoogleSuccessResponse = (sub) => {
-  const token = jwt.sign({ sub }, "fakeSecretKey");
+  const token = jwt.sign({ sub }, "thisIsFakeSecretKey"); // sub is also random
   mock.onPost("https://oauth2.googleapis.com/token").replyOnce(200, { id_token: token });
 };
 
