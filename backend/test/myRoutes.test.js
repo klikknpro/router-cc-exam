@@ -347,4 +347,216 @@ describe("Requests to /api/my-routes", () => {
       });
     });
   });
+
+  describe("PATCH requests to", () => {
+    describe("PATCH request with valid data in body", () => {
+      test("should return 200 and the modified route", async () => {
+        // given
+        const newUser = new User({
+          username: "johnDoe",
+          providers: {
+            google: "1234",
+          },
+          myRoutes: [],
+        });
+        await newUser.save();
+
+        const token = jwt.sign({ userId: newUser._id, providers: newUser.providers }, process.env.SECRET_KEY);
+        const newRoute1 = {
+          description: "evening rush",
+          from: [-73.985734, 40.738147],
+          to: [-74.002423, 40.734337],
+          coordinates: [
+            [-73.985734, 40.738147],
+            [-73.985681, 40.73822],
+            [-73.990532, 40.74027],
+          ],
+          distance: 12,
+          tFactor: [800, 800, 801, 801, 800],
+          isPublic: false,
+        };
+
+        const result = await client.post("/api/my-routes").send(newRoute1).set("authorization", token);
+        const routeId = result._body.data.myRoutes[0]._id;
+
+        // when
+        const response = await client
+          .patch("/api/my-routes/" + routeId)
+          .send({ description: "lazy evening", isPublic: true })
+          .set("authorization", token);
+
+        // then
+        // console.log(response._body);
+        expect(response.status).toBe(200);
+        expect(response._body.description).toStrictEqual("lazy evening");
+        expect(response._body.isPublic).toBeTruthy();
+      });
+
+      test("should return 404 if user not found", async () => {
+        // given
+        const newUser = new User({
+          username: "johnDoe",
+          providers: {
+            google: "1234",
+          },
+          myRoutes: [],
+        });
+        await newUser.save();
+
+        const token = jwt.sign({ userId: newUser._id, providers: newUser.providers }, process.env.SECRET_KEY);
+        const newRoute1 = {
+          description: "evening rush",
+          from: [-73.985734, 40.738147],
+          to: [-74.002423, 40.734337],
+          coordinates: [
+            [-73.985734, 40.738147],
+            [-73.985681, 40.73822],
+            [-73.990532, 40.74027],
+          ],
+          distance: 12,
+          tFactor: [800, 800, 801, 801, 800],
+          isPublic: false,
+        };
+
+        const result = await client.post("/api/my-routes").send(newRoute1).set("authorization", token);
+        const routeId = result._body.data.myRoutes[0]._id;
+
+        await User.deleteMany();
+
+        // when
+        const response = await client
+          .patch("/api/my-routes/" + routeId)
+          .send({ description: "lazy evening", isPublic: true })
+          .set("authorization", token);
+
+        // then
+        // console.log(response._body);
+        expect(response.status).toBe(404);
+        expect(response.text).toStrictEqual("User not found.");
+      });
+
+      test("should return 404 if route not found", async () => {
+        // given
+        const newUser = new User({
+          username: "johnDoe",
+          providers: {
+            google: "1234",
+          },
+          myRoutes: [],
+        });
+        await newUser.save();
+
+        const token = jwt.sign({ userId: newUser._id, providers: newUser.providers }, process.env.SECRET_KEY);
+        const newRoute1 = {
+          description: "evening rush",
+          from: [-73.985734, 40.738147],
+          to: [-74.002423, 40.734337],
+          coordinates: [
+            [-73.985734, 40.738147],
+            [-73.985681, 40.73822],
+            [-73.990532, 40.74027],
+          ],
+          distance: 12,
+          tFactor: [800, 800, 801, 801, 800],
+          isPublic: false,
+        };
+
+        await client.post("/api/my-routes").send(newRoute1).set("authorization", token);
+        const routeId = "12345";
+
+        // when
+        const response = await client
+          .patch("/api/my-routes/" + routeId)
+          .send({ description: "lazy evening", isPublic: true })
+          .set("authorization", token);
+
+        // then
+        // console.log(response._body);
+        expect(response.status).toBe(404);
+        expect(response.text).toStrictEqual("Route not found.");
+      });
+    });
+
+    describe("PATCH request with missing data", () => {
+      test("should return 400 if routeId is missing from path", async () => {
+        // given
+        const newUser = new User({
+          username: "johnDoe",
+          providers: {
+            google: "1234",
+          },
+          myRoutes: [],
+        });
+        await newUser.save();
+
+        const token = jwt.sign({ userId: newUser._id, providers: newUser.providers }, process.env.SECRET_KEY);
+        const newRoute1 = {
+          description: "evening rush",
+          from: [-73.985734, 40.738147],
+          to: [-74.002423, 40.734337],
+          coordinates: [
+            [-73.985734, 40.738147],
+            [-73.985681, 40.73822],
+            [-73.990532, 40.74027],
+          ],
+          distance: 12,
+          tFactor: [800, 800, 801, 801, 800],
+          isPublic: false,
+        };
+
+        await client.post("/api/my-routes").send(newRoute1).set("authorization", token);
+
+        // when
+        const response = await client
+          .patch("/api/my-routes")
+          .send({ description: "lazy evening", isPublic: true })
+          .set("authorization", token);
+
+        // then
+        // console.log(response._body);
+        expect(response.status).toBe(404);
+      });
+
+      test("should return 400 if body is empty", async () => {
+        // given
+        const newUser = new User({
+          username: "johnDoe",
+          providers: {
+            google: "1234",
+          },
+          myRoutes: [],
+        });
+        await newUser.save();
+
+        const token = jwt.sign({ userId: newUser._id, providers: newUser.providers }, process.env.SECRET_KEY);
+        const newRoute1 = {
+          description: "evening rush",
+          from: [-73.985734, 40.738147],
+          to: [-74.002423, 40.734337],
+          coordinates: [
+            [-73.985734, 40.738147],
+            [-73.985681, 40.73822],
+            [-73.990532, 40.74027],
+          ],
+          distance: 12,
+          tFactor: [800, 800, 801, 801, 800],
+          isPublic: false,
+        };
+
+        const result = await client.post("/api/my-routes").send(newRoute1).set("authorization", token);
+        const routeId = result._body.data.myRoutes[0]._id;
+
+        // when
+        const response = await client
+          .patch("/api/my-routes/" + routeId)
+          .send({})
+          .set("authorization", token);
+
+        // then
+        // console.log(response._body);
+        expect(response.status).toBe(400);
+        expect(response.text).toStrictEqual("Cannot change the nothing");
+      });
+    });
+  });
 });

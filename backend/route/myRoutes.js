@@ -61,7 +61,7 @@ router.get("/:routeId", auth({ block: true }), async (req, res) => {
 /* === >>> <<< === */
 /* === >>> change "description" from body <<< === */
 router.patch("/:routeId", auth({ block: true }), async (req, res) => {
-  if (!req.params.routeId) return res.sendStatus(400);
+  if (!req.params.routeId) return res.status(404).send("Route id is missing");
   if (req.body.isPublic !== true && req.body.isPublic !== false && !req.body.description)
     return res.status(400).send("Cannot change the nothing");
 
