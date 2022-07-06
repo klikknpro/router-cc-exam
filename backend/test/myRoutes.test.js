@@ -1,6 +1,6 @@
 require("dotenv").config();
 const app = require("../app");
-const mockServer = require("supertest");
+const mockServer = require("supertest"); // including superagent
 const { MongoMemoryServer } = require("mongodb-memory-server");
 const { startDb, stopDb, deleteAll } = require("./util/inMemoryDb");
 const User = require("../model/user");
@@ -39,7 +39,6 @@ describe("Requests to /api/my-routes", () => {
       await newUser.save();
 
       const token = jwt.sign({ userId: newUser._id, providers: newUser.providers }, process.env.SECRET_KEY);
-      client.set("authorization", token);
 
       const newRoute = {
         description: "evening rush",
@@ -56,13 +55,13 @@ describe("Requests to /api/my-routes", () => {
       };
 
       // when
-      const response = await client.post("/api/my-routes").send(newRoute);
+      const response = await client.post("/api/my-routes").send(newRoute).set("authorization", token);
 
       // then
-      console.log("newUser", newUser._id);
-      console.log(response._body);
+      // console.log(response._body.data);
       expect(response.status).toBe(200);
-      // expect(response._body._id).toStrictEqual(newUser._id);
+      expect(response._body.data).toHaveProperty("_id");
+      expect(response._body.data.myRoutes[0]).toHaveProperty("description");
     });
   });
 });

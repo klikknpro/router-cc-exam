@@ -30,7 +30,7 @@ router.post("/", auth({ block: true }), async (req, res) => {
   user
     .save()
     .then((data) => {
-      return res.status(200).json(data);
+      return res.status(200).json({ data });
     })
     .catch((err) => {
       return res.status(500).json(err);
