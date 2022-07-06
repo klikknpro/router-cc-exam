@@ -4,13 +4,13 @@ import { createPinoBrowserSend, createWriteStream } from "pino-logflare";
 // create pino-logflare stream
 const stream = createWriteStream({
   apiKey: "Xb2epud0H8Qh",
-  sourceToken: "fa74a0a2-b8e7-4822-9c2a-bf4dffb09971",
+  sourceToken: "0728527c-2ae8-42ab-b75e-934c0e064e43",
 });
 
 // create pino-logflare browser stream
 const send = createPinoBrowserSend({
   apiKey: "Xb2epud0H8Qh",
-  sourceToken: "fa74a0a2-b8e7-4822-9c2a-bf4dffb09971",
+  sourceToken: "0728527c-2ae8-42ab-b75e-934c0e064e43",
 });
 
 // create pino loggger

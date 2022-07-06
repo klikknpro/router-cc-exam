@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../providers/auth";
 import http from "axios";
 import config from "../app.config";
+import logger from "../utils/logflare";
 import OneRoute from "./OneRoute";
 
 const MyRoutes = () => {
@@ -11,13 +12,18 @@ const MyRoutes = () => {
   const [username, setUsername] = useState(null);
 
   const getAllRoutes = async () => {
-    const response = await http.get(config.router_project_api + "/my-routes", {
-      headers: {
-        authorization: token,
-      },
-    });
-    setAllRoutes(response.data.myRoutes);
-    setUsername(response.data.username);
+    try {
+      const response = await http.get(config.router_project_api + "/my-routes", {
+        headers: {
+          authorization: token,
+        },
+      });
+      setAllRoutes(response.data.myRoutes);
+      setUsername(response.data.username);
+    } catch (err) {
+      logger.error("Router server error", err);
+      return alert("Router server error:" + err.status);
+    }
   };
 
   useEffect(() => {
