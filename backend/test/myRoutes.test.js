@@ -348,7 +348,7 @@ describe("Requests to /api/my-routes", () => {
     });
   });
 
-  describe("PATCH requests to", () => {
+  describe("PATCH requests", () => {
     describe("PATCH request with valid data in body", () => {
       test("should return 200 and the modified route", async () => {
         // given
@@ -556,6 +556,171 @@ describe("Requests to /api/my-routes", () => {
         // console.log(response._body);
         expect(response.status).toBe(400);
         expect(response.text).toStrictEqual("Cannot change the nothing");
+      });
+    });
+  });
+
+  describe("DELETE requests", () => {
+    describe("DELETE request with valid route id", () => {
+      test("should return 200 and the remaining routes", async () => {
+        // given
+        const newUser = new User({
+          username: "johnDoe",
+          providers: {
+            google: "1234",
+          },
+          myRoutes: [],
+        });
+        await newUser.save();
+
+        const token = jwt.sign({ userId: newUser._id, providers: newUser.providers }, process.env.SECRET_KEY);
+        const newRoute1 = {
+          description: "evening rush",
+          from: [-73.985734, 40.738147],
+          to: [-74.002423, 40.734337],
+          coordinates: [
+            [-73.985734, 40.738147],
+            [-73.985681, 40.73822],
+            [-73.990532, 40.74027],
+          ],
+          distance: 12,
+          tFactor: [800, 800, 801, 801, 800],
+          isPublic: false,
+        };
+        const newRoute2 = {
+          description: "morning rush",
+          from: [-73.985734, 40.738147],
+          to: [-74.002423, 40.734337],
+          coordinates: [
+            [-73.985734, 40.738147],
+            [-73.985681, 40.73822],
+            [-73.990532, 40.74027],
+          ],
+          distance: 12,
+          tFactor: [800, 800, 801, 801, 800],
+          isPublic: false,
+        };
+
+        const result1 = await client.post("/api/my-routes").send(newRoute1).set("authorization", token);
+        await client.post("/api/my-routes").send(newRoute2).set("authorization", token);
+        const routeId = result1._body.data.myRoutes[0]._id;
+
+        // when
+        const response = await client.delete("/api/my-routes/" + routeId).set("authorization", token);
+
+        // then
+        // console.log(response._body);
+        expect(response.status).toBe(200);
+        expect(response._body).toHaveLength(1);
+        expect(response._body[0].description).toStrictEqual("morning rush");
+      });
+
+      test("should return 404 if the user not found", async () => {
+        // given
+        const newUser = new User({
+          username: "johnDoe",
+          providers: {
+            google: "1234",
+          },
+          myRoutes: [],
+        });
+        await newUser.save();
+
+        const token = jwt.sign({ userId: newUser._id, providers: newUser.providers }, process.env.SECRET_KEY);
+        const newRoute1 = {
+          description: "evening rush",
+          from: [-73.985734, 40.738147],
+          to: [-74.002423, 40.734337],
+          coordinates: [
+            [-73.985734, 40.738147],
+            [-73.985681, 40.73822],
+            [-73.990532, 40.74027],
+          ],
+          distance: 12,
+          tFactor: [800, 800, 801, 801, 800],
+          isPublic: false,
+        };
+        const newRoute2 = {
+          description: "morning rush",
+          from: [-73.985734, 40.738147],
+          to: [-74.002423, 40.734337],
+          coordinates: [
+            [-73.985734, 40.738147],
+            [-73.985681, 40.73822],
+            [-73.990532, 40.74027],
+          ],
+          distance: 12,
+          tFactor: [800, 800, 801, 801, 800],
+          isPublic: false,
+        };
+
+        const result1 = await client.post("/api/my-routes").send(newRoute1).set("authorization", token);
+        await client.post("/api/my-routes").send(newRoute2).set("authorization", token);
+        const routeId = result1._body.data.myRoutes[0]._id;
+
+        await User.deleteMany();
+
+        // when
+        const response = await client.delete("/api/my-routes/" + routeId).set("authorization", token);
+
+        // then
+        // console.log(response._body);
+        expect(response.status).toBe(404);
+        expect(response.text).toStrictEqual("User not found.");
+      });
+    });
+
+    describe("DELETE request with invalid route id", () => {
+      test("should return 404", async () => {
+        // given
+        const newUser = new User({
+          username: "johnDoe",
+          providers: {
+            google: "1234",
+          },
+          myRoutes: [],
+        });
+        await newUser.save();
+
+        const token = jwt.sign({ userId: newUser._id, providers: newUser.providers }, process.env.SECRET_KEY);
+        const newRoute1 = {
+          description: "evening rush",
+          from: [-73.985734, 40.738147],
+          to: [-74.002423, 40.734337],
+          coordinates: [
+            [-73.985734, 40.738147],
+            [-73.985681, 40.73822],
+            [-73.990532, 40.74027],
+          ],
+          distance: 12,
+          tFactor: [800, 800, 801, 801, 800],
+          isPublic: false,
+        };
+        const newRoute2 = {
+          description: "morning rush",
+          from: [-73.985734, 40.738147],
+          to: [-74.002423, 40.734337],
+          coordinates: [
+            [-73.985734, 40.738147],
+            [-73.985681, 40.73822],
+            [-73.990532, 40.74027],
+          ],
+          distance: 12,
+          tFactor: [800, 800, 801, 801, 800],
+          isPublic: false,
+        };
+
+        const result1 = await client.post("/api/my-routes").send(newRoute1).set("authorization", token);
+        await client.post("/api/my-routes").send(newRoute2).set("authorization", token);
+        const routeId = "12345";
+
+        // when
+        const response = await client.delete("/api/my-routes/" + routeId).set("authorization", token);
+
+        // then
+        // console.log(response._body);
+        expect(response.status).toBe(404);
+        expect(response.text).toStrictEqual("Route not found");
       });
     });
   });
