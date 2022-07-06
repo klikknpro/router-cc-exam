@@ -6,7 +6,7 @@ const longRoute = require("./long");
 let checkpointsList = [];
 let sumDuration = 0;
 const reqTimestamp = Math.round(Math.round(Date.now() / 1000) / 60) * 60;
-console.log(reqTimestamp);
+// console.log(reqTimestamp);
 
 const legs = longRoute.routes[0].legs;
 
@@ -35,9 +35,4 @@ const newCheckpointsList = [
   checkpointsList[checkpointsList.length - 1],
 ];
 
-console.log("shortened", newCheckpointsList);
-
-// console.log(Math.round(Date.now() / 1000));
-// setTimeout(() => {
-//   console.log(Math.round(Date.now() / 1000));
-// }, 1000);
+// console.log("shortened", newCheckpointsList);

@@ -1,4 +1,4 @@
-# Router
+# Router ©
 
 ## Codecool Full-Stack API final exam project
 
@@ -10,7 +10,7 @@ A developmental MERN-stack web app, created heavily with React, and Express.
 - [Planned features of version 2.0.0](#planned-features-of-version-2.0.0)
 - [Setup requirements](#setup-requirements)
 - [How to start](#how-to-start)
-- [Docker](#docker)
+- [Docker and Deploy](#docker-and-deploy)
 - [Main technologies and services](#main-technologies-and-services)
 - [API documentation at Swagger](#api-documentation-at-swagger)
 - [APIs used](#apis-used)
@@ -40,9 +40,11 @@ The base idea of this project is coming from personal experience. Every time I'm
 
 ## Planned features of version 2.0.0
 
+- loading mask while the map is loading
 - browse public routes (shared by users)
 - filter public routes
 - display a "T-Factor" based on how difficult were the weather conditions on your ride
+- display wind direction
 - display a map for each saved route (on My Routes)
   - possibly with weather data
 
@@ -109,7 +111,7 @@ npm run dev
 cd ..
 ```
 
-## Docker
+## Docker and Deploy
 
 ... under development.
 

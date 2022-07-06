@@ -11,7 +11,6 @@ import weatherMarkers from "../mapbox-features/weatherMarkers";
 import saveRoute from "../api/saveRoute";
 import { Button } from "@mui/material";
 
-/* this version is based on the Original MapBox tutorial */
 const Home = () => {
   const { token } = useAuth();
   const mapContainer = useRef(null); // my DOM element
@@ -22,7 +21,7 @@ const Home = () => {
   const [latCurrent, setLatCurrent] = useState(null); // from geolocate
   const [routeToSave, setRouteToSave] = useState(null);
 
-  /* for sidebar */
+  /* for infobar only */
   const [lngInfo, setLngInfo] = useState(19.0402);
   const [latInfo, setLatInfo] = useState(47.4979);
   const [zoomInfo, setZoomInfo] = useState(10);
@@ -43,7 +42,7 @@ const Home = () => {
   };
 
   const geolocateStart = () => {
-    console.log("register geolocate event at [] only!");
+    console.log("register geolocate event at []");
     geolocateFeature.on("geolocate", (data) => {
       console.log("set geolocate data");
       setLngStart(null);
@@ -66,12 +65,12 @@ const Home = () => {
 
   /* === >>> initialize map (only once) <<< === */
   useEffect(() => {
-    // on site load
+    /* on site load */
     if (map.current) return;
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v11",
-      center: [19.0402, 47.4979],
+      center: [19.0402, 47.4979], // BP
       zoom: 10,
     });
 
@@ -79,7 +78,7 @@ const Home = () => {
     map.current.addControl(navigationFeature);
     map.current.addControl(drawFeature);
 
-    // for sidebar
+    /* for infobar */
     map.current.on("move", () => {
       setLngInfo(map.current.getCenter().lng.toFixed(4));
       setLatInfo(map.current.getCenter().lat.toFixed(4));
@@ -90,10 +89,10 @@ const Home = () => {
     map.current.on("draw.create", async (e) => {
       const drawCoordinates = e.features[0].geometry.coordinates;
       const route = await directions(drawCoordinates, map);
-      console.log("route data from Directions", route);
+      // console.log("route data from Directions", route);
 
       const markersData = await forecast(route);
-      console.log("markersData from OpenWeather", markersData);
+      // console.log("markersData from OpenWeather", markersData);
 
       appendRouteData(route, markersData);
 
