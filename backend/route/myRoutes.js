@@ -12,7 +12,7 @@ router.post("/", auth({ block: true }), async (req, res) => {
     !req.body.distance ||
     !req.body.tFactor
   )
-    return res.sendStatus(400);
+    return res.status(400).send("Missing data from body");
 
   const user = await User.findById(res.locals.user.userId);
   if (!user) return res.status(404).send("User not found.");
