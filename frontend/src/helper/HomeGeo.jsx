@@ -11,10 +11,14 @@ import weatherMarkers from "../mapbox-features/weatherMarkers";
 import saveRoute from "../api/saveRoute";
 import { Button } from "@mui/material";
 
-const Home = ({ setCurrentMap }) => {
+const Home = () => {
   const { token } = useAuth();
   const mapContainer = useRef(null); // my DOM element
   const map = useRef(null); // rendered element
+  const [lngStart, setLngStart] = useState(null); // for direction api
+  const [latStart, setLatStart] = useState(null); // for direction api
+  const [lngCurrent, setLngCurrent] = useState(null); // from geolocate
+  const [latCurrent, setLatCurrent] = useState(null); // from geolocate
   const [routeToSave, setRouteToSave] = useState(null);
 
   /* for infobar only */
@@ -40,7 +44,12 @@ const Home = ({ setCurrentMap }) => {
   const geolocateStart = () => {
     console.log("register geolocate event at []");
     geolocateFeature.on("geolocate", (data) => {
-      // console.log("set geolocate data");
+      /* console.log("set geolocate data");
+      setLngStart(null);
+      setLatStart(null);
+
+      setLngCurrent(data.coords.longitude.toFixed(4));
+      setLatCurrent(data.coords.latitude.toFixed(4)); */
       // console.log(data.coords.longitude.toFixed(4), data.coords.latitude.toFixed(4));
       map.current.flyTo({
         center: [data.coords.longitude, data.coords.latitude],
@@ -64,8 +73,6 @@ const Home = ({ setCurrentMap }) => {
       center: [19.0402, 47.4979], // BP
       zoom: 10,
     });
-
-    setCurrentMap(map.current);
 
     map.current.addControl(geolocateFeature);
     map.current.addControl(navigationFeature);
@@ -113,6 +120,14 @@ const Home = ({ setCurrentMap }) => {
     geolocateStart();
     // eslint-disable-next-line
   }, []);
+
+  /* useEffect(() => {
+    if (!lngStart && !latStart) {
+      setLngStart(lngCurrent);
+      setLatStart(latCurrent);
+    }
+    // eslint-disable-next-line
+  }, [lngCurrent, latCurrent]); */
 
   return (
     <div>

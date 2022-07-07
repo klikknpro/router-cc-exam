@@ -12,20 +12,15 @@ const saveRoute = async (completeRoute, setRouteToSave, token) => {
     // (response.data.data)
     return setRouteToSave(null);
   } catch (err) {
-    // (err.response)
     logger.error("Router API error", err);
-    if (err.response.status === 400) {
-      window.location.reload(false);
-      return alert("Missing data from request body!");
-    }
-    if (err.response.status === 404) {
-      window.location.reload(false);
-      return alert("User not found!");
-    }
-    if (err.response.status >= 500) {
-      window.location.reload(false);
-      return alert("Server error! Try again later.");
-    }
+    const errStatus = err.response.status;
+    const errMessage = err.response.data;
+
+    window.location.reload(false);
+    return alert(`
+      Code: ${errStatus}
+      Message: ${errMessage}
+      `);
   }
 };
 

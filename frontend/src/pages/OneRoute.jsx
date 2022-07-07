@@ -1,15 +1,23 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../providers/auth";
 import http from "axios";
 import config from "../app.config";
 import logger from "../utils/logflare.js";
 import { Switch, FormGroup, Stack, Typography, Button } from "@mui/material";
+import directions from "../mapbox-features/directions";
+import forecast from "../api/openWeatherApi";
+import weatherMarkers from "../mapbox-features/weatherMarkers";
 
-const OneRoute = ({ setAllRoutes, route }) => {
+const OneRoute = ({ setAllRoutes, route, currentMap }) => {
   const { token } = useAuth();
   const [checked, setChecked] = useState(false);
-  // const [isPublic, setIsPublic] = useState(route.isPublic);
+  const navigate = useNavigate();
+
+  const nav = (path) => {
+    navigate(path);
+  };
 
   const switchPublic = async () => {
     try {
@@ -26,28 +34,15 @@ const OneRoute = ({ setAllRoutes, route }) => {
       );
       setChecked(response.data.isPublic);
     } catch (err) {
-      // (err.response)
       logger.error("Router API error", err);
-      if (err.response.status === 400) {
-        window.location.reload(false);
-        return alert("Cannot change the nothing!");
-      }
-      if (err.response.status === 404 && err.response.data === "Route id is missing") {
-        window.location.reload(false);
-        return alert("Route id is missing!");
-      }
-      if (err.response.status === 404 && err.response.data === "User not found.") {
-        window.location.reload(false);
-        return alert("User not found!");
-      }
-      if (err.response.status === 404 && err.response.data === "Route not found.") {
-        window.location.reload(false);
-        return alert("Route not found!");
-      }
-      if (err.response.status >= 500) {
-        window.location.reload(false);
-        return alert("Server error! Try again later.");
-      }
+      const errStatus = err.response.status;
+      const errMessage = err.response.data;
+
+      window.location.reload(false);
+      return alert(`
+      Code: ${errStatus}
+      Message: ${errMessage}
+      `);
     }
   };
 
@@ -64,25 +59,35 @@ const OneRoute = ({ setAllRoutes, route }) => {
       );
       setAllRoutes([...response.data]);
     } catch (err) {
-      // (err.response)
       logger.error("Router API error", err);
-      if (err.response.status === 400) {
-        window.location.reload(false);
-        return alert("Route id is missing!");
-      }
-      if (err.response.status === 404 && err.response.data === "User not found.") {
-        window.location.reload(false);
-        return alert("User not found!");
-      }
-      if (err.response.status === 404 && err.response.data === "Route not found") {
-        window.location.reload(false);
-        return alert("Route not found!");
-      }
-      if (err.response.status >= 500) {
-        window.location.reload(false);
-        return alert("Server error! Try again later.");
-      }
+      const errStatus = err.response.status;
+      const errMessage = err.response.data;
+
+      window.location.reload(false);
+      return alert(`
+      Code: ${errStatus}
+      Message: ${errMessage}
+      `);
     }
+  };
+
+  const goRoute = async () => {
+    const allCoordinates = route.coordinates;
+    const section = Math.round(allCoordinates.length / 24);
+    const coordinates = [allCoordinates[0]];
+    for (let i = 0; i < ; i++) {
+      const element = array[i];
+
+    }
+
+    const savedRoute = await directions(route.coordinates, currentMap);
+    // console.log("route data from Directions", route);
+
+    const markersData = await forecast(savedRoute);
+    // console.log("markersData from OpenWeather", markersData);
+
+    weatherMarkers(markersData, currentMap);
+    nav("/");
   };
 
   useEffect(() => {
@@ -102,6 +107,7 @@ const OneRoute = ({ setAllRoutes, route }) => {
           <Button onClick={deleteRoute} size="small" color="warning">
             Delete route
           </Button>
+          <Button onClick={goRoute}>GO!</Button>
         </Stack>
       </FormGroup>
     </div>

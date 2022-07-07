@@ -6,7 +6,7 @@ import config from "../app.config";
 import logger from "../utils/logflare";
 import OneRoute from "./OneRoute";
 
-const MyRoutes = () => {
+const MyRoutes = ({ currentMap }) => {
   const { token } = useAuth();
   const [allRoutes, setAllRoutes] = useState(null);
   const [username, setUsername] = useState(null);
@@ -21,16 +21,15 @@ const MyRoutes = () => {
       setAllRoutes(response.data.myRoutes);
       setUsername(response.data.username);
     } catch (err) {
-      // (err.response)
       logger.error("Router API error", err);
-      if (err.response.status === 404) {
-        window.location.reload(false);
-        return alert("User not found!");
-      }
-      if (err.response.status >= 500) {
-        window.location.reload(false);
-        return alert("Server error! Try again later.");
-      }
+      const errStatus = err.response.status;
+      const errMessage = err.response.data;
+
+      window.location.reload(false);
+      return alert(`
+      Code: ${errStatus}
+      Message: ${errMessage}
+      `);
     }
   };
 
@@ -42,7 +41,10 @@ const MyRoutes = () => {
   return (
     <div>
       <h4>Username: {username && username}</h4>
-      {allRoutes && allRoutes.map((route, i) => <OneRoute setAllRoutes={setAllRoutes} route={route} key={i} />)}
+      {allRoutes &&
+        allRoutes.map((route, i) => (
+          <OneRoute setAllRoutes={setAllRoutes} route={route} currentMap={currentMap} key={i} />
+        ))}
     </div>
   );
 };
