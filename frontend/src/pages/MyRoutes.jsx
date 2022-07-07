@@ -21,8 +21,16 @@ const MyRoutes = () => {
       setAllRoutes(response.data.myRoutes);
       setUsername(response.data.username);
     } catch (err) {
-      logger.error("Router server error", err);
-      return alert("Router server error:" + err.status);
+      // (err.response)
+      logger.error("Router API error", err);
+      if (err.response.status === 404) {
+        window.location.reload(false);
+        return alert("User not found!");
+      }
+      if (err.response.status >= 500) {
+        window.location.reload(false);
+        return alert("Server error! Try again later.");
+      }
     }
   };
 

@@ -10,10 +10,22 @@ const saveRoute = async (completeRoute, setRouteToSave, token) => {
       },
     });
     // (response.data.data)
-    if (response.status === 200) return setRouteToSave(null);
+    return setRouteToSave(null);
   } catch (err) {
-    logger.error("Router server error", err);
-    return alert("Router server error:" + err.status);
+    // (err.response)
+    logger.error("Router API error", err);
+    if (err.response.status === 400) {
+      window.location.reload(false);
+      return alert("Missing data from request body!");
+    }
+    if (err.response.status === 404) {
+      window.location.reload(false);
+      return alert("User not found!");
+    }
+    if (err.response.status >= 500) {
+      window.location.reload(false);
+      return alert("Server error! Try again later.");
+    }
   }
 };
 
