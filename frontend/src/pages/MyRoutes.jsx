@@ -6,7 +6,7 @@ import config from "../app.config";
 import logger from "../utils/logflare";
 import OneRoute from "./OneRoute";
 
-const MyRoutes = ({ currentMap }) => {
+const MyRoutes = ({ renderedMap }) => {
   const { token } = useAuth();
   const [allRoutes, setAllRoutes] = useState(null);
   const [username, setUsername] = useState(null);
@@ -43,7 +43,7 @@ const MyRoutes = ({ currentMap }) => {
       <h4>Username: {username && username}</h4>
       {allRoutes &&
         allRoutes.map((route, i) => (
-          <OneRoute setAllRoutes={setAllRoutes} route={route} currentMap={currentMap} key={i} />
+          <OneRoute setAllRoutes={setAllRoutes} route={route} renderedMap={renderedMap} key={i} />
         ))}
     </div>
   );

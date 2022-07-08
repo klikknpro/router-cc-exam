@@ -11,7 +11,7 @@ import weatherMarkers from "../mapbox-features/weatherMarkers";
 import saveRoute from "../api/saveRoute";
 import { Button } from "@mui/material";
 
-const Home = ({ setCurrentMap }) => {
+const Home = ({ setRenderedMap }) => {
   const { token } = useAuth();
   const mapContainer = useRef(null); // my DOM element
   const map = useRef(null); // rendered element
@@ -65,7 +65,7 @@ const Home = ({ setCurrentMap }) => {
       zoom: 10,
     });
 
-    setCurrentMap(map.current);
+    setRenderedMap(map.current);
 
     map.current.addControl(geolocateFeature);
     map.current.addControl(navigationFeature);

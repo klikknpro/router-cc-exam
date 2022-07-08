@@ -10,7 +10,7 @@ import directions from "../mapbox-features/directions";
 import forecast from "../api/openWeatherApi";
 import weatherMarkers from "../mapbox-features/weatherMarkers";
 
-const OneRoute = ({ setAllRoutes, route, currentMap }) => {
+const OneRoute = ({ setAllRoutes, route, renderedMap }) => {
   const { token } = useAuth();
   const [checked, setChecked] = useState(false);
   const navigate = useNavigate();
@@ -80,13 +80,13 @@ const OneRoute = ({ setAllRoutes, route, currentMap }) => {
 
     }
 
-    const savedRoute = await directions(route.coordinates, currentMap);
+    const savedRoute = await directions(route.coordinates, renderedMap);
     // console.log("route data from Directions", route);
 
     const markersData = await forecast(savedRoute);
     // console.log("markersData from OpenWeather", markersData);
 
-    weatherMarkers(markersData, currentMap);
+    weatherMarkers(markersData, renderedMap);
     nav("/");
   };
 
