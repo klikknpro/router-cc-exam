@@ -65,7 +65,7 @@ const Home = ({ setRenderedMap }) => {
       zoom: 10,
     });
 
-    setRenderedMap(map.current);
+    setRenderedMap(map);
 
     map.current.addControl(geolocateFeature);
     map.current.addControl(navigationFeature);

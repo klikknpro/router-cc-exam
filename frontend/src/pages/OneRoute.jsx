@@ -8,6 +8,7 @@ import logger from "../utils/logflare.js";
 import { Switch, FormGroup, Stack, Typography, Button } from "@mui/material";
 import directions from "../mapbox-features/directions";
 import forecast from "../api/openWeatherApi";
+import reduceCoordinates from "../utils/reduceCoordinates";
 import weatherMarkers from "../mapbox-features/weatherMarkers";
 
 const OneRoute = ({ setAllRoutes, route, renderedMap }) => {
@@ -73,21 +74,16 @@ const OneRoute = ({ setAllRoutes, route, renderedMap }) => {
 
   const goRoute = async () => {
     const allCoordinates = route.coordinates;
-    const section = Math.round(allCoordinates.length / 24);
-    const coordinates = [allCoordinates[0]];
-    for (let i = 0; i < ; i++) {
-      const element = array[i];
+    const shortRoute = reduceCoordinates(allCoordinates);
+    console.log(shortRoute);
 
-    }
-
-    const savedRoute = await directions(route.coordinates, renderedMap);
+    const finalRoute = await directions(shortRoute, renderedMap);
     // console.log("route data from Directions", route);
 
-    const markersData = await forecast(savedRoute);
+    const markersData = await forecast(finalRoute);
     // console.log("markersData from OpenWeather", markersData);
 
     weatherMarkers(markersData, renderedMap);
-    nav("/");
   };
 
   useEffect(() => {
