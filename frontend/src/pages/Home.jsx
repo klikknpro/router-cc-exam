@@ -114,11 +114,13 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
-      <div className="sidebar">
-        Longitude: {lngInfo} | Latitude: {latInfo} | Zoom: {zoomInfo}
+    <div className="home-container">
+      <div className="main-map">
+        <div className="sidebar">
+          Longitude: {lngInfo} | Latitude: {latInfo} | Zoom: {zoomInfo}
+        </div>
+        <div ref={mapContainer} className="map-container" />
       </div>
-      <div ref={mapContainer} className="map-container" />
       {localStorage.getItem("token") && (
         <Button
           onClick={() => saveRoute(routeToSave, setRouteToSave, token)}

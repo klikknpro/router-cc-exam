@@ -2,8 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../providers/auth";
-import { Button } from "@mui/material";
-import logo from "../img/router_logo.png";
+// import { button } from "@mui/material";
 
 const NavbarComp = () => {
   const navigate = useNavigate();
@@ -16,23 +15,29 @@ const NavbarComp = () => {
 
   return (
     <nav className="navbar">
-      <Button onClick={() => nav("/")} variant="contained" size="small">
-        Home
-      </Button>
-      {token && (
-        <Button onClick={() => nav("/my-routes")} variant="contained" size="small">
-          My Routes
-        </Button>
-      )}
-      {token ? (
-        <Button onClick={logout} variant="contained" color="secondary" size="small">
-          Logout
-        </Button>
-      ) : (
-        <Button onClick={auth} variant="contained" color="info" size="small">
-          Google login
-        </Button>
-      )}
+      <div className="logo">
+        <h1 className="logo-title">router</h1>
+        <h2 className="logo-subtitle">better prepare</h2>
+      </div>
+      <div className="navbar-menu">
+        <button onClick={() => nav("/")} className="menu-home">
+          home
+        </button>
+        {token && (
+          <button onClick={() => nav("/my-routes")} className="menu-myRoutes">
+            my routes
+          </button>
+        )}
+        {token ? (
+          <button onClick={logout} className="menu-logout">
+            logout
+          </button>
+        ) : (
+          <button onClick={auth} className="menu-login">
+            login
+          </button>
+        )}
+      </div>
     </nav>
   );
 };
