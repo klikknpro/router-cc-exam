@@ -12,18 +12,17 @@ function App() {
   // useEffect(() => {
   //   console.log("This app is in", process.env.NODE_ENV, "mode");
   // }, []);
-  const [renderedMap, setRenderedMap] = useState(null);
 
   return (
     <div className="App">
       <NavbarComp />
       <Routes>
-        <Route path="/" element={<Home setRenderedMap={setRenderedMap} />} />
+        <Route path="/" element={<Home />} />
         <Route
           path="/my-routes"
           element={
             <Protected>
-              <MyRoutes renderedMap={renderedMap} />
+              <MyRoutes />
             </Protected>
           }
         />

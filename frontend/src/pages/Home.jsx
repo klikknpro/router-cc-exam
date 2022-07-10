@@ -11,7 +11,7 @@ import weatherMarkers from "../mapbox-features/weatherMarkers";
 import saveRoute from "../api/saveRoute";
 import { Button } from "@mui/material";
 
-const Home = ({ setRenderedMap }) => {
+const Home = () => {
   const { token } = useAuth();
   const mapContainer = useRef(null); // my DOM element
   const map = useRef(null); // rendered element
@@ -65,8 +65,6 @@ const Home = ({ setRenderedMap }) => {
       zoom: 10,
     });
 
-    setRenderedMap(map);
-
     map.current.addControl(geolocateFeature);
     map.current.addControl(navigationFeature);
     map.current.addControl(drawFeature);
@@ -92,9 +90,15 @@ const Home = ({ setRenderedMap }) => {
       weatherMarkers(markersData, map);
     });
 
+    map.current.on("draw.modechange", (e) => {
+      console.log(e.mode);
+      if (map.current.getLayer("routeLayer")) map.current.removeLayer("routeLayer");
+      if (map.current.getSource("routeLayer")) map.current.removeSource("routeLayer");
+    });
+
     map.current.on("draw.delete", (e) => {
-      map.current.removeLayer("routeLayer");
-      map.current.removeSource("routeLayer");
+      if (map.current.getLayer("routeLayer")) map.current.removeLayer("routeLayer");
+      if (map.current.getSource("routeLayer")) map.current.removeSource("routeLayer");
       if (map.current.getLayer("layer0")) map.current.removeLayer("layer0");
       if (map.current.getSource("source0")) map.current.removeSource("source0");
       if (map.current.getLayer("layer1")) map.current.removeLayer("layer1");

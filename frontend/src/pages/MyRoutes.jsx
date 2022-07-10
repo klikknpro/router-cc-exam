@@ -7,10 +7,10 @@ import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-load
 import logger from "../utils/logflare";
 import OneRoute from "./OneRoute";
 
-const MyRoutes = ({ renderedMap }) => {
+const MyRoutes = () => {
   const { token } = useAuth();
-  const mapContainer = useRef(null); // my DOM element
-  const map = useRef(null); // rendered element
+  const mapSmallContainer = useRef(null); // my DOM element
+  const mapSmall = useRef(null); // rendered element
   const [allRoutes, setAllRoutes] = useState(null);
   const [username, setUsername] = useState(null);
 
@@ -45,22 +45,22 @@ const MyRoutes = ({ renderedMap }) => {
 
   useEffect(() => {
     /* on site load */
-    if (map.current) return;
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
+    if (mapSmall.current) return;
+    mapSmall.current = new mapboxgl.Map({
+      container: mapSmallContainer.current,
       style: "mapbox://styles/mapbox/streets-v11",
       center: [19.0402, 47.4979], // BP
       zoom: 10,
     });
     // eslint-disable-next-line
-  }, [map.current]);
+  }, [mapSmall.current]);
 
   return (
     <div>
       <h4>Username: {username && username}</h4>
       {allRoutes &&
-        allRoutes.map((route, i) => <OneRoute setAllRoutes={setAllRoutes} route={route} renderedMap={map} key={i} />)}
-      <div ref={mapContainer} className="map-container-small" />
+        allRoutes.map((route, i) => <OneRoute setAllRoutes={setAllRoutes} route={route} mapSmall={mapSmall} key={i} />)}
+      <div ref={mapSmallContainer} className="map-container-small" />
     </div>
   );
 };

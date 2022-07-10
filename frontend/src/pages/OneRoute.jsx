@@ -1,6 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../providers/auth";
 import http from "axios";
 import config from "../app.config";
@@ -11,14 +10,9 @@ import forecast from "../api/openWeatherApi";
 import reduceCoordinates from "../utils/reduceCoordinates";
 import weatherMarkers from "../mapbox-features/weatherMarkers";
 
-const OneRoute = ({ setAllRoutes, route, renderedMap }) => {
+const OneRoute = ({ setAllRoutes, route, mapSmall }) => {
   const { token } = useAuth();
   const [checked, setChecked] = useState(false);
-  const navigate = useNavigate();
-
-  const nav = (path) => {
-    navigate(path);
-  };
 
   const switchPublic = async () => {
     try {
@@ -75,15 +69,14 @@ const OneRoute = ({ setAllRoutes, route, renderedMap }) => {
   const goRoute = async () => {
     const allCoordinates = route.coordinates;
     const shortRoute = reduceCoordinates(allCoordinates);
-    console.log(shortRoute);
 
-    const finalRoute = await directions(shortRoute, renderedMap);
+    const finalRoute = await directions(shortRoute, mapSmall);
     // console.log("route data from Directions", route);
 
     const markersData = await forecast(finalRoute);
     // console.log("markersData from OpenWeather", markersData);
 
-    weatherMarkers(markersData, renderedMap);
+    weatherMarkers(markersData, mapSmall);
   };
 
   useEffect(() => {
