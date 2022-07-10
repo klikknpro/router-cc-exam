@@ -10,7 +10,7 @@ import forecast from "../api/openWeatherApi";
 import reduceCoordinates from "../utils/reduceCoordinates";
 import weatherMarkers from "../mapbox-features/weatherMarkers";
 
-const OneRoute = ({ setAllRoutes, route, mapSmall }) => {
+const OneRoute = ({ setAllRoutes, route, mapSmall, disableGo, setDisableGo }) => {
   const { token } = useAuth();
   const [checked, setChecked] = useState(false);
 
@@ -77,6 +77,7 @@ const OneRoute = ({ setAllRoutes, route, mapSmall }) => {
     // console.log("markersData from OpenWeather", markersData);
 
     weatherMarkers(markersData, mapSmall);
+    setDisableGo(true);
   };
 
   useEffect(() => {
@@ -96,7 +97,9 @@ const OneRoute = ({ setAllRoutes, route, mapSmall }) => {
           <Button onClick={deleteRoute} size="small" color="warning">
             Delete route
           </Button>
-          <Button onClick={goRoute}>GO!</Button>
+          <Button onClick={goRoute} disabled={disableGo}>
+            GO!
+          </Button>
         </Stack>
       </FormGroup>
     </div>

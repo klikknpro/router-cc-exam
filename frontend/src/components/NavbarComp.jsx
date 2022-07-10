@@ -19,9 +19,11 @@ const NavbarComp = () => {
       <Button onClick={() => nav("/")} variant="contained" size="small">
         Home
       </Button>
-      <Button onClick={() => nav("/my-routes")} variant="contained" size="small">
-        My Routes
-      </Button>
+      {token && (
+        <Button onClick={() => nav("/my-routes")} variant="contained" size="small">
+          My Routes
+        </Button>
+      )}
       {token ? (
         <Button onClick={logout} variant="contained" color="secondary" size="small">
           Logout
