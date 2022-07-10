@@ -90,13 +90,8 @@ const Home = () => {
       weatherMarkers(markersData, map);
     });
 
-    map.current.on("draw.modechange", (e) => {
-      console.log(e.mode);
-      if (map.current.getLayer("routeLayer")) map.current.removeLayer("routeLayer");
-      if (map.current.getSource("routeLayer")) map.current.removeSource("routeLayer");
-    });
-
     map.current.on("draw.delete", (e) => {
+      console.log("draw.delete event", e);
       if (map.current.getLayer("routeLayer")) map.current.removeLayer("routeLayer");
       if (map.current.getSource("routeLayer")) map.current.removeSource("routeLayer");
       if (map.current.getLayer("layer0")) map.current.removeLayer("layer0");
