@@ -9,7 +9,8 @@ import directions from "../mapbox-features/directions";
 import forecast from "../api/openWeatherApi";
 import weatherMarkers from "../mapbox-features/weatherMarkers";
 import saveRoute from "../api/saveRoute";
-import { Button } from "@mui/material";
+import cyclist from "../img/Router-main-img-fill.png";
+import pointer from "../img/iconmonstr-cursor-31-120.png";
 
 const Home = () => {
   const { token } = useAuth();
@@ -115,19 +116,23 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <div className="main-map">
-        <div className="sidebar">
+      <div className="home-left">
+        <img src={cyclist} alt="cyclist thinking about route" />
+        {localStorage.getItem("token") && (
+          <button
+            onClick={() => saveRoute(routeToSave, setRouteToSave, token)}
+            disabled={routeToSave === null ? true : false}>
+            Save route
+          </button>
+        )}
+      </div>
+      <div className="home-right">
+        <div ref={mapContainer} className="map-container" />
+        <div className="map-sidebar">
           Longitude: {lngInfo} | Latitude: {latInfo} | Zoom: {zoomInfo}
         </div>
-        <div ref={mapContainer} className="map-container" />
       </div>
-      {localStorage.getItem("token") && (
-        <Button
-          onClick={() => saveRoute(routeToSave, setRouteToSave, token)}
-          disabled={routeToSave === null ? true : false}>
-          Save route
-        </Button>
-      )}
+      <img className="home-pointer" src={pointer} alt="pointer" />
     </div>
   );
 };

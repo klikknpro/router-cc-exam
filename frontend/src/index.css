@@ -134,11 +134,14 @@ body {
 
   font-size: 20px;
   font-weight: 400;
+  color: var(--clr-black);
 }
 
 .navbar-menu button:hover {
-  background-color: var(--clr-deep-blue);
+  background-color: #fff;
+  font-weight: 800;
   box-shadow: 4px 4px var(--clr-blue);
+  transition: all 0.3s ease;
 }
 
 .navbar-menu button.menu-home {
@@ -149,18 +152,78 @@ body {
   font-size: 18px;
   font-weight: 600;
   text-transform: uppercase;
-  border: 2px solid var(--clr-black);
+  box-shadow: 4px 4px var(--clr-deep-violet);
 }
 
-.navbar-menu button.menu-logout {
-  background-color: var(--clr-blue);
-  box-shadow: 4px 4px var(--clr-deep-blue);
+.navbar-menu button.menu-myRoutes:hover {
+  font-weight: 1000;
 }
 
 .home-container {
-  max-width: 1280px;
+  max-width: 1400px;
   margin: 250px auto;
   display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.home-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  padding-top: 30px;
+  padding-right: 20px;
+  gap: 20px;
+}
+
+.home-left img {
+  max-width: 275px;
+}
+
+.home-left button {
+  width: 140px;
+  height: 50px;
+  margin: 30px auto;
+  background-color: var(--clr-violet);
+  box-shadow: 4px 4px var(--clr-deep-violet);
+
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--clr-black);
+}
+
+.home-left button:disabled {
+  background-color: #ff337a48;
+  box-shadow: 4px 4px #b3366251;
+  color: #00000049;
+  cursor: default;
+}
+
+.home-pointer {
+  width: 50px;
+
+  position: relative;
+  top: 185px;
+  left: -18px;
+  z-index: 2;
+  transform: scale(1);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.8);
+  }
+
+  50% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0.8);
+  }
 }
 
 .map-container {
@@ -169,16 +232,16 @@ body {
   margin-top: 30px;
 }
 
-.map-container-small {
-  height: 50vh;
-}
-
-.sidebar {
+.map-sidebar {
+  width: 100%;
   background-color: rgba(35, 55, 75, 0.9);
   color: #fff;
   padding: 6px 12px;
   font-family: monospace;
   font-size: 12px;
   z-index: 1;
-  border-radius: 4px;
+}
+
+.map-container-small {
+  height: 50vh;
 }
