@@ -74,23 +74,33 @@ const MyRoutes = () => {
   }, [mapSmall.current]);
 
   return (
-    <div>
-      <h4>Username: {username && username}</h4>
-      {allRoutes &&
-        allRoutes.map((route, i) => (
-          <OneRoute
-            setAllRoutes={setAllRoutes}
-            route={route}
-            mapSmall={mapSmall}
-            disableGo={disableGo}
-            setDisableGo={setDisableGo}
-            key={i}
-          />
-        ))}
-      <Button onClick={deleteActiveRoute} disabled={!disableGo}>
-        Delete active route
-      </Button>
-      <div ref={mapSmallContainer} className="map-container-small" />
+    <div className="my-routes">
+      <div className="username">
+        <h3>
+          Hey {username && username}! Click <span> GO! </span> to show actual weather forecast for that route. ☀️🌧️🤞
+        </h3>
+      </div>
+      <div className="my-routes-container">
+        <div className="my-routes-left">
+          {allRoutes &&
+            allRoutes.map((route, i) => (
+              <OneRoute
+                setAllRoutes={setAllRoutes}
+                route={route}
+                mapSmall={mapSmall}
+                disableGo={disableGo}
+                setDisableGo={setDisableGo}
+                key={i}
+              />
+            ))}
+          <button className="delete" onClick={deleteActiveRoute} disabled={!disableGo}>
+            clear the map <span>❌</span>
+          </button>
+        </div>
+        <div className="my-routes-right">
+          <div ref={mapSmallContainer} className="map-container-small" />
+        </div>
+      </div>
     </div>
   );
 };

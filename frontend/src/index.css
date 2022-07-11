@@ -178,6 +178,7 @@ body {
   text-align: center;
   background-color: var(--clr-violet);
 }
+
 .about h3 {
   font-size: 20px;
   font-weight: 600;
@@ -265,6 +266,103 @@ body {
   z-index: 1;
 }
 
+.my-routes {
+  width: 100%;
+  margin: 240px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+}
+
+.username {
+  width: 100%;
+  height: 35px;
+  line-height: 35px;
+  white-space: nowrap;
+  text-align: center;
+  background-color: var(--clr-violet);
+}
+
+.username h3 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.username span {
+  color: var(--clr-yellow);
+}
+
+.my-routes-container {
+  max-width: 1400px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.my-routes-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+  padding-top: 30px;
+}
+
+.my-routes-left button.delete {
+  width: 200px;
+  height: 50px;
+  margin: 0 auto;
+  background-color: var(--clr-violet);
+  box-shadow: 4px 4px var(--clr-deep-violet);
+
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--clr-black);
+}
+
+.my-routes-left button.delete:disabled {
+  background-color: #ff337a48;
+  box-shadow: 4px 4px #b3366251;
+  color: #00000049;
+  cursor: default;
+}
+
+.my-routes-left button.delete-route {
+  width: 100px;
+  height: 40px;
+  margin: 0 auto;
+  background-color: var(--clr-violet);
+  box-shadow: 4px 4px var(--clr-deep-violet);
+
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--clr-black);
+}
+
+.my-routes-left button.go-route {
+  width: 60px;
+  height: 40px;
+  margin: 0 auto;
+  background-color: var(--clr-blue);
+  box-shadow: 4px 4px var(--clr-deep-blue);
+
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--clr-yellow);
+}
+
+.my-routes-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
 .map-container-small {
-  height: 50vh;
+  width: 900px;
+  height: 600px;
+  margin-top: 30px;
 }

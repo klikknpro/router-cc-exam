@@ -86,20 +86,20 @@ const OneRoute = ({ setAllRoutes, route, mapSmall, disableGo, setDisableGo }) =>
   }, []);
 
   return (
-    <div>
-      <h4>{route.description}</h4>
-      <h4>{route.distance} km</h4>
+    <div className="oneroute-container">
+      <p>{route.description}</p>
+      <p>{route.distance} km</p>
       <FormGroup>
         <Stack direction="row" spacing={1} alignItems="center">
-          <Typography>Private</Typography>
+          <Typography>private</Typography>
           <Switch checked={checked} onChange={switchPublic} />
-          <Typography>Public</Typography>
-          <Button onClick={deleteRoute} size="small" color="warning">
-            Delete route
-          </Button>
-          <Button onClick={goRoute} disabled={disableGo}>
+          <Typography>public</Typography>
+          <button className="delete-route" onClick={deleteRoute} size="small" color="warning">
+            delete route
+          </button>
+          <button className="go-route" onClick={goRoute} disabled={disableGo}>
             GO!
-          </Button>
+          </button>
         </Stack>
       </FormGroup>
     </div>

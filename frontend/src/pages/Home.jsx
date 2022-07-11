@@ -118,8 +118,8 @@ const Home = () => {
     <div className="main">
       <div className="about">
         <h3>
-          Welcome dear Cyclist! Plan your route using that tool on the right <span>👉</span> and see how the weather
-          will change during your training. <span>😉</span>
+          Welcome Cyclist! Plan your route using that tool on the right <span>👉</span> and see how the weather will
+          change during your training. <span>😉</span>
         </h3>
       </div>
       <div className="home-container">
@@ -129,7 +129,7 @@ const Home = () => {
             <button
               onClick={() => saveRoute(routeToSave, setRouteToSave, token)}
               disabled={routeToSave === null ? true : false}>
-              Save route
+              save route
             </button>
           )}
         </div>
