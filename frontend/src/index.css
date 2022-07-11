@@ -299,7 +299,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 20px;
+  gap: 30px;
 }
 
 .my-routes-left {
@@ -307,14 +307,14 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  gap: 10px;
+  gap: 20px;
   padding-top: 30px;
 }
 
-.my-routes-left button.delete {
+.my-routes-left button.clear-the-map {
   width: 200px;
   height: 50px;
-  margin: 0 auto;
+  margin: 20px auto;
   background-color: var(--clr-violet);
   box-shadow: 4px 4px var(--clr-deep-violet);
 
@@ -323,7 +323,7 @@ body {
   color: var(--clr-black);
 }
 
-.my-routes-left button.delete:disabled {
+.my-routes-left button.clear-the-map:disabled {
   background-color: #ff337a48;
   box-shadow: 4px 4px #b3366251;
   color: #00000049;
@@ -352,6 +352,25 @@ body {
   font-size: 16px;
   font-weight: 600;
   color: var(--clr-yellow);
+}
+
+.my-routes-left button.go-route:disabled {
+  background-color: #2aaccc54;
+  box-shadow: 4px 4px #2496b34f;
+  color: #00000049;
+  cursor: default;
+}
+
+.oneroute-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.oneroute-container .public {
+  margin-right: 10px;
 }
 
 .my-routes-right {

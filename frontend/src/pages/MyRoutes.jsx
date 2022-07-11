@@ -93,7 +93,7 @@ const MyRoutes = () => {
                 key={i}
               />
             ))}
-          <button className="delete" onClick={deleteActiveRoute} disabled={!disableGo}>
+          <button className="clear-the-map" onClick={deleteActiveRoute} disabled={!disableGo}>
             clear the map <span>❌</span>
           </button>
         </div>

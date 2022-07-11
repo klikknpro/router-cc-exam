@@ -90,10 +90,10 @@ const OneRoute = ({ setAllRoutes, route, mapSmall, disableGo, setDisableGo }) =>
       <p>{route.description}</p>
       <p>{route.distance} km</p>
       <FormGroup>
-        <Stack direction="row" spacing={1} alignItems="center">
-          <Typography>private</Typography>
-          <Switch checked={checked} onChange={switchPublic} />
-          <Typography>public</Typography>
+        <Stack className="stack" direction="row" spacing={1} alignItems="center">
+          <Typography className="private">private</Typography>
+          <Switch className="switch" checked={checked} onChange={switchPublic} />
+          <Typography className="public">public</Typography>
           <button className="delete-route" onClick={deleteRoute} size="small" color="warning">
             delete route
           </button>
