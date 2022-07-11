@@ -115,24 +115,32 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="home-container">
-      <div className="home-left">
-        <img src={cyclist} alt="cyclist thinking about route" />
-        {localStorage.getItem("token") && (
-          <button
-            onClick={() => saveRoute(routeToSave, setRouteToSave, token)}
-            disabled={routeToSave === null ? true : false}>
-            Save route
-          </button>
-        )}
+    <div className="main">
+      <div className="about">
+        <h3>
+          Welcome dear Cyclist! Plan your route using that tool on the right <span>👉</span> and see how the weather
+          will change during your training. <span>😉</span>
+        </h3>
       </div>
-      <div className="home-right">
-        <div ref={mapContainer} className="map-container" />
-        <div className="map-sidebar">
-          Longitude: {lngInfo} | Latitude: {latInfo} | Zoom: {zoomInfo}
+      <div className="home-container">
+        <div className="home-left">
+          <img src={cyclist} alt="cyclist thinking about route" />
+          {localStorage.getItem("token") && (
+            <button
+              onClick={() => saveRoute(routeToSave, setRouteToSave, token)}
+              disabled={routeToSave === null ? true : false}>
+              Save route
+            </button>
+          )}
         </div>
+        <div className="home-right">
+          <div ref={mapContainer} className="map-container" />
+          <div className="map-sidebar">
+            Longitude: {lngInfo} | Latitude: {latInfo} | Zoom: {zoomInfo}
+          </div>
+        </div>
+        <img className="home-pointer" src={pointer} alt="pointer" />
       </div>
-      <img className="home-pointer" src={pointer} alt="pointer" />
     </div>
   );
 };
