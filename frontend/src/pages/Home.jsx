@@ -118,8 +118,8 @@ const Home = () => {
     <div className="main">
       <div className="about">
         <h3>
-          Welcome Cyclist! Plan your route using that tool on the right <span>👉</span> and see how the weather will
-          change during your training. <span>😉</span>
+          Welcome <span>Cyclist!</span> Plan your route using that tool on the right <span>👉</span> and see how the
+          weather will change during your training. <span>😉</span>
         </h3>
       </div>
       <div className="home-container">

@@ -88,7 +88,7 @@ const OneRoute = ({ setAllRoutes, route, mapSmall, disableGo, setDisableGo }) =>
   return (
     <div className="oneroute-container">
       <p>{route.description}</p>
-      <p>{route.distance} km</p>
+      <p className="oneroute-km">{route.distance} km</p>
       <FormGroup>
         <Stack className="stack" direction="row" spacing={1} alignItems="center">
           <Typography className="private">private</Typography>

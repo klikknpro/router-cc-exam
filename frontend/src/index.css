@@ -184,6 +184,10 @@ body {
   font-weight: 600;
 }
 
+.about span {
+  color: var(--clr-yellow);
+}
+
 .home-container {
   max-width: 1400px;
   display: flex;
@@ -367,6 +371,10 @@ body {
   justify-content: flex-start;
   align-items: flex-start;
   gap: 10px;
+}
+
+.oneroute-km {
+  font-weight: 800;
 }
 
 .oneroute-container .public {

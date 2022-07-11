@@ -23,7 +23,7 @@ A developmental MERN-stack web app, created heavily with React, and Express.
 
 ## Theme of the project
 
-The base idea of this project is coming from personal experience. Every time I'm planning to go out for a bicycle training session (or back when I was doing food delivery) I curiously scan the sky, analyze weather forecasts and try to figure out how to best prepare. Especially if conditions look uncertain. Nobody wants to get caught by rain, heavy wind, or choking humidity and has nothing in their pockets to ease your situation. It would be very useful to foresee all the possible weather changes on your exact route planned for the day.
+The base idea of this project is coming from personal experience. Every time I'm planning to go out for a bicycle training session (or back when I was doing food delivery) I curiously scan the sky, analyze weather forecasts and try to figure out how to best prepare. Especially if conditions look uncertain. Nobody wants to get caught in the rain, heavy wind, or choking humidity and has nothing in their pockets to ease the situation. It would be very useful to precisely foresee all the possible weather changes on your exact route planned for the day.
 
 ## Features of version 1.0.0
 
@@ -36,17 +36,15 @@ The base idea of this project is coming from personal experience. Every time I'm
 - users can login using their Google account
   - and register with a username
 - logged in users can save this route (with all relevant data) into their private profile page
-  - saved routes can be edited
+  - saved routes can be made public (for "Feed" in v2.0.0)
 
 ## Planned features of version 2.0.0
 
-- loading mask while the map is loading
 - browse public routes (shared by users)
 - filter public routes
 - display a "T-Factor" based on how difficult were the weather conditions on your ride
 - display wind direction
-- display a map for each saved route (on My Routes)
-  - possibly with weather data
+- dockerize front-end, back-end, database, and run on Digital Ocean
 
 ## Setup requirements
 
@@ -72,7 +70,7 @@ cd ..
 
 3. Create an .env file at the backend root
 
-- fill out with your own data
+- fill out with your own data or ask permission from the developer
 
 ```
 PORT=8080
@@ -91,7 +89,7 @@ GOOGLE_REDIRECT_URI=http://localhost:3000/callback/google
 
 4. Create an .env file at the frontend root
 
-- fill out with your own data
+- fill out with your own data or ask permission from the developer
 
 ```
 REACT_APP_MAPBOX_ACCESS_TOKEN=
@@ -104,26 +102,25 @@ REACT_APP_OPENWEATHER_API_KEY=
 5. Start the localhosts
 
 ```
-cd frontend
-npm start
-cd ../backend
+cd backend
 npm run dev
-cd ..
+(<!-- using nodemon in development -->)
+cd ../frontend
+npm start
 ```
 
 ## Docker and Deploy
 
-... under development.
+... under development, see v2.0.0
 
 ## Main technologies and services
 
 ### Front-end
 
 JS, React \
-CSS, React Bootstrap, Material UI \
+CSS, HTML \
 Mapbox GL JS Api \
 OpenWeather One Call Api 3.0 \
-(Docker)
 
 ### Back-end
 
@@ -132,7 +129,6 @@ MongoDB, Mongoose \
 Jest \
 JWT \
 Swagger \
-(Docker)
 
 ## API documentation at Swagger
 
@@ -143,3 +139,5 @@ https://app.swaggerhub.com/apis/klikknpro1/router-project-api/1.0.0
 Mapbox: https://www.mapbox.com/mapbox-gljs
 
 OpenWeather One Call API 3.0: https://openweathermap.org/api/one-call-3
+
+Photo at Home by <a href="https://unsplash.com/@zoltantasi?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Zoltan Tasi</a> on <a href="https://unsplash.com/s/photos/cyclist?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
