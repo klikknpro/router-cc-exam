@@ -17,6 +17,7 @@ const Home = () => {
   const mapContainer = useRef(null); // my DOM element
   const map = useRef(null); // rendered element
   const [routeToSave, setRouteToSave] = useState(null);
+  const [message, setMessage] = useState(false);
 
   /* for infobar only */
   const [lngInfo, setLngInfo] = useState(19.0402);
@@ -105,6 +106,7 @@ const Home = () => {
       if (map.current.getSource("source3")) map.current.removeSource("source3");
       if (map.current.getLayer("layer4")) map.current.removeLayer("layer4");
       if (map.current.getSource("source4")) map.current.removeSource("source4");
+      setMessage(false);
     });
     // eslint-disable-next-line
   }, [map.current]);
@@ -127,10 +129,20 @@ const Home = () => {
           <img src={cyclist} alt="cyclist thinking about route" />
           {localStorage.getItem("token") && (
             <button
-              onClick={() => saveRoute(routeToSave, setRouteToSave, token)}
+              onClick={() => {
+                saveRoute(routeToSave, setRouteToSave, token);
+                setMessage(true);
+              }}
               disabled={routeToSave === null ? true : false}>
               save route
             </button>
+          )}
+          {message && (
+            <p>
+              we saved it to
+              <br />
+              MY ROUTES! 👍
+            </p>
           )}
         </div>
         <div className="home-right">
