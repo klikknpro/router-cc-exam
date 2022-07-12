@@ -40,7 +40,8 @@
     margin: 0 auto;
   }
 
-  .main {
+  .main,
+  .my-routes {
     margin-top: 279px;
   }
 
@@ -87,7 +88,8 @@
     font-size: 25px;
   }
 
-  .main {
+  .main,
+  .my-routes {
     margin-top: 243px;
   }
 
