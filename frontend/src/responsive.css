@@ -1,0 +1,18 @@
+@media screen and (max-width: 991px) {
+  .navbar {
+    padding: 20px;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .navbar-menu {
+    flex-direction: row;
+    justify-content: center;
+    gap: 35px;
+  }
+
+  .navbar-menu button {
+    margin: 0 auto;
+  }
+}
