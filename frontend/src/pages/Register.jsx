@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../providers/auth";
-import { TextField, Button } from "@mui/material";
+import welcome from "../img/hello-sign-fill.png";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -15,11 +15,20 @@ const Register = () => {
   }, [user]);
 
   return (
-    <div>
-      <TextField variant="filled" onChange={(e) => setUsername(e.target.value)} />
-      <Button onClick={() => register(username)} variant="contained" size="small">
-        Register
-      </Button>
+    <div className="register">
+      <div className="register-message">
+        <h3>
+          Hey! You are brand new here. Enter a username and enjoy! <span>😉</span>
+        </h3>
+      </div>
+      <form>
+        <label htmlFor="username">username:</label>
+        <input type="text" onChange={(e) => setUsername(e.target.value)} />
+        <button className="register-button" onClick={() => register(username)}>
+          register
+        </button>
+      </form>
+      <img src={welcome} alt="hello new user" />
     </div>
   );
 };
