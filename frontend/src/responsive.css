@@ -1,5 +1,6 @@
 @media screen and (max-width: 1399px) {
-  .map-container {
+  .map-container,
+  .map-container-small {
     width: 780px;
   }
 }
@@ -7,6 +8,9 @@
 @media screen and (max-width: 1199px) {
   .map-container {
     width: 700px;
+  }
+  .map-container-small {
+    width: 610px;
   }
 
   .home-left {
@@ -63,8 +67,15 @@
     max-width: 225px;
   }
 
-  .map-container {
+  .map-container,
+  .map-container-small {
     width: 740px;
+  }
+
+  .my-routes-container {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
   }
 }
 
@@ -73,7 +84,8 @@
     max-width: 200px;
   }
 
-  .map-container {
+  .map-container,
+  .map-container-small {
     width: 550px;
     height: 450px;
   }
@@ -111,7 +123,8 @@
     width: (75px, 125px, 150px);
   } */
 
-  .map-container {
+  .map-container,
+  .map-container-small {
     width: 450px;
   }
 }
