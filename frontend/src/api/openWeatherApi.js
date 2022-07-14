@@ -53,7 +53,7 @@ const forecast = async (route) => {
               windSpeed: response.data.hourly[0].wind_speed,
               windDirection: response.data.hourly[0].wind_deg,
               description: response.data.hourly[0].weather[0].description,
-              icon: `http://openweathermap.org/img/wn/${response.data.hourly[0].weather[0].icon}@2x.png`,
+              icon: `https://openweathermap.org/img/wn/${response.data.hourly[0].weather[0].icon}@2x.png`,
             });
           }
         }
@@ -74,7 +74,7 @@ const forecast = async (route) => {
               windSpeed: response.data.hourly[hour].wind_speed,
               windDirection: response.data.hourly[hour].wind_deg,
               description: response.data.hourly[hour].weather[0].description,
-              icon: `http://openweathermap.org/img/wn/${response.data.hourly[hour].weather[0].icon}@2x.png`,
+              icon: `https://openweathermap.org/img/wn/${response.data.hourly[hour].weather[0].icon}@2x.png`,
             });
           }
         }

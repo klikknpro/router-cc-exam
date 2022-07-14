@@ -93,7 +93,7 @@ const Home = () => {
     });
 
     map.current.on("draw.delete", (e) => {
-      console.log("draw.delete event", e);
+      // console.log("draw.delete event", e);
       if (map.current.getLayer("routeLayer")) map.current.removeLayer("routeLayer");
       if (map.current.getSource("routeLayer")) map.current.removeSource("routeLayer");
       if (map.current.getLayer("layer0")) map.current.removeLayer("layer0");
