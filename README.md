@@ -4,6 +4,7 @@
 
 A developmental MERN-stack web app, created heavily with React, and Express.
 
+- [Screenshots](#screenshots)
 - [User story](#user-story)
 - [Theme of the project](#theme-of-the-project)
 - [Features of version 1.0.0](#features-of-version-1.0.0)
@@ -120,7 +121,7 @@ npm start
 JS, React \
 CSS, HTML \
 Mapbox GL JS Api \
-OpenWeather One Call Api 3.0 \
+OpenWeather One Call Api 3.0
 
 ### Back-end
 
@@ -128,7 +129,7 @@ Node.js, Express \
 MongoDB, Mongoose \
 Jest \
 JWT \
-Swagger \
+Swagger
 
 ## API documentation at Swagger
 
@@ -143,3 +144,9 @@ OpenWeather One Call API 3.0: https://openweathermap.org/api/one-call-3
 Photo at Home by <a href="https://unsplash.com/@zoltantasi?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Zoltan Tasi</a> on <a href="https://unsplash.com/s/photos/cyclist?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 
 Photo at Register by <a href="https://unsplash.com/@drew_beamer?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Drew Beamer</a> on <a href="https://unsplash.com/s/photos/welcome?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+
+## Screenshots
+
+<img src="frontend/src/img/screenshot1.png" width="800"/>
+<img src="frontend/src/img/screenshot2.png" width="800"/>
+<img src="frontend/src/img/screenshot3.png" width="800"/>
