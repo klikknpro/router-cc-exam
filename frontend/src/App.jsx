@@ -9,9 +9,9 @@ import Register from "./pages/Register";
 import Callback from "./pages/Callback";
 
 function App() {
-  // useEffect(() => {
-  //   console.log("This app is in", process.env.NODE_ENV, "mode");
-  // }, []);
+  useEffect(() => {
+    console.log("This app is in", process.env.NODE_ENV, "mode");
+  }, []);
 
   return (
     <div className="App">

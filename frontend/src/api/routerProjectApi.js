@@ -1,9 +1,9 @@
 import axios from "axios";
-import config from "../app.config";
+// import config from "../app.config";
 
 export const routerProjectApi = () => {
   const instance = axios.create({
-    baseURL: config.router_project_api,
+    baseURL: process.env.REACT_APP_ROUTER_PROJECT_API,
     timeout: 3000,
   });
 

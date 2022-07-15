@@ -27,7 +27,8 @@ const AuthProvider = ({ children }) => {
 
   const login = async (code, provider) => {
     try {
-      const response = await http.post(config.router_project_api + "/user/login", {
+      // const response = await http.post(config.router_project_api + "/user/login", {
+      const response = await post("/user/login", {
         code,
         provider,
       });
