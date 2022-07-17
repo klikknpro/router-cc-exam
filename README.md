@@ -4,6 +4,8 @@
 
 A developmental MERN-stack web app, created heavily with React, and Express.
 
+The app is live at: <a href="https://jellyfish-app-nhgmb.ondigitalocean.app/">Router - Better prepare</a>
+
 - [Screenshots](#screenshots)
 - [User story](#user-story)
 - [Theme of the project](#theme-of-the-project)
@@ -45,7 +47,6 @@ The base idea of this project is coming from personal experience. Every time I'm
 - filter public routes
 - display a "T-Factor" based on how difficult were the weather conditions on your ride
 - display wind direction
-- dockerize front-end, back-end, database, and run on Digital Ocean
 
 ## Setup requirements
 
@@ -55,7 +56,7 @@ The base idea of this project is coming from personal experience. Every time I'm
 - Node.js
 - Mongo DB
 
-## How to start
+## How to start (if you want to try it out in _development_ mode)
 
 1. Clone the repository and open with Visual Studio Code
 
@@ -74,18 +75,18 @@ cd ..
 - fill out with your own data or ask permission from the developer
 
 ```
-PORT=8080
-APP_URL=http://localhost:3000
-CONNECTION_STRING=
+PORT={your preferred back-end port}
+APP_URL={your front-end localhost}
+CONNECTION_STRING={a local MongoDB database}
 
-SECRET_KEY=
+SECRET_KEY={super mega heavy secret}
 
-LOGFLARE_SOURCE_ID=
-LOGFLARE_API_KEY=
+LOGFLARE_SOURCE_ID={please register}
+LOGFLARE_API_KEY={please register}
 
-GOOGLE_CLIENT_ID=
-GOOGLE_CLIENT_SECRET=
-GOOGLE_REDIRECT_URI=http://localhost:3000/callback/google
+GOOGLE_CLIENT_ID={please register}
+GOOGLE_CLIENT_SECRET={please register}
+GOOGLE_REDIRECT_URI={your front-end localhost}/callback/google
 ```
 
 4. Create an .env file at the frontend root
@@ -93,11 +94,11 @@ GOOGLE_REDIRECT_URI=http://localhost:3000/callback/google
 - fill out with your own data or ask permission from the developer
 
 ```
-REACT_APP_MAPBOX_ACCESS_TOKEN=
-REACT_APP_ROUTER_PROJECT_API=http://localhost:8080/api
+REACT_APP_MAPBOX_ACCESS_TOKEN={please register}
+REACT_APP_ROUTER_PROJECT_API={your front-end localhost}/api
 REACT_APP_GOOGLE_BASE_URL=https://accounts.google.com/o/oauth2/v2/auth
-REACT_APP_GOOGLE_CLIENT_ID=
-REACT_APP_OPENWEATHER_API_KEY=
+REACT_APP_GOOGLE_CLIENT_ID={please register}
+REACT_APP_OPENWEATHER_API_KEY={please register}
 ```
 
 5. Start the localhosts
@@ -112,7 +113,10 @@ npm start
 
 ## Docker and Deploy
 
-... under development, see v2.0.0
+- front-end (after build), and back-end are dockerized seperately
+- hosted on Docker Hub
+- both Docker containers serve as sources for my Digital Ocean apps
+- a MongoDB 4 database is hosted here, too
 
 ## Main technologies and services
 
@@ -121,7 +125,8 @@ npm start
 JS, React \
 CSS, HTML \
 Mapbox GL JS Api \
-OpenWeather One Call Api 3.0
+OpenWeather One Call Api 3.0 \
+Docker, Digital Ocean
 
 ### Back-end
 
@@ -129,7 +134,8 @@ Node.js, Express \
 MongoDB, Mongoose \
 Jest \
 JWT \
-Swagger
+Swagger \
+Docker, Digital Ocean
 
 ## API documentation at Swagger
 
