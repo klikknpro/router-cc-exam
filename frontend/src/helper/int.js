@@ -1,3 +1,4 @@
+/*
 // const string = "CBDEFGABEKXF";
 const string = "lolAbdfgAChe";
 const str = string.split("");
@@ -22,7 +23,7 @@ for (const word of res) {
 
 console.log(longest);
 
-/*
+
 So the first thing you want to be able to do is to identify a problem that uses a sliding window paradigm. Luckily, there are some common giveaways:
 
 

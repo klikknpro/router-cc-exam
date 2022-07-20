@@ -6,6 +6,18 @@
 }
 
 @media screen and (max-width: 1199px) {
+  .main {
+    margin-top: 214px;
+  }
+
+  .logo-title {
+    font-size: 153px;
+  }
+
+  .logo-subtitle {
+    font-size: 43px;
+  }
+
   .map-container {
     width: 700px;
   }
@@ -67,7 +79,15 @@
     max-width: 225px;
   }
 
-  .map-container,
+  .home-pointer {
+    top: -500px;
+    left: 355px;
+  }
+
+  .map-container {
+    width: 710px;
+  }
+
   .map-container-small {
     width: 740px;
   }
@@ -84,7 +104,15 @@
     max-width: 200px;
   }
 
-  .map-container,
+  .home-pointer {
+    width: 40px;
+    left: 260px;
+  }
+
+  .map-container {
+    width: 520px;
+  }
+
   .map-container-small {
     width: 550px;
     height: 450px;
@@ -93,16 +121,31 @@
 
 @media screen and (max-width: 575px) {
   .logo-title {
-    font-size: 90px;
+    font-size: 70px;
   }
 
   .logo-subtitle {
-    font-size: 25px;
+    font-size: 20px;
+  }
+
+  .navbar-menu {
+    gap: 15px;
+  }
+
+  .navbar-menu button {
+    width: 90px;
+    height: 35px;
+
+    font-size: 18px;
+  }
+
+  .navbar-menu button.menu-myRoutes {
+    font-size: 13px;
   }
 
   .main,
   .my-routes {
-    margin-top: 243px;
+    margin-top: 205px;
   }
 
   .home-container {
@@ -123,8 +166,20 @@
     width: (75px, 125px, 150px);
   } */
 
+  .home-pointer {
+    width: 30px;
+    top: -245px;
+    left: 180px;
+  }
+
   .map-container,
   .map-container-small {
-    width: 450px;
+    width: 365px;
+    height: 380px;
+  }
+
+  .map-sidebar {
+    padding: 6px 8px;
+    font-size: 10px;
   }
 }
