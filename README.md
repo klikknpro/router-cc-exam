@@ -47,6 +47,7 @@ The base idea of this project is coming from personal experience. Every time I'm
 - filter public routes
 - display a "T-Factor" based on how difficult were the weather conditions on your ride
 - display wind direction
+- unique route names
 
 ## Setup requirements
 

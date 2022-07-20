@@ -7,7 +7,8 @@
 
 @media screen and (max-width: 1199px) {
   .main,
-  .my-routes {
+  .my-routes,
+  .register {
     margin-top: 214px;
   }
 
@@ -58,7 +59,8 @@
   }
 
   .main,
-  .my-routes {
+  .my-routes,
+  .register {
     margin-top: 279px;
   }
 
@@ -145,7 +147,8 @@
   }
 
   .main,
-  .my-routes {
+  .my-routes,
+  .register {
     margin-top: 205px;
   }
 
@@ -199,5 +202,12 @@
     width: 150px;
     height: 40px;
     font-size: 17px;
+  }
+
+  .register {
+    gap: 30px;
+  }
+  .register form {
+    flex-direction: column;
   }
 }
