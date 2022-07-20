@@ -307,6 +307,7 @@ body {
 
 .my-routes-container {
   max-width: 1400px;
+  padding: 20px;
   display: flex;
   justify-content: center;
   align-items: flex-start;

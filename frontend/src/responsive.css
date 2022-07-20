@@ -6,7 +6,8 @@
 }
 
 @media screen and (max-width: 1199px) {
-  .main {
+  .main,
+  .my-routes {
     margin-top: 214px;
   }
 
@@ -115,7 +116,7 @@
 
   .map-container-small {
     width: 550px;
-    height: 450px;
+    height: 475px;
   }
 }
 
@@ -181,5 +182,22 @@
   .map-sidebar {
     padding: 6px 8px;
     font-size: 10px;
+  }
+
+  .my-routes-left button.delete-route {
+    width: 75px;
+    height: 30px;
+    font-size: 14px;
+  }
+  .my-routes-left button.go-route {
+    width: 45px;
+    height: 30px;
+    font-size: 14px;
+  }
+
+  .my-routes-left button.clear-the-map {
+    width: 150px;
+    height: 40px;
+    font-size: 17px;
   }
 }
