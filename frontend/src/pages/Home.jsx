@@ -78,7 +78,7 @@ const Home = () => {
       setZoomInfo(map.current.getZoom().toFixed(2));
     });
 
-    /* main sh1t happens here */
+    /* main magic happens here */
     map.current.on("draw.create", async (e) => {
       const drawCoordinates = e.features[0].geometry.coordinates;
       const route = await directions(drawCoordinates, map);
@@ -158,44 +158,3 @@ const Home = () => {
 };
 
 export default Home;
-
-/*
-
-useEffect(() => {
-    console.log("click event useEffect");
-    if (lngStart && latStart) {
-      // console.log(hanyszor futsz le? ha valtozik a location (elmozdul a device VAGY manualisat allitok be start poziciot), akkor is ujraregisztralod ezt a click eventet??)
-      console.log("register click event");
-      map.current.on("click", (event) => {
-        let endCoords = [];
-        for (const key in event.lngLat) {
-          endCoords.push(event.lngLat[key]);
-        }
-        console.log("from", lngStart, latStart);
-        console.log("to", endCoords);
-        // ez igy mukodott f@szan, csak mindig ujabb es ujabb click eventet regisztralt
-      });
-    }
-  }, [lngStart, latStart]); // ??? re-register click event?
-
-useEffect(() => {
-    if (lngStart && latStart) {
-      // init LineString tool
-      drawFeature.changeMode("draw_line_string");
-
-      const featureCollection = drawFeature.getAll();
-      const currentFeatureId = featureCollection.features[0].id;
-      console.log(currentFeatureId, typeof currentFeatureId);
-
-      drawFeature.changeMode("draw_line_string", {
-        featureId: currentFeatureId,
-        // couldn't find this featureId, but its there...
-        from: [lngStart, latStart],
-      });
-      console.log("linestring activated");
-    }
-
-    // eslint-disable-next-line
-  }, [lngStart, latStart]);
-
-  */

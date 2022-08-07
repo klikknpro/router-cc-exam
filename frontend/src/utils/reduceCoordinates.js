@@ -18,15 +18,8 @@ const reduceCoordinates = (allCoordinates) => {
       short.push(allCoordinates[i]);
     }
   }
-  /* fix some syntax sh!t */
-  // short.splice(0, 1, allCoordinates[0]);
-  // short.splice(short.length - 1, 1, allCoordinates.length - 1);
 
   return short;
 };
 
 export default reduceCoordinates;
-
-/*
-let difference = arr1.filter(x => !arr2.includes(x));
-*/
