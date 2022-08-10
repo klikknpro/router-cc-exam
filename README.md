@@ -1,10 +1,27 @@
-# Router ©
+# Router - Better prepare
 
 ## Codecool Full-Stack API final exam project
 
 A developmental MERN-stack web app, created heavily with React, and Express.
 
-The app is live at: <a href="https://jellyfish-app-nhgmb.ondigitalocean.app/">Router - Better prepare</a>
+The app is live at: <a href="https://thunderous-concha-3ba15b.netlify.app/">Router - Better prepare</a>
+
+## _Notes on how to use the map in v1.0.0_ 💬
+
+- You can zoom in-out or click&drag the map at any time
+
+1. Click the "line-string" tool on the right hand side of the map
+2. Click anywhere on the map to set your route's **starting point**
+
+- Optional: click additional checkpoints along your route
+
+3. Click anywhere on the map to set your route's **ending point**
+4. Click again on the same spot or hit **Enter** to finish
+
+- Now you'll see the recommended route and the weather info along
+- Feel free to zoom or move the map
+
+5. ❗️ _Before you start drawing a new route, ALWAYS click the_ 🗑 _"trash-tool" first_
 
 - [Screenshots](#screenshots)
 - [User story](#user-story)
@@ -13,7 +30,7 @@ The app is live at: <a href="https://jellyfish-app-nhgmb.ondigitalocean.app/">Ro
 - [Planned features of version 2.0.0](#planned-features-of-version-2.0.0)
 - [Setup requirements](#setup-requirements)
 - [How to start](#how-to-start)
-- [Docker and Deploy](#docker-and-deploy)
+- [Deploy](#deploy)
 - [Main technologies and services](#main-technologies-and-services)
 - [API documentation at Swagger](#api-documentation-at-swagger)
 - [APIs used](#apis-used)
@@ -57,7 +74,7 @@ The base idea of this project is coming from personal experience. Every time I'm
 - Node.js
 - Mongo DB
 
-## How to start (if you want to try it out in _development_ mode)
+## How to start (if you want to try it out _locally_)
 
 1. Clone the repository and open with Visual Studio Code
 
@@ -73,7 +90,7 @@ cd ..
 
 3. Create an .env file at the backend root
 
-- fill out with your own data or ask permission from the developer
+- fill out with your own data
 
 ```
 PORT={your preferred back-end port}
@@ -92,7 +109,7 @@ GOOGLE_REDIRECT_URI={your front-end localhost}/callback/google
 
 4. Create an .env file at the frontend root
 
-- fill out with your own data or ask permission from the developer
+- fill out with your own data
 
 ```
 REACT_APP_MAPBOX_ACCESS_TOKEN={please register}
@@ -112,12 +129,11 @@ cd ../frontend
 npm start
 ```
 
-## Docker and Deploy
+## Deploy
 
-- front-end (after build), and back-end are dockerized seperately
-- hosted on Docker Hub
-- both Docker containers serve as sources for my Digital Ocean apps
-- a MongoDB 4 database is hosted here, too
+- Front-end: on Netlify via GitHub
+- Back-end: on Heroku via GitHub
+- Database: Mongo Cloud (Atlas)
 
 ## Main technologies and services
 
@@ -126,17 +142,16 @@ npm start
 JS, React \
 CSS, HTML \
 Mapbox GL JS Api \
-OpenWeather One Call Api 3.0 \
-Docker, Digital Ocean
+OpenWeather One Call Api 3.0
 
 ### Back-end
 
 Node.js, Express \
 MongoDB, Mongoose \
+Mongo Atlas \
 Jest \
 JWT \
-Swagger \
-Docker, Digital Ocean
+Swagger
 
 ## API documentation at Swagger
 
